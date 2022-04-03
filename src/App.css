@@ -1,38 +1,83 @@
-.App {
-  text-align: center;
+.container-fluid{
+    padding-right: 0px;
+    padding-left: 0px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+    
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.LeftSide{
+    height: 100vh;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.RightSide{
+    height: 100vh;
+    background-color: #48BEFF !important;
 }
 
-.App-link {
-  color: #61dafb;
+.bg-light{
+    background-color: #48BEFF !important;
+    padding-right: 15px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+nav{
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
 }
+
+.navbar-brand {
+    text-transform: uppercase;
+    font-weight: bolder;
+    padding-left: 15px;
+    margin-right: 15px;
+}
+
+.navbar-light .navbar-brand {
+    color: white;
+    font-family: 'Inter', sans-serif;
+
+}
+
+
+.RightSide > div > h2{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 38px;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    top: 15px;
+    right: 10px;
+    margin-left: 35px;
+    color:white;
+}
+
+
+.LeftSide > div{
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    top: 20px;
+    margin-left: 25px;
+}
+
+
+.LeftSide > div > p{
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    color:#48BEFF;
+}
+
+.card{
+    margin-bottom: 15px;
+    border: 1px solid grey;
+    font-size: 13px;
+    font-weight: bold;
+    text-transform:capitalize
+}
+
+
