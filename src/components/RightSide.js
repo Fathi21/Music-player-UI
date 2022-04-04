@@ -1,6 +1,7 @@
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function RightSide() {
   return (
@@ -9,6 +10,7 @@ function RightSide() {
             Created for you 
         </p>
 
+        <i className="fa-solid fa-arrow-down-big-small"></i>
         <Row>
             <Col md={6}>
                 <Card style={{ width: '17rem' }}>

@@ -69,7 +69,7 @@ nav{
     font-weight: bold;
     font-size: 16px;
     font-family: 'Inter', sans-serif;
-    color:#48BEFF;
+    color:black;
 }
 
 .card{
@@ -81,3 +81,12 @@ nav{
 }
 
 
+
+
+img, svg {
+    vertical-align: middle;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    top: 28px;
+}
