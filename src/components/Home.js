@@ -13,16 +13,17 @@ function Home() {
   return (
     <div>
       <Container fluid>
-        <SideNav/>
-        <Row>
-          <Col md={6} className='RightSide'>
-            <LeftSide/>
-          </Col>
+          <Row>
+              <Col md={2} className='LeftSide'>
+                  <LeftSide/>
+              </Col>
 
-          <Col md={6} className='LeftSide' >
-            <RightSide/>
-          </Col>
-        </Row>
+              <Col md={10} className='RightSide' >
+                  <SideNav/>
+                  
+                  <RightSide/>
+              </Col>
+          </Row>
       </Container>
     </div>
   );

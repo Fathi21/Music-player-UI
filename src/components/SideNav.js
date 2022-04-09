@@ -14,9 +14,10 @@ function SideNav() {
     <div>
        <Navbar bg="light" expand={false}>
             <Navbar.Brand href="#">
-                Melody
+              
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="offcanvasNavbar" />
+            
             <Navbar.Offcanvas id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" placement="end">
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title id="offcanvasNavbarLabel">Offcanvas</Offcanvas.Title>

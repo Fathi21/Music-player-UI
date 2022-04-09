@@ -5,71 +5,85 @@
 
 .row {
     margin-right: 0px;
-    margin-left: 0px;
-    
+    margin-left: 0px;    
 }
 
-.LeftSide{
-    height: 100vh;
+.row > *{
+    padding-right: 0px !important;
+    padding-left: 0px !important;
 }
 
 .RightSide{
     height: 100vh;
-    background-color: #48BEFF !important;
+    background-color: #121212 !important;
+}
+
+.LeftSide{
+    height: 100vh;
+    background-color: #000000 !important;
 }
 
 .bg-light{
-    background-color: #48BEFF !important;
+    background-color: #000000 !important;
     padding-right: 15px;
-}
-
-nav{
     position: -webkit-sticky; /* Safari */
     position: sticky;
     top: 0;
 }
 
-.navbar-brand {
+.Logo{
     text-transform: uppercase;
     font-weight: bolder;
     padding-left: 15px;
     margin-right: 15px;
 }
 
-.navbar-light .navbar-brand {
-    color: white;
+.Logo {
+    color: #10de47;
     font-family: 'Inter', sans-serif;
-
+    cursor: pointer;
+    position: relative;
+    top: 22px;
+    left: 53px;
+    font-size: 22px;
+    font-weight: bolder
 }
 
+.navbar-toggler{
+    border: 2px solid red;
+}
 
-.RightSide > div > h2{
+.ListLeftNav{
+    position: relative;
+    top: 50px;
+}
+
+.LeftSide > div > h2{
     text-transform: uppercase;
     font-weight: bold;
-    font-size: 38px;
+    font-size: 30px;
     font-family: 'Inter', sans-serif;
     position: relative;
     top: 15px;
-    right: 10px;
+    right: 30px;
     margin-left: 35px;
-    color:white;
+    color:#10de47;
 }
 
 
-.LeftSide > div{
+.RightSide > div{
     font-family: 'Inter', sans-serif;
-    position: relative;
-    top: 20px;
-    margin-left: 25px;
+
 }
 
 
-.LeftSide > div > p{
+.RightSide > div > p{
     text-transform: uppercase;
     font-weight: bold;
     font-size: 16px;
     font-family: 'Inter', sans-serif;
-    color:black;
+    color:#ffffff;
+    margin-bottom: 35px;
 }
 
 .card{
@@ -81,12 +95,83 @@ nav{
 }
 
 
-
-
-img, svg {
-    vertical-align: middle;
-    height: 100%;
-    width: 100%;
+.list-group-item{
+    background-color: #000000;
+    padding: 0;
+    color: white;
     position: relative;
-    top: 28px;
+    left: 15px;
+    width: 150px;
+    font-size: 15px;
+    margin-bottom: 25px;
+    cursor: pointer;
+}
+
+
+.line{
+    border-bottom: 1px solid #10de47;;
+    position: relative;
+    left: 13px;
+    width: 195px;
+}
+
+.createPlayList > .list-group-item{
+    background-color: #000000;
+    padding: 0;
+    padding-top: 25px;
+    color:#10de47;
+    position: relative;
+    left: 15px;
+    width: 150px;
+    font-size: 15px;
+}
+
+.createPlayList > .list-group-item:hover{
+    color: white;
+}
+
+
+.fa-home, .fa-search, .fa-book, .fa-heart, .fa-plus-square{
+    padding-right: 20px;
+    font-size: 25px;
+}
+
+.Main{
+    margin: 30px;
+}
+
+.card-img-top {
+    height: 160px;
+}
+
+.card {
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-right: 10px;
+    background-color: #181818;
+    color: white;
+    border: 0;
+    cursor: pointer;   
+}
+
+
+.card:hover{
+    background-color: #202020;
+}
+
+.card-body{
+    padding-right: 0;
+    padding-bottom: 15px;
+}
+
+.ArtistName{
+    color: white;
+    font-size: 15px;
+    font-weight: bolder;
+    margin-bottom: 10px;
+}
+
+.SongName{
+    color: #adadad;
+    font-size: 12px;
 }
