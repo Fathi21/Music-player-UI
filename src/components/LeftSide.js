@@ -22,9 +22,18 @@ function LeftSide() {
                 <span className='createPlayList'>
                     <ListGroup.Item><i class="fa fa-plus-square" aria-hidden="true"></i> Create Playlist</ListGroup.Item>
                 </span>
-
+                
                 <ListGroup.Item><i class="fa fa-heart" aria-hidden="true"></i> Liked Songs</ListGroup.Item>
+                
+                <span>
+                <ListGroup.Item> Sign Up</ListGroup.Item>
 
+                <ListGroup.Item> Sign In</ListGroup.Item>
+
+                <ListGroup.Item> Sharif</ListGroup.Item>
+
+                <ListGroup.Item> Logout</ListGroup.Item>
+                </span>
             </ListGroup> 
         </div>
     </div>

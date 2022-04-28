@@ -131,7 +131,7 @@
 }
 
 
-.fa-home, .fa-search, .fa-book, .fa-heart, .fa-plus-square{
+.fa-home, .fa-search, .fa-book, .fa-heart, .fa-plus-square, .fa-id-badge{
     padding-right: 20px;
     font-size: 25px;
 }
@@ -145,13 +145,15 @@
 }
 
 .card {
-    padding-left: 10px;
-    padding-top: 10px;
-    padding-right: 10px;
+    padding-left: 15px;
+    padding-top: 15px;
+    padding-right: 15px;
     background-color: #181818;
     color: white;
     border: 0;
-    cursor: pointer;   
+    cursor: pointer; 
+    width: 200px; 
+    border-radius: 10px;
 }
 
 
@@ -161,17 +163,24 @@
 
 .card-body{
     padding-right: 0;
-    padding-bottom: 15px;
+    padding-left: 2px;
+    padding-bottom: 25px;
 }
 
 .ArtistName{
     color: white;
     font-size: 15px;
     font-weight: bolder;
-    margin-bottom: 10px;
+    margin-bottom: 3px;
 }
 
 .SongName{
     color: #adadad;
     font-size: 12px;
+}
+
+.Songs{
+    margin-right: 25px;
+    margin-left: 10px;
+
 }
