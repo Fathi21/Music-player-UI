@@ -27,7 +27,7 @@ function RightSide() {
             <p>
                 Created for you 
             </p>
-
+                        
             <Row className="">
                 <Col className='Songs'>
                     <CardSong/>

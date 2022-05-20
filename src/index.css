@@ -25,17 +25,11 @@
 .LeftSide{
   height: 100vh;
   background-color: #000000 !important;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
 }
 
 .bg-light{
   background-color: #000000 !important;
   padding-right: 15px;
-  position: -webkit-sticky; /* Safari */
-  position: sticky;
-  top: 0;
 }
 
 .Logo{
