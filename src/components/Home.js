@@ -14,13 +14,13 @@ function Home() {
     <div>
       <Container fluid>
           <Row>
-              <Col md={2} className='LeftSide'>
+          <SideNav/>
+
+              <Col md={2} className='LeftSide fixed-top'>
                   <LeftSide/>
               </Col>
 
-              <Col md={10} className='RightSide' >
-                  <SideNav/>
-                  
+              <Col md={10} className='RightSide' >                  
                   <RightSide/>
               </Col>
           </Row>

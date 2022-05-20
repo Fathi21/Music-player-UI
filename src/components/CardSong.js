@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 
 function CardSong(){
   return (
-    <div>
+    <div className="card-group">
         <Card>
             <Card.Img variant="top" src="https://images.pexels.com/photos/11143927/pexels-photo-11143927.jpeg?cs=srgb&dl=pexels-channnsy-11143927.jpg&fm=jpg" />
             <Card.Body>

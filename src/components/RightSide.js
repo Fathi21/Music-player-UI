@@ -28,7 +28,7 @@ function RightSide() {
                 Created for you 
             </p>
                         
-            <Row className="">
+            <Row className="row-cols-6">
                 <Col className='Songs'>
                     <CardSong/>
                 </Col>
@@ -47,7 +47,24 @@ function RightSide() {
 
                 <Col className='Songs'>
                     <CardSong/>
+                </Col> 
+
+                <Col className='Songs'>
+                    <CardSong/>
+                </Col> 
+
+                <Col className='Songs'>
+                    <CardSong/>
+                </Col> 
+
+                <Col className='Songs'>
+                    <CardSong/>
                 </Col>
+
+                <Col className='Songs'>
+                    <CardSong/>
+                </Col>
+                               
             </Row>  
         </div>
     );

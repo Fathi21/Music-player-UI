@@ -1,3 +1,8 @@
+body{
+  background-color: #121212;
+}
+
+
 .container-fluid{
   padding-right: 0px;
   padding-left: 0px;
@@ -139,6 +144,8 @@
 
 .Main{
   margin: 30px;
+  position: absolute;
+  left: 257px;
 }
 
 .card-img-top {
@@ -182,4 +189,25 @@
 
 .Songs{
   margin-right: 20px;
+  margin-bottom: 20px;
+}
+
+
+
+/* Tablet portrait and larger */
+@media only screen and (min-width: 600px) {}
+/* Tablet landscape and larger */
+@media only screen and (min-width: 900px) {}
+/* Desktop and larger */
+@media only screen and (min-width: 1200px) {
+
+  .bg-light{
+    display: none;
+  }
+}
+/* Big desktop (4k) */
+@media only screen and (min-width: 2500px) {
+  .bg-light{
+    display: none;
+  }
 }
