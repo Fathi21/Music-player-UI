@@ -28,18 +28,26 @@ function RightSide() {
                 Created for you 
             </p>
 
-            <Row className="col-xs-12 col-sm-6 col-md-4">
-                <Col md={4} className='Songs'>
+            <Row className="">
+                <Col className='Songs'>
                     <CardSong/>
                 </Col>
 
-                <Col md={4} className='Songs'>
+                <Col className='Songs'>
                     <CardSong/>
                 </Col>
 
+                <Col className='Songs'>
+                    <CardSong/>
+                </Col>
 
+                <Col className='Songs'>
+                    <CardSong/>
+                </Col>
 
-                
+                <Col className='Songs'>
+                    <CardSong/>
+                </Col>
             </Row>  
         </div>
     );
