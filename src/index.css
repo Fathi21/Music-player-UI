@@ -19,8 +19,8 @@ body{
 }
 
 .RightSide{
-  height: 100vh;
   background-color: #121212 !important;
+  margin: 30px;
 }
 
 .navbar-toggler-icon{
@@ -42,15 +42,12 @@ body{
   font-weight: bolder;
   padding-left: 15px;
   margin-right: 15px;
-}
-
-.Logo {
   color: #10de47;
   font-family: 'Inter', sans-serif;
   cursor: pointer;
   position: relative;
   top: 22px;
-  left: 53px;
+  left: 99px;
   font-size: 22px;
   font-weight: bolder
 }
@@ -83,7 +80,7 @@ body{
 }
 
 
-.RightSide > div > p{
+.RightSide > p{
   text-transform: uppercase;
   font-weight: bold;
   font-size: 16px;
@@ -142,12 +139,6 @@ body{
   font-size: 25px;
 }
 
-.Main{
-  margin: 30px;
-  position: absolute;
-  left: 257px;
-}
-
 .card-img-top {
   height: 160px;
 }
@@ -160,7 +151,7 @@ body{
   color: white;
   border: 0;
   cursor: pointer; 
-  /* width: 200px;  */
+  width: 200px;
   border-radius: 10px;
 }
 
@@ -185,11 +176,6 @@ body{
 .SongName{
   color: #adadad;
   font-size: 12px;
-}
-
-.Songs{
-  margin-right: 20px;
-  margin-bottom: 20px;
 }
 
 

@@ -15,12 +15,11 @@ function Home() {
       <Container fluid>
           <Row>
           <SideNav/>
-
-              <Col md={2} className='LeftSide fixed-top'>
+              <Col md={2}>
                   <LeftSide/>
               </Col>
 
-              <Col md={10} className='RightSide' >                  
+              <Col md={10}>                  
                   <RightSide/>
               </Col>
           </Row>

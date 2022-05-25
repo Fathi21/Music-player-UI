@@ -5,7 +5,7 @@ function LeftSide() {
 
 
   return (
-    <div>
+    <div className='LeftSide'>
         <div className='Logo'>
             Melody
         </div>

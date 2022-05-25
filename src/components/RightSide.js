@@ -23,12 +23,12 @@ function RightSide() {
         GetMusicList();
     }, [0]);
     return (
-        <div className='Main'>
+        <div className='RightSide Main'>
             <p>
                 Created for you 
             </p>
                         
-            <Row className="row-cols-6">
+            <Row className="">
                 <Col className='Songs'>
                     <CardSong/>
                 </Col>
@@ -56,6 +56,14 @@ function RightSide() {
                 <Col className='Songs'>
                     <CardSong/>
                 </Col> 
+
+                <Col className='Songs'>
+                    <CardSong/>
+                </Col>
+
+                <Col className='Songs'>
+                    <CardSong/>
+                </Col>
 
                 <Col className='Songs'>
                     <CardSong/>
@@ -67,6 +75,8 @@ function RightSide() {
                                
             </Row>  
         </div>
+  
+
     );
 }
 
