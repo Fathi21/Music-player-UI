@@ -15,11 +15,11 @@ function Home() {
       <Container fluid>
           <Row>
           <SideNav/>
-              <Col md={2}>
+              <Col lg={3} md={3} >
                   <LeftSide/>
               </Col>
 
-              <Col md={10}>                  
+              <Col lg={9} md={9}>                  
                   <RightSide/>
               </Col>
           </Row>

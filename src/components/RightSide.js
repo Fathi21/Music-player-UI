@@ -7,7 +7,7 @@ import CardSong from './CardSong';
 
 function RightSide() {
     const [musicList, setMusicList] = useState([]);
-
+    
     function GetMusicList(){
         axios.get(`http://127.0.0.1:8000/Api/MusicList`)
         .then(res => {
@@ -22,6 +22,7 @@ function RightSide() {
     useEffect(() => {
         GetMusicList();
     }, [0]);
+    
     return (
         <div className='RightSide Main'>
             <p>

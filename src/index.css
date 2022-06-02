@@ -46,8 +46,8 @@ body{
   font-family: 'Inter', sans-serif;
   cursor: pointer;
   position: relative;
-  top: 22px;
-  left: 99px;
+  top: 17px;
+  left: 45px;
   font-size: 22px;
   font-weight: bolder
 }
@@ -114,8 +114,7 @@ body{
 .line{
   border-bottom: 1px solid #10de47;;
   position: relative;
-  left: 13px;
-  width: 195px;
+  left: 8px;
 }
 
 .createPlayList > .list-group-item{
@@ -178,22 +177,26 @@ body{
   font-size: 12px;
 }
 
+@media only screen and (max-width: 1200px){
+  /*Tablets [601px -> 1200px]*/
 
+}
 
-/* Tablet portrait and larger */
-@media only screen and (min-width: 600px) {}
-/* Tablet landscape and larger */
-@media only screen and (min-width: 900px) {}
-/* Desktop and larger */
-@media only screen and (min-width: 1200px) {
+@media only screen and  (max-width: 990px) and (min-width: 768px){
+  /*Tablets [601px -> 1200px]*/
+  .LeftSide {
+    /* display: none !important; */
+  }
 
   .bg-light{
-    display: none;
+    display: block;
   }
 }
-/* Big desktop (4k) */
-@media only screen and (min-width: 2500px) {
-  .bg-light{
-    display: none;
-  }
+@media only screen and (max-width: 600px){
+/*Big smartphones [426px -> 600px]*/
+
+ 
+}
+@media only screen and (max-width: 425px){
+/*Small smartphones [325px -> 425px]*/
 }
