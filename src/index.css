@@ -35,6 +35,7 @@ body{
 .bg-light{
   background-color: #000000 !important;
   padding-right: 15px;
+  display: none
 }
 
 .Logo{
@@ -177,21 +178,28 @@ body{
   font-size: 12px;
 }
 
+
 @media only screen and (max-width: 1200px){
   /*Tablets [601px -> 1200px]*/
 
+
+
 }
 
-@media only screen and  (max-width: 990px) and (min-width: 768px){
+@media only screen and  (max-width: 768px){
   /*Tablets [601px -> 1200px]*/
-  .LeftSide {
-    /* display: none !important; */
-  }
 
   .bg-light{
-    display: block;
+    display: block !important; 
+  }
+
+  .LeftSide {
+    display: none !important;
+    background-color: #10de47; 
   }
 }
+
+
 @media only screen and (max-width: 600px){
 /*Big smartphones [426px -> 600px]*/
 

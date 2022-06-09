@@ -14,8 +14,8 @@ function Home() {
     <div>
       <Container fluid>
           <Row>
-          <SideNav/>
-              <Col lg={3} md={3} >
+              <SideNav/>
+              <Col lg={3} md={3}  xs={0}>
                   <LeftSide/>
               </Col>
 
