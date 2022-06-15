@@ -7,7 +7,9 @@ function LeftSide() {
   return (
     <div className='LeftSide d-none d-md-block bg-light sidebar'>
         <div className='Logo'>
-            Melody
+            <h1>
+                Melody
+            </h1>
         </div>
         
         <div className='ListLeftNav'>

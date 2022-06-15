@@ -5,11 +5,12 @@ import Button from 'react-bootstrap/Button';
 import LeftSide from './LeftSide';
 import RightSide from './RightSide';
 import SideNav from './SideNav';
-
+import { AllSongs } from '../redux/features/Music/MusicSlice'
+import { useSelector} from 'react-redux'
 function Home() {
+  const music = useSelector (state => state.Music)
 
-  //https://dribbble.com/shots/14235847-Music-player-Web-design
-  //https://codepen.io/bootpen/pen/jbbaRa
+  console.log(music)
   return (
     <div>
       <Container fluid>

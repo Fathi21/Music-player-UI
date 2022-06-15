@@ -15,7 +15,7 @@ function SideNav() {
               
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="offcanvasNavbar" />
-            
+            <i className="fas fa-line-columns"></i>
             <Navbar.Offcanvas id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" placement="end">
                 <Offcanvas.Header closeButton>
                     <Offcanvas.Title id="offcanvasNavbarLabel">Offcanvas</Offcanvas.Title>
