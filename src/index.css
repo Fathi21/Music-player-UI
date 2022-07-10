@@ -39,7 +39,8 @@ body{
 }
 
 .Logo>h1{
-  border: 4px solid;
+  border: 4px solid #10de47;
+  border-radius: 5px;
   text-transform: uppercase;
   padding-left: 3px;
   margin-right: 15px;

@@ -15,48 +15,7 @@ function RightSide() {
             <Row className="">
                 <Col className='Songs'>
                     <CardSong/>
-                </Col>
-
-                <Col className='Songs'>
-                    <CardSong/>
-                </Col>
-
-                <Col className='Songs'>
-                    <CardSong/>
-                </Col>
-
-                <Col className='Songs'>
-                    <CardSong/>
-                </Col>
-
-                <Col className='Songs'>
-                    <CardSong/>
-                </Col> 
-
-                <Col className='Songs'>
-                    <CardSong/>
-                </Col> 
-
-                <Col className='Songs'>
-                    <CardSong/>
-                </Col> 
-
-                <Col className='Songs'>
-                    <CardSong/>
-                </Col>
-
-                <Col className='Songs'>
-                    <CardSong/>
-                </Col>
-
-                <Col className='Songs'>
-                    <CardSong/>
-                </Col>
-
-                <Col className='Songs'>
-                    <CardSong/>
-                </Col>
-                               
+                </Col>                               
             </Row>  
         </div>
   

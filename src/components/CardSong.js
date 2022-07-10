@@ -1,32 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
-import { AllSongs } from '../redux/features/Music/MusicSlice'
+import { GetAllMusic } from '../redux/features/Music/MusicSlice'
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
 function CardSong(){
 
-    const song = useSelector((state) => state.Music.value)
     const dispatch = useDispatch()
 
-    const [Response, setResponse] = useState([]);
-    
-    async function GetMusicList(){
-        try {
-            const response = await axios.get(`http://127.0.0.1:8000/Api/MusicList`)
+    //dispatch(FetchMusicList(8888))
 
-            //dispatch(AllSongs(response.data))
-            console.log(response.data);
-            setResponse(response.data)
-        } catch (error) {
-            console.error('ERROR: 500 ', error);
-          }
-    }
+    const music = useSelector ((state) => state)
     
     useEffect(() => {
-        GetMusicList();
-    }, [1]);
+        dispatch(GetAllMusic())
+    }, [1])
+
+    console.log(music)
 
     return (
         <div>
