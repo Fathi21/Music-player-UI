@@ -16,7 +16,6 @@ export const GetAllMusic = createAsyncThunk(
   })
 );
 
-console.log(GetAllMusic.pending)
 const initialState = {
   value: 0
 }

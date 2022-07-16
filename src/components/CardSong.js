@@ -11,13 +11,30 @@ function CardSong(){
 
     //dispatch(FetchMusicList(8888))
 
-    const music = useSelector ((state) => state)
-    
-    useEffect(() => {
-        dispatch(GetAllMusic())
-    }, [1])
+    //const music = useSelector ((state) => state)
 
-    console.log(music)
+    const [music, setMusic] = useState([])
+
+    function GetAllMusic() {
+        fetch('http://127.0.0.1:8000/Api/GetAllMusic')
+        .then(response => {
+            setMusic(response.json());
+        })
+        .catch((error) => {
+          return error;
+        })
+    }
+
+    useEffect(() => {
+        GetAllMusic()
+    }, [0])
+
+
+    const numbers = [1, 2, 3, 4, 5];
+    const listItems = numbers.map((number) =>
+      <li>{number}</li>
+    );
+
 
     return (
         <div>
