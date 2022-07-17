@@ -29,6 +29,7 @@ function CardSong(){
         GetAllMusic()
     }, [0])
 
+    console.log(music)
 
     const numbers = [1, 2, 3, 4, 5];
     const listItems = numbers.map((number) =>
