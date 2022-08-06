@@ -31,7 +31,7 @@ function CardSong(){
 
     const listMusic = music.map((musicData, index) =>
         <Card key={index}>
-            <Card.Img variant="top" src='{musicData.PhotoCover}' />
+            <Card.Img variant="top" src={'http://127.0.0.1:8000'+musicData.PhotoCover} />
             <Card.Body>
                 <div className='ArtistName' >
                     <Card.Text>
