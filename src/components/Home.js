@@ -1,29 +1,26 @@
-import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Button from 'react-bootstrap/Button';
-import LeftSide from './LeftSide';
-import RightSide from './RightSide';
-import SideNav from './SideNav';
-import { useSelector, useDispatch } from 'react-redux'
-function Home() {
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import CardSong from './GetMusicList';
 
-  return (
-    <div>
-      <Container fluid>
-          <Row>
-              <SideNav/>
-              <Col lg={3} md={3} xs={0}>
-                  <LeftSide/>
-              </Col>
 
-              <Col lg={9} md={9}>                  
-                  <RightSide/>
-              </Col>
-          </Row>
-      </Container>
-    </div>
-  );
+function RightSide() {
+    return (
+        <div className='RightSide Main'>
+            <p>
+                Created for you 
+            </p>
+                        
+            <Row className="">
+                <Col className='Songs'>
+                    <CardSong/>
+                </Col>                               
+            </Row>  
+        </div>
+  
+
+    );
 }
 
-export default Home;
+export default RightSide;
