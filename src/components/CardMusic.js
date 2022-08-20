@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux'
 import { MusicList } from '../Redux/Features/Music/MusicSlice'
-import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 
-function CardSong(){
+function CardSong(props){
 
     const dispatch = useDispatch()
 
@@ -27,7 +26,7 @@ function CardSong(){
 
     dispatch(MusicList(music))
 
-    console.log(music)
+    console.log(props.name)
 
     const listMusic = music.map((musicData, index) =>
         <Card key={index}>

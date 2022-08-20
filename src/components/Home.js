@@ -2,7 +2,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import CardSong from './GetMusicList';
+import CardSong from './CardMusic';
 
 
 function RightSide() {

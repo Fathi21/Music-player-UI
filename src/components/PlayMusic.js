@@ -2,7 +2,7 @@ import React from 'react'
 
 function GetASong() {
   return (
-    <div>
+    <div className='GetASong'>
       <h1>
         GetASong
       </h1>
