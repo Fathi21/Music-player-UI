@@ -26,7 +26,7 @@ function App() {
                       <Home/>
                     </Col>
                   </Route>
-                  <Route path="/song">
+                  <Route path="/song/:id">
                     <Col lg={9} md={9}>                  
                       <PlayMusic/>
                     </Col>

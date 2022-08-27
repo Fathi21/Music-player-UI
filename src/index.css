@@ -35,7 +35,7 @@ body{
 .bg-light{
   background-color: #000000 !important;
   padding-right: 15px;
-  display: none
+  display: block;
 }
 
 .Logo>h1{

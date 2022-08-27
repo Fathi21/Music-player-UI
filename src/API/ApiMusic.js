@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import CardSong from '../components/CardMusic';
+import CardMusic from '../components/CardMusic';
 
 function ApiMusic(){
 
@@ -24,7 +24,7 @@ function ApiMusic(){
 
     return (
         <div>
-            <CardSong name='sdfsd' />;
+            <CardMusic name='sdfsd' />;
         </div>
     )
 }
