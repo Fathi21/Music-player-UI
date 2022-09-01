@@ -35,7 +35,7 @@ body{
 .bg-light{
   background-color: #000000 !important;
   padding-right: 15px;
-  display: block;
+  display: none;
 }
 
 .Logo>h1{
@@ -178,15 +178,21 @@ body{
   font-size: 12px;
 }
 
-.GetASong{
+.MainForSong{
   color: white;
+}
+
+a{
+  color: #0d6efd;
+  text-decoration: none;
+}
+
+.MainBox{
+  border: 2px solid white;
 }
 
 @media only screen and (max-width: 1200px){
   /*Tablets [601px -> 1200px]*/
-
-
-
 }
 
 @media only screen and  (max-width: 767px){

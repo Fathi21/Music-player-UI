@@ -14,7 +14,7 @@ function RightSide() {
                         
             <Row className="">
                 <Col className='Songs'>
-                    <CardSong/>
+                    <CardSong name='fathi'/>
                 </Col>                               
             </Row>  
         </div>
