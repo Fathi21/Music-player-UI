@@ -3,12 +3,13 @@ import React from 'react'
 function PlayMusic() {
   return (
     <div className='MainForSong'>
-      <div className="p-5 rounded-3 MainBox">
-        <div className="container-fluid py-5">
-          <h1 className="display-5 fw-bold">Custom jumbotron</h1>
-          <p className="col-md-8 fs-4">Using a series of utilities, you can create this jumbotron, just like the one in previous versions of Bootstrap. Check out the examples below for how you can remix and restyle it to your liking.</p>
-          <button className="btn btn-primary btn-lg" type="button">Example button</button>
+      <div className="p-5 rounded-0 MainBox">
+        <div className="container-fluid py-2">
+          <img src="https://images.pexels.com/photos/12468153/pexels-photo-12468153.jpeg?cs=srgb&dl=pexels-fernando-paleta-12468153.jpg&fm=jpg" className="img-fluid" alt="..."/>
         </div>
+
+        <p className="fs-1">.fs-1 text</p>
+
       </div>
     </div>
   )

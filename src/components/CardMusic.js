@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom";
 
 
-function CardMusic(props){
+function CardMusic(){
 
     const [music, setmusic] = useState([])
     
@@ -21,8 +21,6 @@ function CardMusic(props){
     useEffect(() => {
         GetAllMusic()
     }, [0])
-
-    console.log('Name: ', props.name)
 
     const listMusic = music.map((musicData, index) =>
         <Link to={'song/' + musicData.id}>

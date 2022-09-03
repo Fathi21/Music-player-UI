@@ -188,7 +188,12 @@ a{
 }
 
 .MainBox{
-  border: 2px solid white;
+  height: 300px;
+  background-color: #76b96a;
+}
+
+.MainBox > .container-fluid > img {
+  width: 250px;
 }
 
 @media only screen and (max-width: 1200px){
