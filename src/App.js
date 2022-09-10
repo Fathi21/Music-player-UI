@@ -19,20 +19,19 @@ function App() {
               <Col lg={3} md={3} xs={0}>
                   <LeftSide/>
               </Col>
+              <Col lg={9} md={9}>                  
+
               <Router>
                 <Switch>
                   <Route exact path="/">
-                    <Col lg={9} md={9}>                  
                       <Home/>
-                    </Col>
                   </Route>
-                  <Route path="/song/:id">
-                    <Col lg={9} md={9}>                  
+                  <Route path="/browse/:id">
                       <PlayMusic/>
-                    </Col>
                   </Route>
                 </Switch>
               </Router>
+              </Col>
           </Row>
       </Container>
 

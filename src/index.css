@@ -113,7 +113,7 @@ body{
 
 
 .line{
-  border-bottom: 1px solid #10de47;;
+  border-bottom: 1px solid #10de47;
   position: relative;
   left: 8px;
 }
@@ -166,7 +166,7 @@ body{
   padding-bottom: 25px;
 }
 
-.ArtistName{
+.Title{
   color: white;
   font-size: 15px;
   font-weight: bolder;
@@ -194,6 +194,36 @@ a{
 
 .MainBox > .container-fluid > img {
   width: 250px;
+}
+
+.MainBox > .container-fluid {
+  border: 1px solid #ffffff;
+}
+
+.Title-lg{
+  position: relative;
+  bottom: 248px;
+  left: 277px;
+  width: 633px;
+  font-weight: bolder;  
+}
+
+.Owner-name-and-date{
+  position: relative;
+  bottom: 269px;
+  left: 278px;
+  font-size: larger;
+  font-weight: bolder;
+  width: 633px;
+}
+
+.react-audio-player {
+  position: relative;
+  bottom: 243px;
+  left: 278px;
+  border: 2px solid;
+  background-color: #f4f4f4;
+  width: 633px;
 }
 
 @media only screen and (max-width: 1200px){

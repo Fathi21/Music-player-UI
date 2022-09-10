@@ -23,11 +23,11 @@ function CardMusic(){
     }, [0])
 
     const listMusic = music.map((musicData, index) =>
-        <Link to={'song/' + musicData.id}>
+        <Link to={'browse/' + musicData.id}>
             <Card key={index}>
                 <Card.Img variant="top" src={'http://127.0.0.1:8000' + musicData.PhotoCover} />
                 <Card.Body>
-                    <div className='ArtistName' >
+                    <div className='Title' >
                         <Card.Text>
                             {musicData.Title}
                         </Card.Text>
