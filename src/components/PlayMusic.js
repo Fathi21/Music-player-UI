@@ -26,13 +26,13 @@ function PlayMusic() {
 
   console.log(music)
 
-  const listMusic = music.map((musicData, index) =>
+  const PlayingMusic = music.map((musicData, index) =>
     <div className="p-5 rounded-0 MainBox">
       <div className="container-fluid py-2 shadow-lg p-2 mb-5">
         <img src="https://images.pexels.com/photos/12468153/pexels-photo-12468153.jpeg?cs=srgb&dl=pexels-fernando-paleta-12468153.jpg&fm=jpg" className="img-fluid" alt="..."/>
       </div>
       <p className="fs-1 Title-lg">{musicData.Title}</p>
-      <p className="text-start Owner-name-and-date">Drake</p>
+      <p className="text-start Owner-name-and-date">Drake <i class="fas fa-circle"></i> <span>{musicData.CreatedAt}</span></p>
       <ReactAudioPlayer
         src={'http://127.0.0.1:8000' + musicData.MusicFile}
         autoPlay
@@ -44,7 +44,7 @@ function PlayMusic() {
 
   return (
     <div className='MainForSong'>
-      {listMusic}
+      {PlayingMusic}
     </div>
   )
 }

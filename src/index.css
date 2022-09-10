@@ -217,6 +217,10 @@ a{
   width: 633px;
 }
 
+.Owner-name-and-date > span {
+  font-weight: normal;
+}
+
 .react-audio-player {
   position: relative;
   bottom: 243px;
@@ -224,6 +228,12 @@ a{
   border: 2px solid;
   background-color: #f4f4f4;
   width: 633px;
+}
+
+.fa-circle{
+  font-size: 8px;
+  position: relative;
+  bottom: 2px;
 }
 
 @media only screen and (max-width: 1200px){
