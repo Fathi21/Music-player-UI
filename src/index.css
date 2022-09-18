@@ -1,44 +1,43 @@
-body{
+body {
   background-color: #121212;
 }
 
-
-.container-fluid{
+.container-fluid {
   padding-right: 0px;
   padding-left: 0px;
 }
 
 .row {
   margin-right: 0px;
-  margin-left: 0px;    
+  margin-left: 0px;
 }
 
-.row > *{
+.row > * {
   padding-right: 0px !important;
   padding-left: 0px !important;
 }
 
-.RightSide{
+.RightSide {
   background-color: #121212 !important;
   margin: 30px;
 }
 
-.navbar-toggler-icon{
+.navbar-toggler-icon {
   border: 2px solid white;
 }
 
-.LeftSide{
+.LeftSide {
   height: 100vh;
   background-color: #000000 !important;
 }
 
-.bg-light{
+.bg-light {
   background-color: #000000 !important;
   padding-right: 15px;
   display: none;
 }
 
-.Logo>h1{
+.Logo > h1 {
   border: 4px solid #10de47;
   border-radius: 5px;
   text-transform: uppercase;
@@ -46,60 +45,56 @@ body{
   margin-right: 15px;
   margin-left: 15px;
   color: #10de47;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   cursor: pointer;
   position: relative;
   top: 17px;
   font-size: 30px;
 }
 
-.navbar-toggler{
+.navbar-toggler {
   border: 2px solid red;
 }
 
-.ListLeftNav{
+.ListLeftNav {
   position: relative;
   top: 50px;
 }
 
-.LeftSide > div > h2{
+.LeftSide > div > h2 {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 30px;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   position: relative;
   top: 15px;
   right: 30px;
   margin-left: 35px;
-  color:#10de47;
+  color: #10de47;
 }
 
-
-.RightSide > div{
-  font-family: 'Inter', sans-serif;
-
+.RightSide > div {
+  font-family: "Inter", sans-serif;
 }
 
-
-.RightSide > p{
+.RightSide > p {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 16px;
-  font-family: 'Inter', sans-serif;
-  color:#ffffff;
+  font-family: "Inter", sans-serif;
+  color: #ffffff;
   margin-bottom: 35px;
 }
 
-.card{
+.card {
   margin-bottom: 10px;
   border: 1px solid grey;
   font-size: 13px;
   font-weight: bold;
-  text-transform:capitalize
+  text-transform: capitalize;
 }
 
-
-.list-group-item{
+.list-group-item {
   background-color: #000000;
   padding: 0;
   color: white;
@@ -111,30 +106,33 @@ body{
   cursor: pointer;
 }
 
-
-.line{
+.line {
   border-bottom: 1px solid #10de47;
   position: relative;
   left: 8px;
 }
 
-.createPlayList > .list-group-item{
+.createPlayList > .list-group-item {
   background-color: #000000;
   padding: 0;
   padding-top: 25px;
-  color:#10de47;
+  color: #10de47;
   position: relative;
   left: 15px;
   width: 150px;
   font-size: 15px;
 }
 
-.createPlayList > .list-group-item:hover{
+.createPlayList > .list-group-item:hover {
   color: white;
 }
 
-
-.fa-home, .fa-search, .fa-book, .fa-heart, .fa-plus-square, .fa-id-badge{
+.fa-home,
+.fa-search,
+.fa-book,
+.fa-heart,
+.fa-plus-square,
+.fa-id-badge {
   padding-right: 20px;
   font-size: 25px;
 }
@@ -150,44 +148,43 @@ body{
   background-color: #181818;
   color: white;
   border: 0;
-  cursor: pointer; 
+  cursor: pointer;
   width: 200px;
   border-radius: 10px;
 }
 
-
-.card:hover{
+.card:hover {
   background-color: #202020;
 }
 
-.card-body{
+.card-body {
   padding-right: 0;
   padding-left: 2px;
   padding-bottom: 25px;
 }
 
-.Title{
+.Title {
   color: white;
   font-size: 15px;
   font-weight: bolder;
   margin-bottom: 3px;
 }
 
-.SongName{
+.SongName {
   color: #adadad;
   font-size: 12px;
 }
 
-.MainForSong{
+.MainForSong {
   color: white;
 }
 
-a{
+a {
   color: #0d6efd;
   text-decoration: none;
 }
 
-.MainBox{
+.MainBox {
   height: 300px;
   background-color: #76b96a;
 }
@@ -201,15 +198,15 @@ a{
   border: 1px solid #ffffff;
 }
 
-.Title-lg{
+.Title-lg {
   position: relative;
   bottom: 240px;
   left: 277px;
   width: 633px;
-  font-weight: bolder;  
+  font-weight: bolder;
 }
 
-.Owner-name-and-date{
+.Owner-name-and-date {
   position: relative;
   bottom: 255px;
   left: 278px;
@@ -231,7 +228,7 @@ a{
   width: 633px;
 }
 
-.fa-circle{
+.fa-circle {
   font-size: 8px;
   position: relative;
   bottom: 2px;
@@ -240,43 +237,75 @@ a{
 .CardBox {
   margin-left: 20px;
 }
-@media only screen and (max-width: 1200px){
+
+.Main-righSide {
+  position: relative;
+  left: 338px;
+}
+
+.LikeAndAddToPlayList {
+  position: relative;
+  bottom: 219px;
+  left: 2px;
+}
+
+.LikeAndAddToPlayList > .fa-heart,
+.fa-plus {
+  font-size: 30px;
+  padding-right: 0px;
+  margin-right: 25px;
+  cursor: pointer;
+  color: white;
+}
+
+.CommentBox {
+  color: black;
+}
+
+.form-control {
+  border-radius: 0px;
+  border: 0px solid;
+  border-bottom: #10de47;
+}
+
+.spinner-border {
+  height: 100px;
+  width: 100px;
+}
+
+@media only screen and (max-width: 1200px) {
   /*Tablets [601px -> 1200px]*/
 }
 
-@media only screen and  (max-width: 767px){
+@media only screen and (max-width: 767px) {
   /*Tablets [601px -> 1200px]*/
 
-  .bg-light{
-    display: block !important; 
+  .bg-light {
+    display: block !important;
   }
 
   .LeftSide {
     display: none !important;
-    background-color: #10de47; 
+    background-color: #10de47;
   }
 }
 
-
-@media only screen and  (max-width: 767px){
+@media only screen and (max-width: 767px) {
   /*Tablets [601px -> 1200px]*/
 
-  .bg-light{
-    display: block !important; 
+  .bg-light {
+    display: block !important;
   }
 
   .LeftSide {
     display: none !important;
-    background-color: #10de47; 
+    background-color: #10de47;
   }
 }
 
-
-@media only screen and (max-width: 600px){
-/*Big smartphones [426px -> 600px]*/
-
- 
+@media only screen and (max-width: 600px) {
+  /*Big smartphones [426px -> 600px]*/
 }
-@media only screen and (max-width: 425px){
-/*Small smartphones [325px -> 425px]*/
+@media only screen and (max-width: 425px) {
+  /*Small smartphones [325px -> 425px]*/
 }
