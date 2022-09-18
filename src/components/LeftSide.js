@@ -6,15 +6,15 @@ function LeftSide() {
     return (
         <div className='LeftSide d-none d-md-block bg-light sidebar'>
             <div className='Logo'>
-                <h1>
-                    Melody
-                </h1>
+                    <h1>
+                        Melody
+                    </h1>
             </div>
             
             <div className='ListLeftNav'>
                 <ListGroup variant="flush">
                     <ListGroup.Item><i className="fa fa-home" aria-hidden="true"></i> Home</ListGroup.Item>
-                    <ListGroup.Item><i className="fa fa-search" aria-hidden="true"></i> Search</ListGroup.Item>
+                    <ListGroup.Item><i className="fa fa-search" aria-hidden="false"></i> Search</ListGroup.Item>
                     <ListGroup.Item><i className="fa fa-book" aria-hidden="true"></i> library</ListGroup.Item>
                     
                     <span className='line'>

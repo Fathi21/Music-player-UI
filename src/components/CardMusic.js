@@ -23,28 +23,31 @@ function CardMusic(){
     }, [0])
 
     const listMusic = music.map((musicData, index) =>
-        <Link to={'browse/' + musicData.id}>
-            <Card key={index}>
-                <Card.Img variant="top" src={'http://127.0.0.1:8000' + musicData.PhotoCover} />
-                <Card.Body>
-                    <div className='Title' >
-                        <Card.Text>
-                            {musicData.Title}
-                        </Card.Text>
-                    </div>
+        <div class="col CardBox">
+            <Link to={'browse/' + musicData.id}>
+                <Card key={index}>
+                    <Card.Img variant="top" src={'http://127.0.0.1:8000' + musicData.PhotoCover} />
+                    <Card.Body>
+                        <div className='Title' >
+                            <Card.Text>
+                                {musicData.Title}
+                            </Card.Text>
+                        </div>
 
-                    <div className='SongName' >
-                        <Card.Text>
-                            Over my dead body 
-                        </Card.Text>
-                    </div>
-                </Card.Body>
-            </Card>
-        </Link>
+                        <div className='SongName' >
+                            <Card.Text>
+                                Over my dead body 
+                            </Card.Text>
+                        </div>
+                    </Card.Body>
+                </Card>
+            </Link>
+        </div>
+
     );
 
     return (
-        <div>
+        <div class="row row-cols-4 row-cols-lg-5 g-2 g-lg-3">
             {listMusic}
         </div>
     )

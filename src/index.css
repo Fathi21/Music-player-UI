@@ -194,6 +194,7 @@ a{
 
 .MainBox > .container-fluid > img {
   width: 250px;
+  height: 180px;
 }
 
 .MainBox > .container-fluid {
@@ -202,7 +203,7 @@ a{
 
 .Title-lg{
   position: relative;
-  bottom: 248px;
+  bottom: 240px;
   left: 277px;
   width: 633px;
   font-weight: bolder;  
@@ -210,7 +211,7 @@ a{
 
 .Owner-name-and-date{
   position: relative;
-  bottom: 269px;
+  bottom: 255px;
   left: 278px;
   font-size: larger;
   font-weight: bolder;
@@ -236,6 +237,9 @@ a{
   bottom: 2px;
 }
 
+.CardBox {
+  margin-left: 20px;
+}
 @media only screen and (max-width: 1200px){
   /*Tablets [601px -> 1200px]*/
 }

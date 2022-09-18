@@ -2,7 +2,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import CardSong from './CardMusic';
+import CardMusic from './CardMusic';
 
 
 function RightSide() {
@@ -12,11 +12,9 @@ function RightSide() {
                 Created for you 
             </p>
                         
-            <Row className="">
                 <Col className='Songs'>
-                    <CardSong />
+                    <CardMusic />
                 </Col>                               
-            </Row>  
         </div>
   
 
