@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
+import Spinner from "./Spinner";
 
 function CardMusic() {
   const [music, setmusic] = useState([]);
+
+  const [HideSpinner, setHideSpinner] = useState("");
 
   function GetAllMusic() {
     axios
@@ -18,7 +21,8 @@ function CardMusic() {
   useEffect(() => {
     setTimeout(function () {
       GetAllMusic();
-    }, 100);
+      setHideSpinner("hide");
+    }, 500);
   }, [0]);
 
   const listMusic = music.map((musicData, index) => (
@@ -45,9 +49,7 @@ function CardMusic() {
 
   return (
     <div className="row row-cols-4 row-cols-lg-5 g-2 g-lg-3">
-      <div className="spinner-border text-success" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </div>
+      <Spinner hide={HideSpinner} />
       {listMusic}
     </div>
   );

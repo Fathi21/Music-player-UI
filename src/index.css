@@ -186,7 +186,7 @@ a {
 
 .MainBox {
   height: 300px;
-  background-color: #76b96a;
+  background-color: #33602b;
 }
 
 .MainBox > .container-fluid > img {
@@ -271,6 +271,13 @@ a {
 .spinner-border {
   height: 100px;
   width: 100px;
+  position: relative;
+  top: 168px;
+  left: 430px;
+}
+
+.hide {
+  display: none;
 }
 
 @media only screen and (max-width: 1200px) {

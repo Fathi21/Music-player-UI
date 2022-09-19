@@ -1,7 +1,18 @@
 import React from "react";
 
 function Comment() {
-  return <div>Comment</div>;
+  return (
+    <div className="mb-3 CommentBox">
+      <div className="form-floating">
+        <textarea
+          className="form-control"
+          placeholder="Leave a comment here"
+          id="floatingTextarea"
+        ></textarea>
+        <label for="floatingTextarea">Add a comment</label>
+      </div>
+    </div>
+  );
 }
 
 export default Comment;
