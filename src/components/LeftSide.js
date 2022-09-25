@@ -41,7 +41,9 @@ function LeftSide() {
           </ListGroup.Item>
 
           <span>
-            <ListGroup.Item> Sign Up</ListGroup.Item>
+            <Link to="/register">
+              <ListGroup.Item> Sign Up</ListGroup.Item>
+            </Link>
 
             <ListGroup.Item> Sign In</ListGroup.Item>
 

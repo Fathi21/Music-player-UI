@@ -26,7 +26,7 @@ function CardMusic() {
   }, [0]);
 
   const listMusic = music.map((musicData, index) => (
-    <div className="col CardBox">
+    <div className="col">
       <Link to={"browse/" + musicData.id}>
         <Card key={index}>
           <Card.Img
