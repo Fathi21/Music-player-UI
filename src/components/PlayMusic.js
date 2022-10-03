@@ -2,6 +2,7 @@ import ReactAudioPlayer from "react-audio-player";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import LeftSide from "./LeftSide";
 import LikeButton from "./LikeButton";
 import AddToPlayList from "./AddToPlayList";
 import Spinner from "./Spinner";
@@ -54,10 +55,11 @@ function PlayMusic() {
 
   return (
     <div className="MainForSong">
+      <div className="col-3 col-lg-3 fixed-top">
+        <LeftSide />
+      </div>
       <Spinner hide={HideSpinner} />
-
       {PlayingMusic}
-
       <Comment />
     </div>
   );

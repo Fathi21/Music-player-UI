@@ -18,38 +18,38 @@ function LeftSide() {
         <ListGroup variant="flush">
           <Link to="/">
             <ListGroup.Item>
-              <i className="fa fa-home" aria-hidden="true"></i> Home
+              <i className="fa fa-home" aria-hidden="true"></i>Home
             </ListGroup.Item>
           </Link>
           <ListGroup.Item>
-            <i className="fa fa-search" aria-hidden="true"></i> Search
+            <i className="fa fa-search" aria-hidden="true"></i>Search
           </ListGroup.Item>
           <ListGroup.Item>
-            <i className="fa fa-book" aria-hidden="true"></i> library
+            <i className="fa fa-book" aria-hidden="true"></i>library
           </ListGroup.Item>
 
           <span className="line"></span>
           <span className="createPlayList">
             <ListGroup.Item>
-              <i className="fa fa-plus-square" aria-hidden="true"></i> Create
-              Playlist
+              <i className="fa fa-plus-square" aria-hidden="true"></i>
+              Create Playlist
             </ListGroup.Item>
           </span>
 
           <ListGroup.Item>
-            <i className="fa fa-heart" aria-hidden="true"></i> Liked Songs
+            <i className="fa fa-heart" aria-hidden="true"></i>Liked Songs
           </ListGroup.Item>
 
           <span>
             <Link to="/register">
-              <ListGroup.Item> Sign Up</ListGroup.Item>
+              <ListGroup.Item>Sign Up</ListGroup.Item>
             </Link>
 
-            <ListGroup.Item> Sign In</ListGroup.Item>
+            <ListGroup.Item>Sign In</ListGroup.Item>
 
-            <ListGroup.Item> Sharif</ListGroup.Item>
+            <ListGroup.Item>Sharif</ListGroup.Item>
 
-            <ListGroup.Item> Logout</ListGroup.Item>
+            <ListGroup.Item>Logout</ListGroup.Item>
           </span>
         </ListGroup>
       </div>

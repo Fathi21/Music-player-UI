@@ -1,4 +1,5 @@
 import React from "react";
+import BackWard from "./BackWard";
 
 function SignUp() {
   return (

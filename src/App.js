@@ -16,22 +16,24 @@ function App() {
         <div className="row">
           <Router>
             <SideNav />
-            <div className="col-3 col-lg-3 fixed-top">
-              <LeftSide />
-            </div>
-            <div className="col-9 col-lg-9 Main-righSide">
-              <Switch>
+            <Switch>
+              <div className="col-9 Main-righSide">
                 <Route exact path="/">
                   <Home />
                 </Route>
                 <Route path="/browse/:id">
                   <PlayMusic />
                 </Route>
+              </div>
+            </Switch>
+
+            <Switch>
+              <div className="col-12">
                 <Route exact path="/Register">
                   <SignUp />
                 </Route>
-              </Switch>
-            </div>
+              </div>
+            </Switch>
           </Router>
         </div>
       </div>

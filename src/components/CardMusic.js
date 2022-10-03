@@ -3,6 +3,7 @@ import axios from "axios";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import Spinner from "./Spinner";
+import LeftSide from "./LeftSide";
 
 function CardMusic() {
   const [music, setmusic] = useState([]);
@@ -49,6 +50,9 @@ function CardMusic() {
 
   return (
     <div className="row row-cols-4 row-cols-lg-5 g-2 g-lg-3">
+      <div className="col-3 col-lg-3 fixed-top">
+        <LeftSide />
+      </div>
       <Spinner hide={HideSpinner} />
       {listMusic}
     </div>
