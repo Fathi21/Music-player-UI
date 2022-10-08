@@ -73,11 +73,11 @@ body {
   color: #10de47;
 }
 
-.RightSide > div {
+.Main-righSide > div {
   font-family: "Inter", sans-serif;
 }
 
-.RightSide > p {
+.Main-righSide > p {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 16px;
@@ -286,20 +286,22 @@ a {
 }
 
 .form-Box > form {
-  background-color: #33602b;
+  background-color: #292828;
   padding: 20px;
   width: 400px;
   margin-top: 50px;
   margin-top: 100px;
   color: white;
   font-weight: bolder;
-  border-radius: 5px;
 }
 
 .form-control {
   border-radius: 7px;
 }
 
+#emailHelp {
+  color: #b2e672;
+}
 @media only screen and (max-width: 1200px) {
   /*Tablets [601px -> 1200px]*/
 }

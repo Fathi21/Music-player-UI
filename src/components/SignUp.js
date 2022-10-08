@@ -14,20 +14,22 @@ function SignUp() {
             className="form-control"
             id="exampleInputEmail1"
             aria-describedby="emailHelp"
+            placeholder="Email@hotmail.com"
           />
           <div id="emailHelp" className="form-text">
             We'll never share your email with anyone else.
           </div>
         </div>
         <div className="mb-3">
-          <label for="exampleInputEmail1" className="form-label">
+          <label for="" className="form-label">
             User name
           </label>
           <input
             type="email"
             className="form-control"
-            id="exampleInputEmail1"
+            id=""
             aria-describedby="emailHelp"
+            placeholder="Username"
           />
         </div>
         <div className="mb-3">
@@ -38,6 +40,7 @@ function SignUp() {
             type="password"
             className="form-control"
             id="exampleInputPassword1"
+            placeholder="Password"
           />
         </div>
         <div className="mb-3 form-check">
@@ -47,11 +50,11 @@ function SignUp() {
             id="exampleCheck1"
           />
           <label className="form-check-label" for="exampleCheck1">
-            Check me out
+            Show password
           </label>
         </div>
         <div className="col-auto">
-          <button type="submit" className="btn btn-primary mb-3">
+          <button type="submit" className="btn btn-success mb-3">
             Confirm identity
           </button>
         </div>

@@ -49,12 +49,18 @@ function CardMusic() {
   ));
 
   return (
-    <div className="row row-cols-4 row-cols-lg-5 g-2 g-lg-3">
+    <div className="row">
       <div className="col-3 col-lg-3 fixed-top">
         <LeftSide />
       </div>
-      <Spinner hide={HideSpinner} />
-      {listMusic}
+      <div className="col-9 Main-righSide">
+        <p>Created for you</p>
+
+        <div className="row row-cols-4 row-cols-lg-4 g-2 g-lg-3">
+          <Spinner hide={HideSpinner} />
+          {listMusic}
+        </div>
+      </div>
     </div>
   );
 }

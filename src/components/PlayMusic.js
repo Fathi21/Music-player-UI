@@ -55,12 +55,16 @@ function PlayMusic() {
 
   return (
     <div className="MainForSong">
-      <div className="col-3 col-lg-3 fixed-top">
-        <LeftSide />
+      <div className="row">
+        <div className="col-3 col-lg-3 fixed-top">
+          <LeftSide />
+        </div>
+        <div className="col-9 Main-righSide">
+          <Spinner hide={HideSpinner} />
+          {PlayingMusic}
+          <Comment />
+        </div>
       </div>
-      <Spinner hide={HideSpinner} />
-      {PlayingMusic}
-      <Comment />
     </div>
   );
 }

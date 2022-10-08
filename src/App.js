@@ -13,29 +13,20 @@ function App() {
   return (
     <div>
       <div className="container-fluid">
-        <div className="row">
-          <Router>
-            <SideNav />
-            <Switch>
-              <div className="col-9 Main-righSide">
-                <Route exact path="/">
-                  <Home />
-                </Route>
-                <Route path="/browse/:id">
-                  <PlayMusic />
-                </Route>
-              </div>
-            </Switch>
-
-            <Switch>
-              <div className="col-12">
-                <Route exact path="/Register">
-                  <SignUp />
-                </Route>
-              </div>
-            </Switch>
-          </Router>
-        </div>
+        <Router>
+          <SideNav />
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/browse/:id">
+              <PlayMusic />
+            </Route>
+            <Route exact path="/Register">
+              <SignUp />
+            </Route>
+          </Switch>
+        </Router>
       </div>
     </div>
   );
