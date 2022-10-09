@@ -1,7 +1,26 @@
-import React from "react";
-import BackWard from "./BackWard";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import Footer from "./Footer";
 
 function SignUp() {
+  const [music, setmusic] = useState([]);
+
+  const [HideSpinner, setHideSpinner] = useState("");
+
+  function CreateNewUser() {
+    axios
+      .post("/user", {
+        firstName: "Fred",
+        lastName: "Flintstone",
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   return (
     <div className="form-Box">
       <form>
@@ -55,10 +74,11 @@ function SignUp() {
         </div>
         <div className="col-auto">
           <button type="submit" className="btn btn-success mb-3">
-            Confirm identity
+            Register
           </button>
         </div>
       </form>
+      <Footer />
     </div>
   );
 }
