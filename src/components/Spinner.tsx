@@ -1,6 +1,6 @@
 import React from "react";
 
-function Spinner(props) {
+function Spinner(props: any) {
   console.log();
 
   return (

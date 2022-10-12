@@ -9,7 +9,7 @@ import Spinner from "./Spinner";
 import Comment from "./Comment";
 
 function PlayMusic() {
-  let { id } = useParams();
+  const { id }: any = useParams();
 
   const [music, setmusic] = useState([]);
 
@@ -31,7 +31,7 @@ function PlayMusic() {
     }, 500);
   }, [0]);
 
-  const PlayingMusic = music.map((musicData, index) => (
+  const PlayingMusic = music.map((musicData: any, index) => (
     <div className="p-5 rounded-0 MainBox">
       <div className="container-fluid py-2 shadow-lg p-2 mb-5">
         <img src={"http://127.0.0.1:8000" + musicData.PhotoCover} />

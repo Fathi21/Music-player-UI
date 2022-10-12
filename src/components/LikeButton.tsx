@@ -1,6 +1,6 @@
 import React from "react";
 
-function LikeButton(props) {
+function LikeButton(props: any) {
   console.log(props);
   return <i className="fas fa-heart"></i>;
 }

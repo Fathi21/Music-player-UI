@@ -9,7 +9,7 @@ function Comment() {
           placeholder="Leave a comment here"
           id="floatingTextarea"
         ></textarea>
-        <label for="floatingTextarea">Add a comment</label>
+        <label htmlFor="floatingTextarea">Add a comment</label>
       </div>
     </div>
   );

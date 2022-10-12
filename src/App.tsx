@@ -2,12 +2,12 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
-import LeftSide from "./components/LeftSide";
 import Home from "./components/Home";
 import SideNav from "./components/SideNav";
 import PlayMusic from "./components/PlayMusic";
 import SignUp from "./components/SignUp";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import React from "react";
 
 function App() {
   return (

@@ -48,7 +48,7 @@ function LeftSide() {
             <ListGroup.Item>Sign In</ListGroup.Item>
 
             <ListGroup.Item>
-              <i class="fas fa-users-cog"></i>Sharif
+              <i className="fas fa-users-cog"></i>Sharif
             </ListGroup.Item>
 
             <ListGroup.Item>Logout</ListGroup.Item>
