@@ -288,10 +288,11 @@ a {
 
 .form-Box > form {
   background-color: #292828;
-  padding: 20px;
+  padding-top: 15px;
+  padding-left: 15px;
+  padding-right: 15px;
   width: 400px;
-  margin-top: 50px;
-  margin-top: 100px;
+  margin-top: 55px;
   color: white;
   font-weight: bolder;
 }
@@ -317,6 +318,13 @@ a {
 .form-check-input:checked {
   background-color: #ff0000;
   border-color: #ffffff;
+}
+
+form > a > .Logo > h1 {
+  position: relative;
+  top: -2px;
+  right: 13px;
+  width: 368px;
 }
 @media only screen and (max-width: 1200px) {
   /*Tablets [601px -> 1200px]*/

@@ -1,15 +1,11 @@
-import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import CardMusic from "./CardMusic";
 
 function RightSide() {
   return (
     <div className="RightSide Main">
-      <Col className="Songs">
-        <CardMusic />
-      </Col>
+      <CardMusic />
     </div>
   );
 }
