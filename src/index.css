@@ -326,6 +326,10 @@ form > a > .Logo > h1 {
   right: 13px;
   width: 368px;
 }
+
+#error-message {
+  color: #ff0000;
+}
 @media only screen and (max-width: 1200px) {
   /*Tablets [601px -> 1200px]*/
 }

@@ -1,67 +1,68 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useFormik } from "formik";
 import axios from "axios";
 import Footer from "./Footer";
+import { urlCalls } from "../utilities/ApiUrlCalls";
+import { SignUpMessage } from "../utilities/ValidationMessages";
 
 function SignUp() {
-  const [music, setmusic] = useState([]);
+  const [email, setEmail] = React.useState("");
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
-  const [HideSpinner, setHideSpinner] = useState("");
+  const [messages, setMessages] = useState({ email: "", username: "" });
 
-  function CreateNewUser() {
+  const [responseError, setresponseError] = React.useState({
+    username: "",
+    password: "",
+  });
+
+  function CreateNewUser(email: string, username: string, password: string) {
     axios
-      .post("/http://127.0.0.1:8000/Api/Register", {
-        firstName: "Fred",
-        lastName: "Flintstone",
+      .post(urlCalls.Register, {
+        email: email,
+        username: username,
+        password: password,
+        first_name: "",
+        last_name: "",
       })
       .then(function (response) {
-        console.log(response);
+        console.log(response.data[0]);
+        setresponseError(response.data[0]);
       })
       .catch(function (error) {
-        console.log(error);
+        console.log(error.response.data.username);
+        setresponseError((prev) => ({
+          ...prev,
+          username: error.response.data.username,
+        }));
+
+        setresponseError((prev) => ({
+          ...prev,
+          password: error.response.data.password,
+        }));
       });
   }
 
-  // const validate = (values) => {
-  //   const errors = {};
-  //   if (!values.firstName) {
-  //     errors.firstName = "Required";
-  //   } else if (values.firstName.length > 15) {
-  //     errors.firstName = "Must be 15 characters or less";
-  //   }
+  function handleValidations(): void {
+    if (SignUpMessage.usernameExists == responseError.username) {
+      setMessages((prev) => ({ ...prev, email: responseError.username }));
+    }
+  }
 
-  //   if (!values.lastName) {
-  //     errors.lastName = "Required";
-  //   } else if (values.lastName.length > 20) {
-  //     errors.lastName = "Must be 20 characters or less";
-  //   }
-
-  //   if (!values.email) {
-  //     errors.email = "Required";
-  //   } else if (
-  //     !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-  //   ) {
-  //     errors.email = "Invalid email address";
-  //   }
-
-  //   return errors;
-  // };
-
-  const formik = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-    },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
-  });
+  function handleSubmit(event: any) {
+    event.preventDefault();
+    CreateNewUser(email, username, password);
+    handleValidations();
+    console.log(messages.username);
+    setEmail("");
+    setUsername("");
+    setPassword("");
+  }
 
   return (
     <div className="form-Box">
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <Link to="/">
           <div className="Logo">
             <h1>Melody</h1>
@@ -74,12 +75,19 @@ function SignUp() {
           <input
             type="email"
             className="form-control"
-            id="exampleInputEmail1"
             aria-describedby="emailHelp"
             placeholder="Email@hotmail.com"
+            name="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            required
           />
           <div id="emailHelp" className="form-text">
             We'll never share your email with anyone else.
+          </div>
+
+          <div id="error-message" className="form-text">
+            {messages.email}
           </div>
         </div>
         <div className="mb-3">
@@ -87,11 +95,13 @@ function SignUp() {
             User name
           </label>
           <input
-            type="email"
+            type="text"
             className="form-control"
-            id=""
             aria-describedby="emailHelp"
             placeholder="Username"
+            name="username"
+            onChange={(e) => setUsername(e.target.value)}
+            required
           />
         </div>
         <div className="mb-3">
@@ -101,8 +111,10 @@ function SignUp() {
           <input
             type="password"
             className="form-control"
-            id="exampleInputPassword1"
             placeholder="Password"
+            name="password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
         <div className="mb-3 form-check">

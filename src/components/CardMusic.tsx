@@ -4,6 +4,7 @@ import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import Spinner from "./Spinner";
 import LeftSide from "./LeftSide";
+import { urlCalls } from "../utilities/ApiUrlCalls";
 
 function CardMusic() {
   const [music, setmusic] = useState([]);
@@ -12,7 +13,7 @@ function CardMusic() {
 
   function GetAllMusic() {
     axios
-      .get("http://127.0.0.1:8000/Api/GetAllMusic")
+      .get(urlCalls.GetAllMusic)
       .then((response) => setmusic(response.data))
       .catch((error) => {
         console.error("There was an error!", error);

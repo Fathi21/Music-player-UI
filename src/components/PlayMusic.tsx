@@ -7,6 +7,7 @@ import LikeButton from "./LikeButton";
 import AddToPlayList from "./AddToPlayList";
 import Spinner from "./Spinner";
 import Comment from "./Comment";
+import { urlCalls } from "../utilities/ApiUrlCalls";
 
 function PlayMusic() {
   const { id }: any = useParams();
@@ -17,7 +18,7 @@ function PlayMusic() {
 
   function GetAMusic() {
     axios
-      .get("http://127.0.0.1:8000/Api/GetSongById/" + id)
+      .get(urlCalls.GetSongById + id)
       .then((response) => setmusic(response.data))
       .catch((error) => {
         console.error("There was an error!", error);
