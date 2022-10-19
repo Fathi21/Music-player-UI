@@ -45,8 +45,12 @@ function SignUp() {
   }
 
   function handleValidations(): void {
-    if (SignUpMessage.usernameExists == responseError.username) {
-      setMessages((prev) => ({ ...prev, email: responseError.username }));
+    const mes: string = "A user with that username already exists.";
+    if (SignUpMessage.usernameExists === mes) {
+      setMessages((prev) => ({
+        ...prev,
+        username: SignUpMessage.usernameExists,
+      }));
     }
   }
 
@@ -87,7 +91,7 @@ function SignUp() {
           </div>
 
           <div id="error-message" className="form-text">
-            {messages.email}
+            {messages.username}
           </div>
         </div>
         <div className="mb-3">
