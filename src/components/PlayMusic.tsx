@@ -36,8 +36,6 @@ function PlayMusic() {
     </div>
   ));
 
-  console.log(music.length);
-
   return (
     <div className="MainForSong">
       <div className="row">
