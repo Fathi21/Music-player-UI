@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Footer from "./Footer";
-import { urlCalls } from "../utilities/ApiUrlCalls";
+import { urlCalls } from "../utilities/Enums/ApiUrlCalls";
 import { SignUpMessage } from "../utilities/ValidationMessages";
+import CreateNewUser from "../utilities/ApiCalls/CreateNewUser";
 
 function SignUp() {
   const [email, setEmail] = React.useState("");
@@ -11,38 +12,6 @@ function SignUp() {
   const [password, setPassword] = React.useState("");
 
   const [messages, setMessages] = useState({ email: "", username: "" });
-
-  const [responseError, setresponseError] = React.useState({
-    username: "",
-    password: "",
-  });
-
-  function CreateNewUser(email: string, username: string, password: string) {
-    axios
-      .post(urlCalls.Register, {
-        email: email,
-        username: username,
-        password: password,
-        first_name: "",
-        last_name: "",
-      })
-      .then(function (response) {
-        console.log(response.data[0]);
-        setresponseError(response.data[0]);
-      })
-      .catch(function (error) {
-        console.log(error.response.data.username);
-        setresponseError((prev) => ({
-          ...prev,
-          username: error.response.data.username,
-        }));
-
-        setresponseError((prev) => ({
-          ...prev,
-          password: error.response.data.password,
-        }));
-      });
-  }
 
   function handleValidations(): void {
     const mes: string = "A user with that username already exists.";
@@ -59,8 +28,8 @@ function SignUp() {
     CreateNewUser(email, username, password);
     handleValidations();
     console.log(messages.username);
-    setEmail("");
     setUsername("");
+    setEmail("");
     setPassword("");
   }
 
@@ -105,6 +74,7 @@ function SignUp() {
             placeholder="Username"
             name="username"
             onChange={(e) => setUsername(e.target.value)}
+            value={username}
             required
           />
         </div>
@@ -118,6 +88,7 @@ function SignUp() {
             placeholder="Password"
             name="password"
             onChange={(e) => setPassword(e.target.value)}
+            value={password}
             required
           />
         </div>

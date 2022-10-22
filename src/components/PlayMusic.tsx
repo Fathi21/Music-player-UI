@@ -1,41 +1,23 @@
 import ReactAudioPlayer from "react-audio-player";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import LeftSide from "./LeftSide";
 import LikeButton from "./LikeButton";
 import AddToPlayList from "./AddToPlayList";
 import Spinner from "./Spinner";
 import Comment from "./Comment";
-import { urlCalls } from "../utilities/ApiUrlCalls";
+import { urlCalls } from "../utilities/Enums/ApiUrlCalls";
+import GetSongById from "../utilities/ApiCalls/GetSongById";
 
 function PlayMusic() {
   const { id }: any = useParams();
 
-  const [music, setmusic] = useState([]);
-
-  const [HideSpinner, setHideSpinner] = useState("");
-
-  function GetAMusic() {
-    axios
-      .get(urlCalls.GetSongById + id)
-      .then((response) => setmusic(response.data))
-      .catch((error) => {
-        console.error("There was an error!", error);
-      });
-  }
-
-  useEffect(() => {
-    setTimeout(function () {
-      GetAMusic();
-      setHideSpinner("hide");
-    }, 500);
-  }, [0]);
+  const music = GetSongById(id);
 
   const PlayingMusic = music.map((musicData: any, index) => (
     <div className="p-5 rounded-0 MainBox">
       <div className="container-fluid py-2 shadow-lg p-2 mb-5">
-        <img src={"http://127.0.0.1:8000" + musicData.PhotoCover} />
+        <img src={urlCalls.Base + musicData.PhotoCover} />
       </div>
       <p className="fs-1 Title-lg">{musicData.Title}</p>
       <p className="text-start Owner-name-and-date">
@@ -43,7 +25,7 @@ function PlayMusic() {
         <span>{musicData.CreatedAt}</span>
       </p>
       <ReactAudioPlayer
-        src={"http://127.0.0.1:8000" + musicData.MusicFile}
+        src={urlCalls.Base + musicData.MusicFile}
         autoPlay
         controls
       />
@@ -54,6 +36,8 @@ function PlayMusic() {
     </div>
   ));
 
+  console.log(music.length);
+
   return (
     <div className="MainForSong">
       <div className="row">
@@ -61,8 +45,8 @@ function PlayMusic() {
           <LeftSide />
         </div>
         <div className="col-9 Main-righSide">
-          <Spinner hide={HideSpinner} />
           {PlayingMusic}
+          <Spinner data={music.length} />
           <Comment />
         </div>
       </div>
