@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Footer from "./Footer";
 import { urlCalls } from "../utilities/Enums/ApiUrlCalls";
-import { SignUpMessage } from "../utilities/ValidationMessages";
+import { SignUpMessage } from "../utilities/Enums/ValidationMessages";
 import CreateNewUser from "../utilities/ApiCalls/CreateNewUser";
 
 function SignUp() {
