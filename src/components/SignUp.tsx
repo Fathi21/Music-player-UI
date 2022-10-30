@@ -16,7 +16,7 @@ function SignUp() {
     password: "",
   });
 
-  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(true);
 
   function handleValidations() {
     ExistUsers().then(function (result) {
@@ -64,9 +64,13 @@ function SignUp() {
   }, [email, username]);
 
   function handleShowpassword() {
-    setShowPassword(true);
-
-    console.log(showPassword);
+    if (showPassword) {
+      setShowPassword(false);
+      console.log(showPassword);
+    } else {
+      setShowPassword(true);
+      console.log(showPassword);
+    }
   }
 
   return (
@@ -121,7 +125,7 @@ function SignUp() {
             Password
           </label>
           <input
-            type="password"
+            type={showPassword ? "password" : "text"}
             className="form-control"
             placeholder="Password"
             name="password"
