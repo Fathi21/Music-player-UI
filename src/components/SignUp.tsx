@@ -1,21 +1,29 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useInsertionEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import Footer from "./Footer";
-import { urlCalls } from "../utilities/Enums/ApiUrlCalls";
-import { SignUpMessage } from "../utilities/Enums/ValidationMessages";
-import CreateNewUser from "../utilities/ApiCalls/CreateNewUser";
+import { SignUpMessage } from "../Utilities/Enums/ValidationMessages";
+import CreateNewUser from "../Utilities/ApiCalls/CreateNewUser";
+import GetUserByEmail from "../Utilities/ApiCalls/GetUserByEmail";
+import GetUserByUserName from "../Utilities/ApiCalls/GetUserByUserName";
+import Validation from "../Utilities/Validation/Validation";
 
 function SignUp() {
-  const [email, setEmail] = React.useState("");
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   const [messages, setMessages] = useState({ email: "", username: "" });
+  const [resEmail, setresEmail] = useState("");
+  const [resUsername, setresUsername] = useState("");
 
-  function handleValidations(): void {
-    const mes: string = "A user with that username already exists.";
-    if (SignUpMessage.usernameExists === mes) {
+  function handleValidations() {
+    console.log("Validation");
+    if (resEmail.length > 0) {
+      setMessages((prev) => ({
+        ...prev,
+        username: SignUpMessage.emailExists,
+      }));
+    } else if (resUsername.length > 0) {
       setMessages((prev) => ({
         ...prev,
         username: SignUpMessage.usernameExists,
@@ -25,9 +33,15 @@ function SignUp() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    CreateNewUser(email, username, password);
     handleValidations();
-    console.log(messages.username);
+
+    GetUserByEmail(email).then(function (result) {
+      setresEmail(result);
+    });
+    GetUserByUserName(username).then(function (result) {
+      setresUsername(result);
+    });
+    //CreateNewUser(email, username, password);
     setUsername("");
     setEmail("");
     setPassword("");
@@ -58,7 +72,6 @@ function SignUp() {
           <div id="emailHelp" className="form-text">
             We'll never share your email with anyone else.
           </div>
-
           <div id="error-message" className="form-text">
             {messages.username}
           </div>
@@ -77,6 +90,9 @@ function SignUp() {
             value={username}
             required
           />
+          <div id="error-message" className="form-text">
+            {messages.username}
+          </div>
         </div>
         <div className="mb-3">
           <label htmlFor="exampleInputPassword1" className="form-label">

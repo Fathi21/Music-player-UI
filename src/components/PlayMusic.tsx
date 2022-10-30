@@ -6,8 +6,8 @@ import LikeButton from "./LikeButton";
 import AddToPlayList from "./AddToPlayList";
 import Spinner from "./Spinner";
 import Comment from "./Comment";
-import { urlCalls } from "../utilities/Enums/ApiUrlCalls";
-import GetSongById from "../utilities/ApiCalls/GetSongById";
+import { urlCalls } from "../Utilities/Enums/ApiUrlCalls";
+import GetSongById from "../Utilities/ApiCalls/GetSongById";
 
 function PlayMusic() {
   const { id }: any = useParams();

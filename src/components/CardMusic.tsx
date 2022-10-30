@@ -3,8 +3,8 @@ import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import Spinner from "./Spinner";
 import LeftSide from "./LeftSide";
-import { urlCalls } from "../utilities/Enums/ApiUrlCalls";
-import GetAllSongs from "../utilities/ApiCalls/GetAllSongs";
+import { urlCalls } from "../Utilities/Enums/ApiUrlCalls";
+import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
 
 function CardMusic() {
   const music = GetAllSongs();

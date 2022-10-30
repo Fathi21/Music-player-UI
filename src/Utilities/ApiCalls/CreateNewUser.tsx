@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { urlCalls } from "../Enums/ApiUrlCalls";
+import GetUserByEmail from "../ApiCalls/GetUserByEmail";
+import GetUserByUserName from "../ApiCalls/GetUserByUserName";
+import Validation from "../Validation/Validation";
 
 function CreateNewUser(email: string, username: string, password: string) {
+  console.log("CreateNewUser");
+  //const [takenEmail, setTakenEmail] = useState("");
+
   axios
     .post(urlCalls.Register, {
       email: email,
@@ -12,20 +18,10 @@ function CreateNewUser(email: string, username: string, password: string) {
       last_name: "",
     })
     .then(function (response) {
-      console.log(response.data[0]);
       // setresponseError(response.data[0]);
     })
     .catch(function (error) {
-      console.log(error.response.data.username);
-      // setresponseError((prev) => ({
-      //   ...prev,
-      //   username: error.response.data.username,
-      // }));
-
-      // setresponseError((prev) => ({
-      //   ...prev,
-      //   password: error.response.data.password,
-      // }));
+      // setresponseError(response.data[0]);
     });
 }
 
