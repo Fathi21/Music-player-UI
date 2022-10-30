@@ -3,48 +3,70 @@ import { Link } from "react-router-dom";
 import Footer from "./Footer";
 import { SignUpMessage } from "../Utilities/Enums/ValidationMessages";
 import CreateNewUser from "../Utilities/ApiCalls/CreateNewUser";
-import GetUserByEmail from "../Utilities/ApiCalls/GetUserByEmail";
-import GetUserByUserName from "../Utilities/ApiCalls/GetUserByUserName";
-import Validation from "../Utilities/Validation/Validation";
+import ExistUsers from "../Utilities/ApiCalls/ExistUsers";
 
 function SignUp() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const [messages, setMessages] = useState({ email: "", username: "" });
-  const [resEmail, setresEmail] = useState("");
-  const [resUsername, setresUsername] = useState("");
+  const [messages, setMessages] = useState({
+    email: "",
+    username: "",
+    password: "",
+  });
+
+  const [showPassword, setShowPassword] = useState(false);
 
   function handleValidations() {
-    console.log("Validation");
-    if (resEmail.length > 0) {
-      setMessages((prev) => ({
-        ...prev,
-        username: SignUpMessage.emailExists,
-      }));
-    } else if (resUsername.length > 0) {
-      setMessages((prev) => ({
-        ...prev,
-        username: SignUpMessage.usernameExists,
-      }));
-    }
+    ExistUsers().then(function (result) {
+      result.filter((data: any, index: any) => {
+        if (data.email === email) {
+          setMessages((prev) => ({
+            ...prev,
+            email: SignUpMessage.emailExists,
+          }));
+        } else if (data.username === username) {
+          setMessages((prev) => ({
+            ...prev,
+            username: SignUpMessage.usernameExists,
+          }));
+        } else if (password.length < 3) {
+          setMessages((prev) => ({
+            ...prev,
+            password: SignUpMessage.strongPassword,
+          }));
+        } else if (!email) {
+          setMessages((prev) => ({
+            ...prev,
+            email: SignUpMessage.emptyStrig,
+          }));
+        } else if (!username) {
+          setMessages((prev) => ({
+            ...prev,
+            username: SignUpMessage.emptyStrig,
+          }));
+        }
+      });
+    });
   }
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    handleValidations();
-
-    GetUserByEmail(email).then(function (result) {
-      setresEmail(result);
-    });
-    GetUserByUserName(username).then(function (result) {
-      setresUsername(result);
-    });
-    //CreateNewUser(email, username, password);
+    CreateNewUser(email, username, password);
     setUsername("");
     setEmail("");
     setPassword("");
+  }
+
+  useEffect(() => {
+    handleValidations();
+  }, [email, username]);
+
+  function handleShowpassword() {
+    setShowPassword(true);
+
+    console.log(showPassword);
   }
 
   return (
@@ -73,7 +95,7 @@ function SignUp() {
             We'll never share your email with anyone else.
           </div>
           <div id="error-message" className="form-text">
-            {messages.username}
+            {messages.email}
           </div>
         </div>
         <div className="mb-3">
@@ -107,9 +129,13 @@ function SignUp() {
             value={password}
             required
           />
+          <div id="error-message" className="form-text">
+            {messages.password}
+          </div>
         </div>
         <div className="mb-3 form-check">
           <input
+            onClick={(event) => handleShowpassword()}
             type="checkbox"
             className="form-check-input"
             id="exampleCheck1"

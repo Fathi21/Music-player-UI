@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { urlCalls } from "../Enums/ApiUrlCalls";
-import GetUserByEmail from "../ApiCalls/GetUserByEmail";
+import GetUserByEmail from "./ExistUsers";
 import GetUserByUserName from "../ApiCalls/GetUserByUserName";
-import Validation from "../Validation/Validation";
 
 function CreateNewUser(email: string, username: string, password: string) {
   console.log("CreateNewUser");
