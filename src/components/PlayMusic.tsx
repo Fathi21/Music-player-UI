@@ -6,7 +6,7 @@ import LikeButton from "./LikeButton";
 import AddToPlayList from "./AddToPlayList";
 import Spinner from "./Spinner";
 import Comment from "./Comment";
-import { urlCalls } from "../Utilities/Enums/ApiUrlCalls";
+import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import GetSongById from "../Utilities/ApiCalls/GetSongById";
 
 function PlayMusic() {

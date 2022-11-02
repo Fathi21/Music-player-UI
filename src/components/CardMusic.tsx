@@ -3,7 +3,8 @@ import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import Spinner from "./Spinner";
 import LeftSide from "./LeftSide";
-import { urlCalls } from "../Utilities/Enums/ApiUrlCalls";
+import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
+import { RoutePath } from "../Utilities/UrlPath/RoutePath";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
 
 function CardMusic() {
@@ -11,7 +12,7 @@ function CardMusic() {
 
   const listMusic = music.map((musicData: any, index) => (
     <div className="col">
-      <Link to={"browse/" + musicData.id}>
+      <Link to={RoutePath.browse + musicData.id}>
         <Card key={index}>
           <Card.Img variant="top" src={urlCalls.Base + musicData.PhotoCover} />
           <Card.Body>

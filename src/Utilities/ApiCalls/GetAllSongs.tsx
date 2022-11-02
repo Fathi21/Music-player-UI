@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { urlCalls } from "../Enums/ApiUrlCalls";
+import { urlCalls } from "../UrlPath/ApiUrlPath";
 
 function GetAllSongs() {
   const [music, setmusic] = useState([]);

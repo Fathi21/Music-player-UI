@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useInsertionEffect } from "react";
 import { Link } from "react-router-dom";
 import Footer from "./Footer";
-import { SignUpMessage } from "../Utilities/Enums/ValidationMessages";
+import { RoutePath } from "../Utilities/UrlPath/RoutePath";
+import { SignUpMessage } from "../Utilities/OutputText/ValidationMessages";
 import CreateNewUser from "../Utilities/ApiCalls/CreateNewUser";
 import ExistUsers from "../Utilities/ApiCalls/ExistUsers";
 
@@ -26,15 +27,25 @@ function SignUp() {
             ...prev,
             email: SignUpMessage.emailExists,
           }));
+        } else if (email.length === 0) {
+          setMessages((prev) => ({
+            ...prev,
+            email: SignUpMessage.emptyStrig,
+          }));
         } else if (data.username === username) {
           setMessages((prev) => ({
             ...prev,
             username: SignUpMessage.usernameExists,
           }));
-        } else if (password.length < 3) {
+        } else if (username.length === 0) {
           setMessages((prev) => ({
             ...prev,
-            password: SignUpMessage.strongPassword,
+            username: SignUpMessage.emptyStrig,
+          }));
+        } else if (password.length <= 3) {
+          setMessages((prev) => ({
+            ...prev,
+            password: SignUpMessage.weakPassword,
           }));
         } else if (!email) {
           setMessages((prev) => ({
@@ -76,7 +87,7 @@ function SignUp() {
   return (
     <div className="form-Box">
       <form onSubmit={handleSubmit}>
-        <Link to="/">
+        <Link to={RoutePath.homePage}>
           <div className="Logo">
             <h1>Melody</h1>
           </div>

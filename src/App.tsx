@@ -1,9 +1,10 @@
+import React from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { RoutePath } from "./Utilities/UrlPath/RoutePath";
 import Home from "./components/Home";
 import SideNav from "./components/SideNav";
 import PlayMusic from "./components/PlayMusic";
 import SignUp from "./components/SignUp";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import React from "react";
 
 function App() {
   return (
@@ -12,13 +13,13 @@ function App() {
         <Router>
           <SideNav />
           <Switch>
-            <Route exact path="/">
+            <Route exact path={RoutePath.homePage}>
               <Home />
             </Route>
-            <Route path="/browse/:id">
+            <Route path={RoutePath.browseId}>
               <PlayMusic />
             </Route>
-            <Route exact path="/Register">
+            <Route exact path={RoutePath.registerPage}>
               <SignUp />
             </Route>
           </Switch>
