@@ -10,11 +10,9 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const [messages, setMessages] = useState({
     email: "",
     username: "",
-    password: "",
   });
 
   const [showPassword, setShowPassword] = useState(true);
@@ -41,11 +39,6 @@ function SignUp() {
           setMessages((prev) => ({
             ...prev,
             username: SignUpMessage.emptyStrig,
-          }));
-        } else if (password.length <= 3) {
-          setMessages((prev) => ({
-            ...prev,
-            password: SignUpMessage.weakPassword,
           }));
         } else if (!email) {
           setMessages((prev) => ({
@@ -144,9 +137,6 @@ function SignUp() {
             value={password}
             required
           />
-          <div id="error-message" className="form-text">
-            {messages.password}
-          </div>
         </div>
         <div className="mb-3 form-check">
           <input

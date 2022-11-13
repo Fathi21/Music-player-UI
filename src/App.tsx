@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import SideNav from "./components/SideNav";
 import PlayMusic from "./components/PlayMusic";
 import SignUp from "./components/SignUp";
+import Login from "./components/Login";
 
 function App() {
   return (
@@ -21,6 +22,9 @@ function App() {
             </Route>
             <Route exact path={RoutePath.registerPage}>
               <SignUp />
+            </Route>
+            <Route exact path={RoutePath.loginPage}>
+              <Login />
             </Route>
           </Switch>
         </Router>

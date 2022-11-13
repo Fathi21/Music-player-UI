@@ -42,8 +42,9 @@ function LeftSide() {
             <Link to={RoutePath.registerPage}>
               <ListGroup.Item>Sign Up</ListGroup.Item>
             </Link>
-
-            <ListGroup.Item>Sign In</ListGroup.Item>
+            <Link to={RoutePath.loginPage}>
+              <ListGroup.Item>Sign In</ListGroup.Item>
+            </Link>
 
             <ListGroup.Item>
               <i className="fas fa-users-cog"></i>Sharif

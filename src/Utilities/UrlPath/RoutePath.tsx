@@ -3,4 +3,5 @@ export const RoutePath = {
   browseId: "/browse/:id",
   browse: "browse/",
   registerPage: "/register",
+  loginPage: "/login",
 };
