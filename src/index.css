@@ -138,6 +138,10 @@ body {
   font-size: 20px;
 }
 
+#redColor {
+  color: red;
+}
+
 .card-img-top {
   height: 160px;
 }
@@ -252,7 +256,6 @@ a {
   padding-right: 0px;
   margin-right: 25px;
   cursor: pointer;
-  color: white;
 }
 
 .CommentBox {
