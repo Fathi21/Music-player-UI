@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useInsertionEffect } from "react";
 import { Link } from "react-router-dom";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 import { RoutePath } from "../Utilities/UrlPath/RoutePath";
 import { SignUpMessage } from "../Utilities/OutputText/ValidationMessages";
 import CreateNewUser from "../Utilities/ApiCalls/CreateNewUser";
 import ExistUsers from "../Utilities/ApiCalls/ExistUsers";
 
-function Login() {
+function SignUp() {
+  const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [messages, setMessages] = useState({
@@ -19,7 +20,17 @@ function Login() {
   function handleValidations() {
     ExistUsers().then(function (result) {
       result.filter((data: any, index: any) => {
-        if (data.username === username) {
+        if (data.email === email) {
+          setMessages((prev) => ({
+            ...prev,
+            email: SignUpMessage.emailExists,
+          }));
+        } else if (email.length === 0) {
+          setMessages((prev) => ({
+            ...prev,
+            email: SignUpMessage.emptyStrig,
+          }));
+        } else if (data.username === username) {
           setMessages((prev) => ({
             ...prev,
             username: SignUpMessage.usernameExists,
@@ -28,6 +39,11 @@ function Login() {
           setMessages((prev) => ({
             ...prev,
             username: SignUpMessage.emptyStrig,
+          }));
+        } else if (!email) {
+          setMessages((prev) => ({
+            ...prev,
+            email: SignUpMessage.emptyStrig,
           }));
         } else if (!username) {
           setMessages((prev) => ({
@@ -41,13 +57,15 @@ function Login() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
+    CreateNewUser(email, username, password);
     setUsername("");
+    setEmail("");
     setPassword("");
   }
 
   useEffect(() => {
     handleValidations();
-  }, [username]);
+  }, [email, username]);
 
   function handleShowpassword() {
     if (showPassword) {
@@ -60,13 +78,34 @@ function Login() {
   }
 
   return (
-    <div className="Login-form">
+    <div className="form-Box">
       <form onSubmit={handleSubmit}>
         <Link to={RoutePath.homePage}>
           <div className="Logo">
             <h1>Melody</h1>
           </div>
         </Link>
+        <div className="mb-3">
+          <label htmlFor="exampleInputEmail1" className="form-label">
+            Email address
+          </label>
+          <input
+            type="email"
+            className="form-control"
+            aria-describedby="emailHelp"
+            placeholder="Email@hotmail.com"
+            name="email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            required
+          />
+          <div id="emailHelp" className="form-text">
+            We'll never share your email with anyone else.
+          </div>
+          <div id="error-message" className="form-text">
+            {messages.email}
+          </div>
+        </div>
         <div className="mb-3">
           <label htmlFor="" className="form-label">
             User name
@@ -121,4 +160,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default SignUp;

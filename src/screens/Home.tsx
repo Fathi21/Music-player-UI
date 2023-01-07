@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
-import Spinner from "./Spinner";
-import LeftSide from "./LeftSide";
+import Spinner from "../components/Spinner";
+import LeftSide from "../components/LeftSide";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import { RoutePath } from "../Utilities/UrlPath/RoutePath";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
 
-function CardMusic() {
+function Home() {
   const music = GetAllSongs();
 
   const listMusic = music.map((musicData: any, index) => (
@@ -31,7 +31,7 @@ function CardMusic() {
 
   return (
     <div className="row">
-      <div className="col-3 col-lg-3 fixed-top">
+      <div className="col-3 col-lg-3">
         <LeftSide />
       </div>
       <div className="col-9 Main-righSide">
@@ -46,4 +46,4 @@ function CardMusic() {
   );
 }
 
-export default CardMusic;
+export default Home;

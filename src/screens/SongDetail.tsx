@@ -1,11 +1,11 @@
 import ReactAudioPlayer from "react-audio-player";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import LeftSide from "./LeftSide";
-import LikeButton from "./LikeButton";
-import AddToPlayList from "./AddToPlayList";
-import Spinner from "./Spinner";
-import Comment from "./Comment";
+import LeftSide from "../components/LeftSide";
+import LikeButton from "../components/LikeButton";
+import AddToPlayList from "../components/AddToPlayList";
+import Spinner from "../components/Spinner";
+import Comment from "../components/Comment";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import GetSongById from "../Utilities/ApiCalls/GetSongById";
 
@@ -39,7 +39,7 @@ function PlayMusic() {
   return (
     <div className="MainForSong">
       <div className="row">
-        <div className="col-3 col-lg-3 fixed-top">
+        <div className="col-3 col-lg-3">
           <LeftSide />
         </div>
         <div className="col-9 Main-righSide">

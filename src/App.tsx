@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { RoutePath } from "./Utilities/UrlPath/RoutePath";
-import Home from "./components/Home";
+import Home from "./screens/Home";
 import SideNav from "./components/SideNav";
-import PlayMusic from "./components/PlayMusic";
-import SignUp from "./components/SignUp";
-import Login from "./components/Login";
+import PlayMusic from "./screens/SongDetail";
+import SignUp from "./screens/SignUp";
+import Login from "./screens/Login";
 
 function App() {
   return (
