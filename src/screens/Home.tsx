@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import Spinner from "../components/Spinner";
-import LeftSide from "../components/LeftSide";
+import SideBar from "../components/sideBar";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import { RoutePath } from "../Utilities/UrlPath/RoutePath";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
@@ -31,13 +31,13 @@ function Home() {
 
   return (
     <div className="row">
-      <div className="col-3 col-lg-3">
-        <LeftSide />
+      <div className="col-2">
+        <SideBar />
       </div>
-      <div className="col-9 Main-righSide">
+      <div className="col-10 Main-righSide">
         <p>Created for you</p>
 
-        <div className="row row-cols-4 row-cols-lg-4 g-2 g-lg-3">
+        <div className="row">
           <Spinner data={music.length} />
           {listMusic}
         </div>

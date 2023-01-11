@@ -3,9 +3,9 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { Link } from "react-router-dom";
 import { RoutePath } from "../Utilities/UrlPath/RoutePath";
 
-function LeftSide() {
+function SideBar() {
   return (
-    <div className="LeftSide d-none d-md-block bg-light sidebar">
+    <div className="SideBar d-none d-md-block bg-light sidebar">
       <Link to={RoutePath.homePage}>
         <div className="Logo">
           <h1>Melody</h1>
@@ -58,4 +58,4 @@ function LeftSide() {
   );
 }
 
-export default LeftSide;
+export default SideBar;

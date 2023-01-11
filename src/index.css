@@ -26,7 +26,7 @@ body {
   border: 2px solid white;
 }
 
-.LeftSide {
+.SideBar {
   height: 100vh;
   background-color: #000000 !important;
 }
@@ -61,7 +61,7 @@ body {
   top: 50px;
 }
 
-.LeftSide > div > h2 {
+.SideBar > div > h2 {
   text-transform: uppercase;
   font-weight: bold;
   font-size: 30px;
@@ -83,7 +83,6 @@ body {
   font-size: 16px;
   font-family: "Inter", sans-serif;
   color: #ffffff;
-  margin-bottom: 35px;
 }
 
 .card {
@@ -138,6 +137,10 @@ body {
   font-size: 20px;
 }
 
+.fa-heart {
+  display: inline;
+}
+
 #redColor {
   color: red;
 }
@@ -180,41 +183,31 @@ body {
   font-size: 12px;
 }
 
-.MainForSong {
-  color: white;
-}
-
 a {
   color: #0d6efd;
   text-decoration: none;
 }
 
 .MainBox {
-  height: 300px;
   background-color: #33602b;
+  color: white;
 }
 
-.MainBox > .container-fluid > img {
-  width: 250px;
+.rounded-0 > .container-fluid > .row > .col-3 > img {
+  width: 230px;
   height: 180px;
 }
 
-.MainBox > .container-fluid {
+.rounded-0 > .container-fluid {
   border: 1px solid #ffffff;
 }
 
 .Title-lg {
-  position: relative;
-  bottom: 240px;
-  left: 277px;
   width: 633px;
   font-weight: bolder;
 }
 
 .Owner-name-and-date {
-  position: relative;
-  bottom: 255px;
-  left: 278px;
   font-size: larger;
   font-weight: bolder;
   width: 633px;
@@ -225,12 +218,10 @@ a {
 }
 
 .react-audio-player {
-  position: relative;
-  bottom: 243px;
-  left: 278px;
   border: 2px solid;
   background-color: #f4f4f4;
-  width: 633px;
+  box-sizing: content-box;
+  width: 99%;
 }
 
 .fa-circle {
@@ -239,23 +230,18 @@ a {
   bottom: 2px;
 }
 
-
 .LikeAndAddToPlayList {
-  position: relative;
-  bottom: 219px;
-  left: 2px;
+  display: flex;
+  justify-content: flex-start;
 }
 
 .LikeAndAddToPlayList > .fa-heart,
 .fa-plus {
   font-size: 30px;
   padding-right: 0px;
-  margin-right: 25px;
   cursor: pointer;
-}
-
-.CommentBox {
-  color: black;
+  margin-right: 7px;
+  margin-left: 7px;
 }
 
 .form-control {
@@ -372,7 +358,7 @@ form > a > .Logo > h1 {
     display: block !important;
   }
 
-  .LeftSide {
+  .SideBar {
     display: none !important;
     background-color: #10de47;
   }
@@ -385,7 +371,7 @@ form > a > .Logo > h1 {
     display: block !important;
   }
 
-  .LeftSide {
+  .SideBar {
     display: none !important;
     background-color: #10de47;
   }
