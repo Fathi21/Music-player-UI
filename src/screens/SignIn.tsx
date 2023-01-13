@@ -6,7 +6,7 @@ import { SignUpMessage } from "../Utilities/OutputText/ValidationMessages";
 import CreateNewUser from "../Utilities/ApiCalls/CreateNewUser";
 import ExistUsers from "../Utilities/ApiCalls/ExistUsers";
 
-function Login() {
+function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [messages, setMessages] = useState({
@@ -115,10 +115,18 @@ function Login() {
             Register
           </button>
         </div>
+        <div className="signUpAndSignInPage">
+          <p>
+            You don't have account
+            <Link to={RoutePath.registerPage}>
+              <span className="link">sign up</span>{" "}
+            </Link>
+          </p>
+        </div>
       </form>
       <Footer />
     </div>
   );
 }
 
-export default Login;
+export default SignIn;

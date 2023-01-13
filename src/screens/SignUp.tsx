@@ -17,6 +17,8 @@ function SignUp() {
 
   const [showPassword, setShowPassword] = useState(true);
 
+  const [disabled, setDisabled] = useState(false);
+
   function handleValidations() {
     ExistUsers().then(function (result) {
       result.filter((data: any, index: any) => {
@@ -25,27 +27,20 @@ function SignUp() {
             ...prev,
             email: SignUpMessage.emailExists,
           }));
-        } else if (email.length === 0) {
+        }
+        if (data.email !== email) {
           setMessages((prev) => ({
             ...prev,
             email: SignUpMessage.emptyStrig,
           }));
-        } else if (data.username === username) {
+        }
+        if (data.username === username) {
           setMessages((prev) => ({
             ...prev,
             username: SignUpMessage.usernameExists,
           }));
-        } else if (username.length === 0) {
-          setMessages((prev) => ({
-            ...prev,
-            username: SignUpMessage.emptyStrig,
-          }));
-        } else if (!email) {
-          setMessages((prev) => ({
-            ...prev,
-            email: SignUpMessage.emptyStrig,
-          }));
-        } else if (!username) {
+        }
+        if (data.username !== username) {
           setMessages((prev) => ({
             ...prev,
             username: SignUpMessage.emptyStrig,
@@ -57,25 +52,45 @@ function SignUp() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    CreateNewUser(email, username, password);
+    //if (!messages.email && messages.username) {
+    CreateNewUser(email.toLowerCase(), username.toLowerCase(), password);
     setUsername("");
     setEmail("");
     setPassword("");
+    //}
   }
-
-  useEffect(() => {
-    handleValidations();
-  }, [email, username]);
 
   function handleShowpassword() {
     if (showPassword) {
       setShowPassword(false);
       console.log(showPassword);
-    } else {
+    }
+    {
       setShowPassword(true);
       console.log(showPassword);
     }
   }
+
+  function handleDisabled() {
+    if (!email || !username || !password) {
+      return (
+        <button type="submit" className="btn btn-success mb-3" disabled>
+          Register
+        </button>
+      );
+    } else {
+      return (
+        <button type="submit" className="btn btn-success mb-3">
+          Register
+        </button>
+      );
+    }
+  }
+
+  useEffect(() => {
+    handleValidations();
+    handleDisabled();
+  }, [email, username, password]);
 
   return (
     <div className="form-Box">
@@ -100,7 +115,7 @@ function SignUp() {
             required
           />
           <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone else.
+            We'll never share your email with anyone .
           </div>
           <div id="error-message" className="form-text">
             {messages.email}
@@ -149,10 +164,14 @@ function SignUp() {
             Show password
           </label>
         </div>
-        <div className="col-auto">
-          <button type="submit" className="btn btn-success mb-3">
-            Register
-          </button>
+        <div className="col-auto">{handleDisabled()}</div>
+        <div className="signUpAndSignInPage">
+          <p>
+            You have account{" "}
+            <Link to={RoutePath.loginPage}>
+              <span className="link">sign in</span>{" "}
+            </Link>
+          </p>
         </div>
       </form>
       <Footer />

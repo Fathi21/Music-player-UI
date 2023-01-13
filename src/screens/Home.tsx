@@ -35,8 +35,6 @@ function Home() {
         <SideBar />
       </div>
       <div className="col-10 Main-righSide">
-        <p>Created for you</p>
-
         <div className="row">
           <Spinner data={music.length} />
           {listMusic}

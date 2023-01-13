@@ -5,7 +5,7 @@ import Home from "./screens/Home";
 import SideNav from "./components/SideNav";
 import PlayMusic from "./screens/SongDetail";
 import SignUp from "./screens/SignUp";
-import Login from "./screens/Login";
+import SignIn from "./screens/SignIn";
 
 function App() {
   return (
@@ -24,7 +24,7 @@ function App() {
               <SignUp />
             </Route>
             <Route exact path={RoutePath.loginPage}>
-              <Login />
+              <SignIn />
             </Route>
           </Switch>
         </Router>

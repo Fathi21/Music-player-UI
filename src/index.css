@@ -75,6 +75,7 @@ body {
 
 .Main-righSide > div {
   font-family: "Inter", sans-serif;
+  margin: 15px;
 }
 
 .Main-righSide > p {
@@ -193,7 +194,7 @@ a {
   color: white;
 }
 
-.rounded-0 > .container-fluid > .row > .col-3 > img {
+.rounded-0 > .container-fluid > .row > .col-md-3 > img {
   width: 230px;
   height: 180px;
 }
@@ -346,6 +347,21 @@ form > a > .Logo > h1 {
   /* it center the item vertically */
   justify-content: center;
   padding-bottom: 5px;
+}
+
+.signUpAndSignInPage {
+  color: white;
+  font-weight: lighter;
+}
+
+.link {
+  color: #0d6efd;
+  cursor: pointer;
+  margin-left: 3px;
+}
+
+.link:hover {
+  border-bottom: 1px solid #0d6efd;
 }
 @media only screen and (max-width: 1200px) {
   /*Tablets [601px -> 1200px]*/

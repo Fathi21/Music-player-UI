@@ -15,10 +15,10 @@ function PlayMusic() {
     <div className="p-5 rounded-0">
       <div className="container-fluid py-2 shadow-lg p-2 mb-3">
         <div className="row g-0">
-          <div className="col-3">
+          <div className="col-md-3 mb-md-0">
             <img src={urlCalls.Base + musicData.PhotoCover} />
           </div>
-          <div className="col-9">
+          <div className="col-md-9 ps-md-0">
             <p className="fs-1 Title-lg">{musicData.Title}</p>
             <p className="text-start Owner-name-and-date">
               Drake <i className="fas fa-circle"></i>{" "}
