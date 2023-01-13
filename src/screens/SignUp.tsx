@@ -17,36 +17,40 @@ function SignUp() {
 
   const [showPassword, setShowPassword] = useState(true);
 
-  const [disabled, setDisabled] = useState(false);
+  const [accountCreated, setAccountCreated] = useState("");
 
   function handleValidations() {
     ExistUsers().then(function (result) {
-      result.filter((data: any, index: any) => {
-        if (data.email === email) {
-          setMessages((prev) => ({
-            ...prev,
-            email: SignUpMessage.emailExists,
-          }));
-        }
-        if (data.email !== email) {
-          setMessages((prev) => ({
-            ...prev,
-            email: SignUpMessage.emptyStrig,
-          }));
-        }
-        if (data.username === username) {
-          setMessages((prev) => ({
-            ...prev,
-            username: SignUpMessage.usernameExists,
-          }));
-        }
-        if (data.username !== username) {
-          setMessages((prev) => ({
-            ...prev,
-            username: SignUpMessage.emptyStrig,
-          }));
-        }
-      });
+      const emailExist = result.find((data: any) => data.email === email);
+
+      const usernameExist = result.find(
+        (data: any) => data.username === username
+      );
+
+      if (emailExist) {
+        setMessages((prev) => ({
+          ...prev,
+          email: SignUpMessage.emailExists,
+        }));
+      }
+      if (!emailExist) {
+        setMessages((prev) => ({
+          ...prev,
+          email: SignUpMessage.emptyStrig,
+        }));
+      }
+      if (usernameExist) {
+        setMessages((prev) => ({
+          ...prev,
+          username: SignUpMessage.usernameExists,
+        }));
+      }
+      if (!usernameExist) {
+        setMessages((prev) => ({
+          ...prev,
+          username: SignUpMessage.emptyStrig,
+        }));
+      }
     });
   }
 
@@ -57,6 +61,7 @@ function SignUp() {
     setUsername("");
     setEmail("");
     setPassword("");
+    setAccountCreated("Account created");
     //}
   }
 
@@ -100,6 +105,10 @@ function SignUp() {
             <h1>Melody</h1>
           </div>
         </Link>
+
+        <div className="accountCreated">
+          <p>{accountCreated}</p>
+        </div>
         <div className="mb-3">
           <label htmlFor="exampleInputEmail1" className="form-label">
             Email address

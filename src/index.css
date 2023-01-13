@@ -363,6 +363,16 @@ form > a > .Logo > h1 {
 .link:hover {
   border-bottom: 1px solid #0d6efd;
 }
+
+.accountCreated {
+  display: flex;
+  justify-content: center;
+  color: #22ff60;
+  font-size: larger;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+
 @media only screen and (max-width: 1200px) {
   /*Tablets [601px -> 1200px]*/
 }
@@ -372,6 +382,8 @@ form > a > .Logo > h1 {
 
   .bg-light {
     display: block !important;
+    display: flex;
+    justify-self: end;
   }
 
   .SideBar {
