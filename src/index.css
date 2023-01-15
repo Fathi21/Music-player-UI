@@ -154,7 +154,7 @@ body {
   padding-left: 10px;
   padding-top: 10px;
   padding-right: 10px;
-  background-color: #181818;
+  background-color: #1a3b14;
   color: white;
   border: 0;
   cursor: pointer;
@@ -190,7 +190,7 @@ a {
 }
 
 .MainBox {
-  background-color: #33602b;
+  background-color: #1a3b14;
   color: white;
 }
 
@@ -372,7 +372,9 @@ form > a > .Logo > h1 {
   font-weight: 300;
   text-transform: uppercase;
 }
-
+.signUpAndSignIn {
+  margin-top: 20px;
+}
 @media only screen and (max-width: 1200px) {
   /*Tablets [601px -> 1200px]*/
 }

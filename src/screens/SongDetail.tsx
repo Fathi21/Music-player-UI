@@ -46,7 +46,7 @@ function PlayMusic() {
         <div className="col-2">
           <SideBar />
         </div>
-        <div className="col-10 Main-righSide">
+        <div className="col-10">
           {PlayingMusic}
           <Spinner data={GetSongById.length} />
         </div>

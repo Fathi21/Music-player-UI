@@ -37,7 +37,7 @@ function SideBar() {
       );
     } else {
       return (
-        <div>
+        <div className="signUpAndSignIn">
           <Link to={RoutePath.registerPage}>
             <ListGroup.Item>Sign Up</ListGroup.Item>
           </Link>
