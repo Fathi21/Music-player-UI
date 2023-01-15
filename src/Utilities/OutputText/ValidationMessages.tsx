@@ -4,3 +4,7 @@ export const SignUpMessage = {
   emptyStrig: "",
   weakPassword: "Password is too weak",
 };
+
+export const SignInMessage = {
+  usernameExists: "A user with that username doesn't exists.",
+};

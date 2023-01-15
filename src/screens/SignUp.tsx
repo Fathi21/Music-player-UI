@@ -56,28 +56,33 @@ function SignUp() {
 
   function handleSubmit(event: any) {
     event.preventDefault();
-    //if (!messages.email && messages.username) {
-    CreateNewUser(email.toLowerCase(), username.toLowerCase(), password);
-    setUsername("");
-    setEmail("");
-    setPassword("");
-    setAccountCreated("Account created");
-    //}
+    if (!messages.email && !messages.username) {
+      CreateNewUser(email.toLowerCase(), username.toLowerCase(), password);
+      setUsername("");
+      setEmail("");
+      setPassword("");
+      setAccountCreated("Account created");
+    }
   }
 
   function handleShowpassword() {
     if (showPassword) {
       setShowPassword(false);
       console.log(showPassword);
-    }
-    {
+    } else {
       setShowPassword(true);
       console.log(showPassword);
     }
   }
 
   function handleDisabled() {
-    if (!email || !username || !password) {
+    if (
+      !email ||
+      !username ||
+      !password ||
+      messages.email ||
+      messages.username
+    ) {
       return (
         <button type="submit" className="btn btn-success mb-3" disabled>
           Register

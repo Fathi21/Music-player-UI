@@ -7,4 +7,5 @@ export const urlCalls = {
   Register: "http://127.0.0.1:8000/Api/Register",
   ExistUsers: "http://127.0.0.1:8000/Api/ExistUsers",
   UserByUserName: "http://127.0.0.1:8000/Api/UserByUserName/",
+  login: "http://127.0.0.1:8000/Api/login/",
 };
