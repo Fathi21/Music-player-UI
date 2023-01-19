@@ -1,17 +1,28 @@
 import ReactAudioPlayer from "react-audio-player";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import SideBar from "../components/sideBar";
+import SideBar from "../components/SideBar";
 import LikeButton from "../components/LikeButton";
 import AddToPlayList from "../components/AddToPlayList";
 import Spinner from "../components/Spinner";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import GetSongById from "../Utilities/ApiCalls/GetSongById";
+import IsUserLoggedIn from "../components/IsUserLoggedIn";
 
 function PlayMusic() {
   const { id }: any = useParams();
-
-  const PlayingMusic = GetSongById(id).map((musicData: any, index) => (
+  const music = GetSongById(id);
+  function HandleLikeButtonAndAddToPlayList() {
+    if (IsUserLoggedIn()) {
+      return (
+        <div className="LikeAndAddToPlayList">
+          <LikeButton songId={id} />
+          <AddToPlayList />
+        </div>
+      );
+    }
+  }
+  const PlayingMusic = music.map((musicData: any, index) => (
     <div className="p-5 rounded-0">
       <div className="container-fluid py-2 shadow-lg p-2 mb-3">
         <div className="row g-0">
@@ -32,11 +43,7 @@ function PlayMusic() {
           </div>
         </div>
       </div>
-
-      <div className="LikeAndAddToPlayList">
-        <LikeButton songId={id} />
-        <AddToPlayList />
-      </div>
+      {HandleLikeButtonAndAddToPlayList()}
     </div>
   ));
 
@@ -48,7 +55,7 @@ function PlayMusic() {
         </div>
         <div className="col-10">
           {PlayingMusic}
-          <Spinner data={GetSongById.length} />
+          <Spinner data={music.length} />
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import Spinner from "../components/Spinner";
-import SideBar from "../components/sideBar";
+import SideBar from "../components/SideBar";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import { RoutePath } from "../Utilities/UrlPath/RoutePath";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";

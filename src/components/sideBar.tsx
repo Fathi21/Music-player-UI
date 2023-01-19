@@ -1,20 +1,31 @@
 import React, { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { RoutePath } from "../Utilities/UrlPath/RoutePath";
 import IsUserLoggedIn from "./IsUserLoggedIn";
 import UserDetails from "./UserDetails";
+import Logout from "./Logout";
 
 function SideBar() {
+  let history = useHistory();
+
   const userName = UserDetails().username;
   console.log(userName);
-  const [isLoggedIn, setisLoggedIn] = useState(IsUserLoggedIn());
   const [username, setUsername] = useState(userName);
   console.log(IsUserLoggedIn());
   console.log(UserDetails().email);
 
+  function handleLogout() {
+    Logout();
+    console.log("clicked");
+    history.push("/login");
+    //let history = useHistory();
+
+    //return history.push("/login");
+  }
   function HandleSignUpAndSignIn() {
-    if (isLoggedIn) {
+    console.log("clicked logged out");
+    if (IsUserLoggedIn()) {
       return (
         <div>
           <span className="createPlayList">
@@ -32,7 +43,7 @@ function SideBar() {
             {username}
           </ListGroup.Item>
 
-          <ListGroup.Item>Logout</ListGroup.Item>
+          <ListGroup.Item onClick={handleLogout}>Logout</ListGroup.Item>
         </div>
       );
     } else {
@@ -65,9 +76,6 @@ function SideBar() {
           </Link>
           <ListGroup.Item>
             <i className="fa fa-search" aria-hidden="true"></i>Search
-          </ListGroup.Item>
-          <ListGroup.Item>
-            <i className="fa fa-book" aria-hidden="true"></i>library
           </ListGroup.Item>
           <span className="line"></span>
 

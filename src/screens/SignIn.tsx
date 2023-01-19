@@ -8,6 +8,7 @@ import {
 } from "../Utilities/OutputText/ValidationMessages";
 import GetAtoken from "../Utilities/ApiCalls/GetAtoken";
 import ExistUsers from "../Utilities/ApiCalls/ExistUsers";
+import RedirectIfUserLoggedIn from "../components/RedirectIfUserLoggedIn";
 
 function SignIn() {
   const [username, setUsername] = useState("");
@@ -18,7 +19,7 @@ function SignIn() {
   });
 
   const [showPassword, setShowPassword] = useState(true);
-
+  const [incorrectMessage, setIncorrectMessage] = useState("");
   function handleValidations() {
     ExistUsers().then(function (result) {
       const usernameExist = result.find(
@@ -62,12 +63,20 @@ function SignIn() {
   function handleSubmit(event: any) {
     event.preventDefault();
     GetAtoken(username, password).then(function (result) {
-      handleSaveUserInlocalStorage(
-        result.data.Token,
-        result.data.UserId,
-        result.data.Email,
-        result.data.Username
-      );
+      if (result.data.isUserHasToken) {
+        console.log(result);
+
+        handleSaveUserInlocalStorage(
+          result.data.Token,
+          result.data.UserId,
+          result.data.Email,
+          result.data.Username
+        );
+
+        setIncorrectMessage("");
+      } else {
+        setIncorrectMessage(result.data.message);
+      }
     });
     setUsername("");
     setPassword("");
@@ -103,6 +112,8 @@ function SignIn() {
     handleValidations();
     handleDisabled();
   }, [username, password]);
+
+  RedirectIfUserLoggedIn();
 
   return (
     <div className="Login-form">
@@ -143,6 +154,9 @@ function SignIn() {
             value={password}
             required
           />
+          <div id="error-message" className="form-text">
+            {incorrectMessage}
+          </div>
         </div>
         <div className="mb-3 form-check">
           <input

@@ -5,6 +5,7 @@ import { RoutePath } from "../Utilities/UrlPath/RoutePath";
 import { SignUpMessage } from "../Utilities/OutputText/ValidationMessages";
 import CreateNewUser from "../Utilities/ApiCalls/CreateNewUser";
 import ExistUsers from "../Utilities/ApiCalls/ExistUsers";
+import RedirectIfUserLoggedIn from "../components/RedirectIfUserLoggedIn";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -101,6 +102,8 @@ function SignUp() {
     handleValidations();
     handleDisabled();
   }, [email, username, password]);
+
+  RedirectIfUserLoggedIn();
 
   return (
     <div className="form-Box">
