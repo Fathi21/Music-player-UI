@@ -275,9 +275,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* it center the item vertically */
   justify-content: center;
-  /* it center the item horizontally */
 }
 
 .form-Box > form {
