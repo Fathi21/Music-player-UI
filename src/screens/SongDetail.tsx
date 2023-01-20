@@ -12,6 +12,7 @@ import IsUserLoggedIn from "../components/IsUserLoggedIn";
 function PlayMusic() {
   const { id }: any = useParams();
   const music = GetSongById(id);
+
   function HandleLikeButtonAndAddToPlayList() {
     if (IsUserLoggedIn()) {
       return (
@@ -22,9 +23,10 @@ function PlayMusic() {
       );
     }
   }
+
   const PlayingMusic = music.map((musicData: any, index) => (
     <div className="p-5 rounded-0">
-      <div className="container-fluid py-2 shadow-lg p-2 mb-3">
+      <div className="container-fluid shadow-lg">
         <div className="row g-0">
           <div className="col-md-3 mb-md-0">
             <img src={urlCalls.Base + musicData.PhotoCover} />

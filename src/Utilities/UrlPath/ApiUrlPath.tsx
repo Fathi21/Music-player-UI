@@ -8,4 +8,7 @@ export const urlCalls = {
   ExistUsers: "http://127.0.0.1:8000/Api/ExistUsers",
   UserByUserName: "http://127.0.0.1:8000/Api/UserByUserName/",
   login: "http://127.0.0.1:8000/Api/login/",
+  GetLikesBySongId: "http://127.0.0.1:8000/Api/GetLikesBySongId",
+  LikeASongById: "http://127.0.0.1:8000/Api/LikeASongById",
+  GetAllLikedSongs: "http://127.0.0.1:8000/Api/GetAllLikedSongs",
 };
