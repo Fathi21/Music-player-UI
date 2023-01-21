@@ -17,7 +17,6 @@ function LikeButton(props: any) {
       } else {
         setredColor("");
       }
-      setredColor(redColor);
     });
   }
 
