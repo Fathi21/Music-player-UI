@@ -69,10 +69,8 @@ function SignUp() {
   function handleShowpassword() {
     if (showPassword) {
       setShowPassword(false);
-      console.log(showPassword);
     } else {
       setShowPassword(true);
-      console.log(showPassword);
     }
   }
 

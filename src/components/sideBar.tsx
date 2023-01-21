@@ -10,21 +10,16 @@ function SideBar() {
   let history = useHistory();
 
   const userName = UserDetails().username;
-  console.log(userName);
   const [username, setUsername] = useState(userName);
-  console.log(IsUserLoggedIn());
-  console.log(UserDetails().email);
 
   function handleLogout() {
     Logout();
-    console.log("clicked");
     history.push("/login");
     //let history = useHistory();
 
     //return history.push("/login");
   }
   function HandleSignUpAndSignIn() {
-    console.log("clicked logged out");
     if (IsUserLoggedIn()) {
       return (
         <div>
