@@ -5,6 +5,7 @@ import { RoutePath } from "../Utilities/UrlPath/RoutePath";
 import IsUserLoggedIn from "./IsUserLoggedIn";
 import UserDetails from "./UserDetails";
 import Logout from "./Logout";
+import Search from "./Search";
 
 function SideBar() {
   let history = useHistory();
@@ -70,7 +71,7 @@ function SideBar() {
             </ListGroup.Item>
           </Link>
           <ListGroup.Item>
-            <i className="fa fa-search" aria-hidden="true"></i>Search
+            <Search />
           </ListGroup.Item>
           <span className="line"></span>
 

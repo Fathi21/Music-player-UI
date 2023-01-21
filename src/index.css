@@ -373,9 +373,30 @@ form > a > .Logo > h1 {
   font-weight: 300;
   text-transform: uppercase;
 }
+
 .signUpAndSignIn {
   margin-top: 20px;
 }
+.modal-body {
+  color: #000000;
+}
+.searchInput {
+  border: 1px solid #22ff60;
+  border-radius: 5px;
+  height: 50px;
+}
+
+.input-group-text > .fa-search {
+  position: relative;
+  left: 10px;
+}
+
+.searchInput > .input-group-text {
+  background-color: white;
+  color: #3abd5f;
+  border: 0px solid #ced4da;
+}
+
 @media only screen and (max-width: 1200px) {
   /*Tablets [601px -> 1200px]*/
 }
