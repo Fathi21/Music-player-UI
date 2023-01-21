@@ -64,8 +64,6 @@ function SignIn() {
     event.preventDefault();
     GetAtoken(username, password).then(function (result) {
       if (result.data.isUserHasToken) {
-        console.log(result);
-
         handleSaveUserInlocalStorage(
           result.data.Token,
           result.data.UserId,
@@ -101,10 +99,8 @@ function SignIn() {
   function handleShowpassword() {
     if (showPassword) {
       setShowPassword(false);
-      console.log(showPassword);
     } else {
       setShowPassword(true);
-      console.log(showPassword);
     }
   }
 
