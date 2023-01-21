@@ -25,32 +25,34 @@ function SideBar() {
       return (
         <div>
           <span className="createPlayList">
-            <ListGroup.Item>
+            <ListGroup.Item className="sideBarButton">
               <i className="fa fa-plus-square" aria-hidden="true"></i>
               Create Playlist
             </ListGroup.Item>
           </span>
 
-          <ListGroup.Item>
+          <ListGroup.Item className="sideBarButton">
             <i className="fa fa-heart" aria-hidden="true"></i>Liked Songs
           </ListGroup.Item>
-          <ListGroup.Item>
+          <ListGroup.Item className="sideBarButton">
             <i className="fas fa-users-cog"></i>
             {username}
           </ListGroup.Item>
 
-          <ListGroup.Item onClick={handleLogout}>Logout</ListGroup.Item>
+          <ListGroup.Item onClick={handleLogout} className="sideBarButton">
+            Logout
+          </ListGroup.Item>
         </div>
       );
     } else {
       return (
         <div className="signUpAndSignIn">
-          <Link to={RoutePath.registerPage}>
-            <ListGroup.Item>Sign Up</ListGroup.Item>
-          </Link>
-          <Link to={RoutePath.loginPage}>
-            <ListGroup.Item>Sign In</ListGroup.Item>
-          </Link>
+          <ListGroup.Item className="sideBarButton">
+            <Link to={RoutePath.registerPage}>Sign Up</Link>
+          </ListGroup.Item>
+          <ListGroup.Item className="sideBarButton">
+            <Link to={RoutePath.loginPage}>Sign In</Link>
+          </ListGroup.Item>
         </div>
       );
     }
@@ -65,12 +67,12 @@ function SideBar() {
 
       <div className="ListLeftNav">
         <ListGroup variant="flush">
-          <Link to={RoutePath.homePage}>
-            <ListGroup.Item>
+          <ListGroup.Item className="sideBarButton">
+            <Link to={RoutePath.homePage}>
               <i className="fa fa-home" aria-hidden="true"></i>Home
-            </ListGroup.Item>
-          </Link>
-          <ListGroup.Item>
+            </Link>
+          </ListGroup.Item>
+          <ListGroup.Item className="sideBarButton">
             <Search />
           </ListGroup.Item>
           <span className="line"></span>

@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
+import { RoutePath } from "../Utilities/UrlPath/RoutePath";
+import { Link } from "react-router-dom";
+import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
 
 function Search() {
+  const music = GetAllSongs();
+
+  const [searchInput, setSearchInput] = useState("");
+
+  const listMusic = music.map((musicData: any, index) => (
+    <Link
+      key={musicData.id}
+      className="list-group-item list-group-item-action"
+      to={RoutePath.browse + musicData.id}
+    >
+      {musicData.Title}
+    </Link>
+  ));
+
   return (
     <div>
       <i
@@ -27,14 +44,17 @@ function Search() {
                 <input
                   type="text"
                   className="form-control"
-                  placeholder="Search for songs..."
+                  placeholder="Search for a song..."
                   aria-label="Search"
                   aria-describedby="basic-addon1"
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  value={searchInput}
                 />
               </div>
             </div>
             <div className="modal-body">
               <div className="DocSearch-Hit-source">Results</div>
+              <div className="list-group searchedData">{listMusic}</div>
             </div>
             <div className="modal-footer"></div>
           </div>

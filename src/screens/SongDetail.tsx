@@ -25,7 +25,7 @@ function PlayMusic() {
   }
 
   const PlayingMusic = music.map((musicData: any, index) => (
-    <div className="p-5 rounded-0">
+    <div key={musicData.id} className="p-5 rounded-0">
       <div className="container-fluid shadow-lg">
         <div className="row g-0">
           <div className="col-md-3 mb-md-0">
