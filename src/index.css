@@ -111,11 +111,13 @@ body {
   position: relative;
   left: 8px;
 }
+.libraryLink > .list-group-item {
+  margin-top: 22px;
+}
 
 .createPlayList > .list-group-item {
   background-color: #000000;
   padding: 0;
-  padding-top: 25px;
   color: #10de47;
   position: relative;
   left: 15px;
@@ -132,7 +134,8 @@ body {
 .fa-heart,
 .fa-plus-square,
 .fa-id-badge,
-.fa-users-cog {
+.fa-users-cog,
+.fa-bookmark {
   padding-right: 20px;
   font-size: 20px;
 }

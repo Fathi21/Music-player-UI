@@ -24,6 +24,12 @@ function SideBar() {
     if (IsUserLoggedIn()) {
       return (
         <div>
+          <span className="libraryLink">
+            <ListGroup.Item className="sideBarButton">
+              <i className="fa-regular fa-bookmark"></i> My library
+            </ListGroup.Item>
+          </span>
+
           <span className="createPlayList">
             <ListGroup.Item className="sideBarButton">
               <i className="fa fa-plus-square" aria-hidden="true"></i>
