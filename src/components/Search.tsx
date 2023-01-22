@@ -14,19 +14,25 @@ function Search() {
 
   const [searchInput, setSearchInput] = useState("");
 
-  const listMusic = music.map((musicData: any, index) => (
-    <Link
-      key={musicData.id}
-      className="list-group-item list-group-item-action"
-      to={RoutePath.browse + musicData.id}
-    >
-      {musicData.Title}
-    </Link>
-  ));
+  const searchOutput = music
+    .filter((data: any) => data.Title.includes(searchInput))
+    .slice(0, 7)
+    .map((musicData: any, index) => (
+      <Link
+        key={musicData.id}
+        className="list-group-item list-group-item-action"
+        to={RoutePath.browse + musicData.id}
+      >
+        {musicData.Title}
+      </Link>
+    ));
 
   return (
     <div>
-      <i className="fa fa-search" onClick={handleShow}></i> Search
+      <span onClick={handleShow}>
+        <i className="fa fa-search"></i> Search
+      </span>
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header>
           <div className="input-group searchInput">
@@ -45,9 +51,8 @@ function Search() {
           </div>
         </Modal.Header>
         <Modal.Body>
-          <div className="list-group searchedData">{listMusic}</div>
+          <div className="list-group searchedData">{searchOutput}</div>
         </Modal.Body>
-        <Modal.Footer></Modal.Footer>
       </Modal>
     </div>
   );
