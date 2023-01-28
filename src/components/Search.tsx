@@ -27,6 +27,54 @@ function Search() {
       </Link>
     ));
 
+  function handleNotFoundSearch() {
+    if (searchOutput.length < 1) {
+      return (
+        <div className="DocSearch-Dropdown">
+          <div className="DocSearch-NoResults">
+            <div className="DocSearch-Screen-Icon">
+              <svg
+                width="40"
+                height="40"
+                viewBox="0 0 20 20"
+                fill="none"
+                fill-rule="evenodd"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M15.5 4.8c2 3 1.7 7-1 9.7h0l4.3 4.3-4.3-4.3a7.8 7.8 0 01-9.8 1m-2.2-2.2A7.8 7.8 0 0113.2 2.4M2 18L18 2"></path>
+              </svg>
+            </div>
+            <p className="DocSearch-Title text-wrap">
+              No results for "<strong>{searchInput}</strong>"
+            </p>
+            <div className="DocSearch-NoResults-Prefill-List">
+              <p className="DocSearch-Help">Try searching for:</p>
+              <ul>
+                <li>
+                  <button className="DocSearch-Prefill" type="button">
+                    Validation
+                  </button>
+                </li>
+                <li>
+                  <button className="DocSearch-Prefill" type="button">
+                    Offcanvas
+                  </button>
+                </li>
+                <li>
+                  <button className="DocSearch-Prefill" type="button">
+                    RFS
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  }
+
   return (
     <div>
       <span onClick={handleShow}>
@@ -52,6 +100,7 @@ function Search() {
         </Modal.Header>
         <Modal.Body>
           <div className="list-group searchedData">{searchOutput}</div>
+          {handleNotFoundSearch()}
         </Modal.Body>
       </Modal>
     </div>

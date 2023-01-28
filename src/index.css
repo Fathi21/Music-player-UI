@@ -115,17 +115,14 @@ body {
   margin-top: 22px;
 }
 
-.createPlayList > .list-group-item {
+.createPlayList > .list-group-item > a {
   background-color: #000000;
   padding: 0;
   color: #10de47;
-  position: relative;
-  left: 15px;
-  width: 151px;
   font-size: 15px;
 }
 
-.createPlayList > .list-group-item:hover {
+.createPlayList > .list-group-item > a:hover {
   color: white;
 }
 
@@ -134,12 +131,14 @@ body {
 .fa-heart,
 .fa-plus-square,
 .fa-id-badge,
-.fa-users-cog,
-.fa-bookmark {
+.fa-users-cog {
   padding-right: 20px;
   font-size: 20px;
 }
 
+.bi-collection-play {
+  margin-right: 20px;
+}
 .fa-heart {
   display: inline;
 }
@@ -245,7 +244,8 @@ a {
 }
 
 .LikeAndAddToPlayList > .fa-heart,
-.fa-plus {
+.fa-plus,
+.bi-three-dots {
   font-size: 30px;
   padding-right: 0px;
   cursor: pointer;
@@ -433,6 +433,102 @@ form > a > .Logo > h1 {
 .searchedData > .list-group-item:hover {
   background-color: #202020;
 }
+
+.DocSearch-NoResults {
+  display: contents;
+  justify-content: center;
+}
+
+.DocSearch-Screen-Icon {
+  display: flex;
+  justify-content: center;
+}
+.mainPlayList {
+  color: white;
+}
+.backgroundColorCreatePlayList {
+  background-color: #202020;
+}
+
+.backgroundColorCreatePlayList > .row > .col-3 > img {
+  max-width: 87%;
+  height: 197px;
+}
+
+.backgroundColorCreatePlayList > .row > .col-9 > .playList {
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.backgroundColorCreatePlayList > .row > .col-9 > .playlistInput {
+  font-size: 12px;
+  font-size: 90px;
+  text-transform: capitalize;
+  font-weight: 800;
+}
+
+.backgroundColorCreatePlayList > .row > .col-9 > .username {
+  font-weight: 700;
+}
+
+.songsToAddPlayList {
+  margin: 20px;
+  border-top: 1px solid #202020;
+  padding-top: 20px;
+}
+
+.songsToAddPlayList > .row > .col-4 > p {
+  font-weight: bolder;
+  font-size: larger;
+}
+
+.dropdown-menu {
+  border-radius: 0px;
+  background-color: #202020;
+  color: white;
+}
+
+.dropdown-menu > li {
+  margin-top: 5px;
+  margin-left: 15px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.bi-pen-fill,
+.bi-archive-fill {
+  margin-right: 15px;
+}
+
+.songsToAddPlayList > .row > .col-4 > .input-group > .input-group-text {
+  background-color: #202020;
+  color: white;
+  border: 1px;
+  border-radius: 3px;
+}
+
+.songsToAddPlayList > .row > .col-4 > .input-group > input {
+  background-color: #202020;
+  color: white;
+  border-radius: 3px;
+}
+
+.songsToAddPlayList > .list-group {
+  margin-top: 12px;
+}
+
+.songsToAddPlayList > .list-group > .list-group-item {
+  background-color: #0f0f0f;
+  color: white;
+  border: 1px solid red;
+}
+
+.songsToAddPlayList > .list-group > .list-group-item > img {
+  height: 35px;
+  width: 45px;
+}
+
 @media only screen and (max-width: 1200px) {
   /*Tablets [601px -> 1200px]*/
 }
