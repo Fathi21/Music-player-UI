@@ -465,6 +465,7 @@ form > a > .Logo > h1 {
   font-size: 90px;
   text-transform: capitalize;
   font-weight: 800;
+  cursor: pointer;
 }
 
 .backgroundColorCreatePlayList > .row > .col-9 > .username {
@@ -501,6 +502,10 @@ form > a > .Logo > h1 {
   margin-right: 15px;
 }
 
+.DeleteButton {
+  color: red;
+}
+
 .songsToAddPlayList > .row > .col-4 > .input-group > .input-group-text {
   background-color: #202020;
   color: white;
@@ -519,14 +524,58 @@ form > a > .Logo > h1 {
 }
 
 .songsToAddPlayList > .list-group > .list-group-item {
+  display: flex;
+  justify-content: space-between;
   background-color: #0f0f0f;
   color: white;
-  border: 1px solid red;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 10px;
+  cursor: pointer;
 }
 
-.songsToAddPlayList > .list-group > .list-group-item > img {
+.songsToAddPlayList > .list-group > .list-group-item:hover {
+  background-color: #202020;
+}
+
+.songsToAddPlayList > .list-group > .list-group-item > .songInfo > img {
   height: 35px;
   width: 45px;
+  margin-right: 12px;
+}
+
+.songDetails {
+  display: grid;
+}
+
+.songInfo {
+  font-size: small;
+}
+
+.AddButton {
+  display: flex;
+  align-self: center;
+  margin-right: 5px;
+  border: 1px solid #ffffff;
+  padding: 9px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.AddButton:hover {
+  background-color: #1a3b14;
+}
+
+.EditPlayList > .modal-content {
+  background-color: #202020;
+}
+
+.EditPlayList > .modal-content > .modal-body > .row {
+  margin-top: 25px;
+}
+
+.EditPlayList > .modal-content > .modal-header > .modal-title {
+  font-weight: bold;
 }
 
 @media only screen and (max-width: 1200px) {

@@ -44,7 +44,12 @@ function CreatePlayList() {
             <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z" />
           </svg>
           <ul className="dropdown-menu">
-            <li className="list-group-item">
+            <li
+              className="list-group-item EditButton"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+              data-bs-whatever="@mdo"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -57,7 +62,7 @@ function CreatePlayList() {
               </svg>
               Edit
             </li>
-            <li className="list-group-item">
+            <li className="list-group-item DeleteButton">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="16"
@@ -71,6 +76,56 @@ function CreatePlayList() {
               Delete
             </li>
           </ul>
+
+          <div
+            className="modal fade"
+            id="exampleModal"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div className="modal-dialog EditPlayList">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h1 className="modal-title fs-5" id="exampleModalLabel">
+                    Edit details
+                  </h1>
+                  <button
+                    type="button"
+                    className="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div className="modal-body">
+                  <div className="row">
+                    <div className="col-4">
+                      <img
+                        src="https://images.pexels.com/photos/114820/pexels-photo-114820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                        className="rounded-0 float-start"
+                        alt="..."
+                      />
+                    </div>
+                    <div className="col-8">
+                      <div className="mb-3">
+                        <input
+                          type="email"
+                          className="form-control"
+                          id="exampleFormControlInput1"
+                          placeholder="PlayList Name"
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <textarea
+                          className="form-control"
+                          id="exampleFormControlTextarea1"
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
           <div className="songsToAddPlayList">
             <div className="row">
@@ -101,12 +156,29 @@ function CreatePlayList() {
             </div>
             <ul className="list-group">
               <li className="list-group-item">
-                <img
-                  src="https://images.pexels.com/photos/114820/pexels-photo-114820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                  className="rounded-0 float-start"
-                  alt="..."
-                />
-                <span className="">An item</span>
+                <span className="songInfo">
+                  <img
+                    src="https://images.pexels.com/photos/114820/pexels-photo-114820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                    className="rounded-0 float-start"
+                    alt="..."
+                  />
+                  <span className="songDetails">
+                    <span>Over my dead</span>
+                    <span>Drake</span>
+                  </span>
+                </span>
+                <span className="AddButton">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor"
+                    className="bi bi-plus"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                  </svg>
+                </span>
               </li>
             </ul>
           </div>
