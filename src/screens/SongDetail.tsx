@@ -8,6 +8,7 @@ import Spinner from "../components/Spinner";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import GetSongById from "../Utilities/ApiCalls/GetSongById";
 import IsUserLoggedIn from "../components/IsUserLoggedIn";
+import { useHistory } from "react-router-dom";
 
 function PlayMusic() {
   const { id }: any = useParams();
@@ -25,7 +26,7 @@ function PlayMusic() {
   }
 
   const PlayingMusic = music.map((musicData: any, index) => (
-    <div className="p-5 rounded-0">
+    <div key={musicData.id} className="p-5 rounded-0">
       <div className="container-fluid shadow-lg">
         <div className="row g-0">
           <div className="col-md-3 mb-md-0">

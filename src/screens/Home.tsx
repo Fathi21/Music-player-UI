@@ -11,7 +11,7 @@ function Home() {
   const music = GetAllSongs();
 
   const listMusic = music.map((musicData: any, index) => (
-    <div className="col">
+    <div key={musicData.id} className="col">
       <Link to={RoutePath.browse + musicData.id}>
         <Card key={index}>
           <Card.Img variant="top" src={urlCalls.Base + musicData.PhotoCover} />

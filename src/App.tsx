@@ -6,7 +6,7 @@ import SideNav from "./components/SideNav";
 import PlayMusic from "./screens/SongDetail";
 import SignUp from "./screens/SignUp";
 import SignIn from "./screens/SignIn";
-
+import CreatePlayList from "./screens/CreatePlayList";
 function App() {
   return (
     <div>
@@ -25,6 +25,9 @@ function App() {
             </Route>
             <Route exact path={RoutePath.loginPage}>
               <SignIn />
+            </Route>
+            <Route exact path={RoutePath.CreatePlayList}>
+              <CreatePlayList />
             </Route>
           </Switch>
         </Router>
