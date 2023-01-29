@@ -1,8 +1,14 @@
 import React from "react";
 import SideBar from "../components/SideBar";
 import Spinner from "../components/Spinner";
+import RedirectIfUserLoggedOut from "../components/RedirectIfUserLoggedOut";
+import UserDetails from "../components/UserDetails";
 
 function CreatePlayList() {
+  const userName = UserDetails().username;
+
+  RedirectIfUserLoggedOut();
+
   return (
     <div className="mainPlayList">
       <div className="row">
@@ -24,8 +30,15 @@ function CreatePlayList() {
                   </div>
                   <div className="col-9">
                     <p className="playList">playlist</p>
-                    <h1 className="playlistInput">my play list</h1>
-                    <p className="username">Username</p>
+                    <h1
+                      className="playlistInput"
+                      data-bs-toggle="modal"
+                      data-bs-target="#exampleModal"
+                      data-bs-whatever="@mdo"
+                    >
+                      my play list
+                    </h1>
+                    <p className="username">{userName}</p>
                   </div>
                 </div>
               </div>
@@ -106,18 +119,19 @@ function CreatePlayList() {
                       />
                     </div>
                     <div className="col-8">
-                      <div className="mb-3">
+                      <div className="mb-3 playlistName">
                         <input
                           type="email"
                           className="form-control"
                           id="exampleFormControlInput1"
-                          placeholder="PlayList Name"
+                          placeholder="Add name"
                         />
                       </div>
-                      <div className="mb-3">
+                      <div className="mb-3 playlistDescription">
                         <textarea
                           className="form-control"
                           id="exampleFormControlTextarea1"
+                          placeholder="Add an optional description"
                         ></textarea>
                       </div>
                     </div>
@@ -163,8 +177,8 @@ function CreatePlayList() {
                     alt="..."
                   />
                   <span className="songDetails">
-                    <span>Over my dead</span>
-                    <span>Drake</span>
+                    <span className="songName">Over my dead</span>
+                    <span className="ArtistName">Drake</span>
                   </span>
                 </span>
                 <span className="AddButton">

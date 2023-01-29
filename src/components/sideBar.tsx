@@ -10,8 +10,7 @@ import Search from "./Search";
 function SideBar() {
   let history = useHistory();
 
-  const userName = UserDetails().username;
-  const [username, setUsername] = useState(userName);
+  const [username, setUsername] = useState(UserDetails().username);
 
   function handleLogout() {
     Logout();
