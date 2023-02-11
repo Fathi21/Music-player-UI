@@ -17,7 +17,7 @@ function App() {
             <Route exact path={RoutePath.homePage}>
               <Home />
             </Route>
-            <Route path={RoutePath.browseId}>
+            <Route path={RoutePath.browseId} component={PlayMusic}>
               <PlayMusic />
             </Route>
             <Route exact path={RoutePath.registerPage}>

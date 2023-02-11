@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { RoutePath } from "../Utilities/UrlPath/RoutePath";
-import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
-import { Link, useLocation, useHistory } from "react-router-dom";
+import GetPlayList from "../Utilities/ApiCalls/GetPlayList";
+import { Link, useLocation } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 
-function Search() {
-  const music = GetAllSongs();
+function MyLibrary() {
+  const playList = GetPlayList();
 
   const [show, setShow] = useState(false);
 
@@ -13,26 +13,19 @@ function Search() {
   const handleShow = () => setShow(true);
 
   const [searchInput, setSearchInput] = useState("");
-  let history = useHistory();
-  let location = useLocation();
 
-  const searchOutput = music
-    .filter((data: any) => data.Title.includes(searchInput))
+  const searchOutput = playList
+    .filter((data: any) => data.PlayListName.includes(searchInput))
     .slice(0, 7)
-    .map((musicData: any, index) => (
-      <span
-        onClick={(e) => handleClickedRoute(musicData.id)}
-        key={musicData.id}
+    .map((playListData: any, index) => (
+      <Link
+        key={playListData.id}
         className="list-group-item list-group-item-action"
-        // to={RoutePath.browse + musicData.id}
+        to={RoutePath.browse + playListData.id}
       >
-        {musicData.Title}
-      </span>
+        {playListData.PlayListName}
+      </Link>
     ));
-
-  function handleClickedRoute(id: string) {
-    history.push(`browse/${id}`);
-  }
 
   function handleNotFoundSearch() {
     if (searchOutput.length < 1) {
@@ -85,28 +78,34 @@ function Search() {
   return (
     <div>
       <span onClick={handleShow}>
-        <i className="fa fa-search"></i> Search
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          className="bi bi-collection-play"
+          viewBox="0 0 16 16"
+        >
+          <path d="M2 3a.5.5 0 0 0 .5.5h11a.5.5 0 0 0 0-1h-11A.5.5 0 0 0 2 3zm2-2a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 0-1h-7A.5.5 0 0 0 4 1zm2.765 5.576A.5.5 0 0 0 6 7v5a.5.5 0 0 0 .765.424l4-2.5a.5.5 0 0 0 0-.848l-4-2.5z" />
+          <path d="M1.5 14.5A1.5 1.5 0 0 1 0 13V6a1.5 1.5 0 0 1 1.5-1.5h13A1.5 1.5 0 0 1 16 6v7a1.5 1.5 0 0 1-1.5 1.5h-13zm13-1a.5.5 0 0 0 .5-.5V6a.5.5 0 0 0-.5-.5h-13A.5.5 0 0 0 1 6v7a.5.5 0 0 0 .5.5h13z" />
+        </svg>{" "}
+        My Library
       </span>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal className="allPlayList" show={show} onHide={handleClose}>
         <Modal.Header>
-          <div className="input-group searchInput">
-            <span className="input-group-text" id="basic-addon1">
-              <i className="fa fa-search"></i>
-            </span>
-            <input
-              type="text"
-              className="form-control"
-              placeholder="Search for a song..."
-              aria-label="Search"
-              aria-describedby="basic-addon1"
-              onChange={(e) => setSearchInput(e.target.value)}
-              value={searchInput}
-            />
-          </div>
+          <h1 className="modal-title fs-5" id="exampleModalLabel">
+            My library
+          </h1>
+          <button
+            type="button"
+            className="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
         </Modal.Header>
         <Modal.Body>
-          <div className="list-group searchedData">{searchOutput}</div>
+          <div className="list-group playListData">{searchOutput}</div>
           {handleNotFoundSearch()}
         </Modal.Body>
       </Modal>
@@ -114,4 +113,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default MyLibrary;

@@ -141,6 +141,7 @@ body {
 }
 .fa-heart {
   display: inline;
+  color: white;
 }
 
 #redColor {
@@ -170,7 +171,7 @@ body {
 .card-body {
   padding-right: 0;
   padding-left: 2px;
-  padding-bottom: 25px;
+  padding-bottom: 12px;
 }
 
 .Title {
@@ -251,6 +252,11 @@ a {
   cursor: pointer;
   margin-right: 7px;
   margin-left: 7px;
+}
+
+.songBox {
+  background-color: #202020;
+  color: white;
 }
 
 .form-control {
@@ -414,7 +420,8 @@ form > a > .Logo > h1 {
   color: #3abd5f;
 }
 
-.searchedData {
+.searchedData,
+.playListData {
   margin-top: 14px;
 }
 
@@ -422,6 +429,16 @@ form > a > .Logo > h1 {
   display: flex;
   align-items: center;
   background-color: #1a3b14;
+  height: 49px;
+  font-size: 13px;
+  font-weight: bold;
+  color: white;
+}
+
+.playListData > .list-group-item {
+  display: flex;
+  align-items: center;
+  background-color: #282828;
   height: 49px;
   font-size: 13px;
   font-weight: bold;
@@ -572,11 +589,11 @@ form > a > .Logo > h1 {
   display: grid;
 }
 
-.songDetails > .songName{
+.songDetails > .songName {
   font-weight: bolder;
 }
 
-.songDetails > .ArtistName{
+.songDetails > .ArtistName {
   color: gray;
   font-size: 13px;
   text-transform: uppercase;
@@ -604,11 +621,16 @@ form > a > .Logo > h1 {
   background-color: #202020;
 }
 
+.allPlayList > .modal-dialog > .modal-content {
+  background-color: #202020;
+  color: white;
+}
+
 .EditPlayList > .modal-content > .modal-body > .row {
   margin-top: 25px;
 }
 
-.EditPlayList > .modal-content > .modal-body > .row  > .col-4 > img{
+.EditPlayList > .modal-content > .modal-body > .row > .col-4 > img {
   height: 140px;
   width: 144px;
 }
@@ -617,8 +639,9 @@ form > a > .Logo > h1 {
   font-weight: bold;
 }
 
-
-
+.EditAndDeleteButton {
+  color: white;
+}
 @media only screen and (max-width: 1200px) {
   /*Tablets [601px -> 1200px]*/
 }

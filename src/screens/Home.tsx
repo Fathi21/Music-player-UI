@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import Spinner from "../components/Spinner";
-import SideBar from "../components/SideBar";
+import SideBar from "../components/sideBar";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import { RoutePath } from "../Utilities/UrlPath/RoutePath";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
@@ -21,7 +21,7 @@ function Home() {
             </div>
 
             <div className="SongName">
-              <Card.Text>Over my dead body</Card.Text>
+              <Card.Text>{musicData.Artist}</Card.Text>
             </div>
           </Card.Body>
         </Card>

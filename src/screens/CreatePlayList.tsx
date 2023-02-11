@@ -1,5 +1,5 @@
 import React from "react";
-import SideBar from "../components/SideBar";
+import SideBar from "../components/sideBar";
 import Spinner from "../components/Spinner";
 import RedirectIfUserLoggedOut from "../components/RedirectIfUserLoggedOut";
 import UserDetails from "../components/UserDetails";
