@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { RoutePath } from "../Utilities/UrlPath/RoutePath";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
-import { Link, useLocation, useHistory } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 
 function Search() {
@@ -13,7 +13,7 @@ function Search() {
   const handleShow = () => setShow(true);
 
   const [searchInput, setSearchInput] = useState("");
-  let history = useHistory();
+  //let history = useHistory();
   let location = useLocation();
 
   const searchOutput = music
@@ -31,7 +31,7 @@ function Search() {
     ));
 
   function handleClickedRoute(id: string) {
-    history.push(`browse/${id}`);
+    //history.push(`browse/${id}`);
   }
 
   function handleNotFoundSearch() {

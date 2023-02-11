@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { RoutePath } from "./Utilities/UrlPath/RoutePath";
 import Home from "./screens/Home";
 import SideNav from "./components/SideNav";
@@ -11,26 +11,21 @@ function App() {
   return (
     <div>
       <div className="container-fluid">
-        <Router>
-          <SideNav />
-          <Switch>
-            <Route exact path={RoutePath.homePage}>
-              <Home />
-            </Route>
-            <Route path={RoutePath.browseId} component={PlayMusic}>
-              <PlayMusic />
-            </Route>
-            <Route exact path={RoutePath.registerPage}>
-              <SignUp />
-            </Route>
-            <Route exact path={RoutePath.loginPage}>
-              <SignIn />
-            </Route>
-            <Route exact path={RoutePath.CreatePlayList}>
-              <CreatePlayList />
-            </Route>
-          </Switch>
-        </Router>
+        <BrowserRouter>
+          <Routes>
+            {/* <SideNav /> */}
+            <Route path="/" element={<Home />} />
+
+            <Route path={RoutePath.homePage} element={<Home />} />
+            <Route path={RoutePath.browseId} element={<PlayMusic />} />
+            <Route path={RoutePath.registerPage} element={<SignUp />} />
+            <Route path={RoutePath.loginPage} element={<SignIn />} />
+            <Route
+              path={RoutePath.CreatePlayList}
+              element={<CreatePlayList />}
+            />
+          </Routes>
+        </BrowserRouter>
       </div>
     </div>
   );

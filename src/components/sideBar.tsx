@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RoutePath } from "../Utilities/UrlPath/RoutePath";
 import IsUserLoggedIn from "./IsUserLoggedIn";
 import UserDetails from "./UserDetails";
@@ -9,13 +9,13 @@ import Search from "./Search";
 import MyLibrary from "./MyLibrary";
 
 function SideBar() {
-  let history = useHistory();
+  let navigate = useNavigate();
 
   const [username, setUsername] = useState(UserDetails().username);
 
   function handleLogout() {
     Logout();
-    history.push("/login");
+    navigate("/login");
     //let history = useHistory();
 
     //return history.push("/login");

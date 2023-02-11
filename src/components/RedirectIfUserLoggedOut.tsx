@@ -1,15 +1,15 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import IsUserLoggedIn from "./IsUserLoggedIn";
 
 function RedirectIfUserLoggedOut() {
-  let history = useHistory();
+  let navigate = useNavigate();
 
   if (!IsUserLoggedIn()) {
-    history.push("/");
+    navigate("/");
   }
 
-  return history;
+  return navigate;
 }
 
-export default RedirectIfUserLoggedOut
+export default RedirectIfUserLoggedOut;

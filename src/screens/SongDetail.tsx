@@ -8,7 +8,6 @@ import Spinner from "../components/Spinner";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import GetSongById from "../Utilities/ApiCalls/GetSongById";
 import IsUserLoggedIn from "../components/IsUserLoggedIn";
-import { useHistory } from "react-router-dom";
 
 function PlayMusic() {
   const { id }: any = useParams();
