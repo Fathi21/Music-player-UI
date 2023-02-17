@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { RoutePath } from "../Utilities/UrlPath/RoutePath";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate, HashRouter } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 
 function Search() {
@@ -13,26 +13,21 @@ function Search() {
   const handleShow = () => setShow(true);
 
   const [searchInput, setSearchInput] = useState("");
-  //let history = useHistory();
-  let location = useLocation();
+
+  const [oldUrl, setOldUrl] = useState("");
 
   const searchOutput = music
     .filter((data: any) => data.Title.includes(searchInput))
     .slice(0, 7)
     .map((musicData: any, index) => (
-      <span
-        onClick={(e) => handleClickedRoute(musicData.id)}
+      <Link
         key={musicData.id}
         className="list-group-item list-group-item-action"
-        // to={RoutePath.browse + musicData.id}
+        to={"/browse/" + musicData.id}
       >
-        {musicData.Title}
-      </span>
+        {musicData.Title}{" "}
+      </Link>
     ));
-
-  function handleClickedRoute(id: string) {
-    //history.push(`browse/${id}`);
-  }
 
   function handleNotFoundSearch() {
     if (searchOutput.length < 1) {

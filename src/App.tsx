@@ -7,17 +7,20 @@ import PlayMusic from "./screens/SongDetail";
 import SignUp from "./screens/SignUp";
 import SignIn from "./screens/SignIn";
 import CreatePlayList from "./screens/CreatePlayList";
+import Search from "./components/Search";
+
 function App() {
   return (
     <div>
       <div className="container-fluid">
+        <SideNav />
+
         <BrowserRouter>
           <Routes>
-            {/* <SideNav /> */}
             <Route path="/" element={<Home />} />
 
             <Route path={RoutePath.homePage} element={<Home />} />
-            <Route path={RoutePath.browseId} element={<PlayMusic />} />
+            <Route path="/browse/:id" element={<PlayMusic />} />
             <Route path={RoutePath.registerPage} element={<SignUp />} />
             <Route path={RoutePath.loginPage} element={<SignIn />} />
             <Route

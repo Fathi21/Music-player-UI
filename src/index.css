@@ -172,6 +172,7 @@ body {
   padding-right: 0;
   padding-left: 2px;
   padding-bottom: 12px;
+  padding-top: 5px;
 }
 
 .Title {
@@ -241,7 +242,8 @@ a {
 .LikeAndAddToPlayList {
   display: flex;
   justify-content: flex-start;
-  margin-top: 10px;
+  margin-top: 16px;
+  margin-left: 16px;
 }
 
 .LikeAndAddToPlayList > .fa-heart,

@@ -32,7 +32,7 @@ function LikeButton(props: any) {
 
   useEffect(() => {
     LikesForThisSong();
-  }, [redColor]);
+  }, [redColor, props.songId]);
 
   return <i onClick={handleClick} className="fas fa-heart" id={redColor}></i>;
 }
