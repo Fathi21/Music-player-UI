@@ -27,7 +27,7 @@ function Search() {
         to={"/browse/" + musicData.id}
         onClick={handleClose}
       >
-        <LinesEllipsis text={musicData.Title} from={"songData.Title"} />{" "}
+        <LinesEllipsis text={musicData.Title} from={"songData.Title"} />
       </Link>
     ));
 
