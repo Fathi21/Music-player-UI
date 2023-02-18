@@ -8,7 +8,11 @@ import Spinner from "../components/Spinner";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import GetSongById from "../Utilities/ApiCalls/GetSongById";
 import IsUserLoggedIn from "../components/IsUserLoggedIn";
+import GetCategoryById from "../Utilities/ApiCalls/GetCategoryById";
+import LinesEllipsis from "../components/LinesEllipsis";
 import { Link, useLocation, useNavigate, HashRouter } from "react-router-dom";
+import Moment from "react-moment";
+
 function PlayMusic() {
   const { id }: any = useParams();
 
@@ -23,6 +27,14 @@ function PlayMusic() {
     id: "",
   });
 
+  const [CategoryData, setCategoryData] = useState({
+    id: "",
+    Title: "",
+    Description: "",
+    CreatedAt: "",
+    UserId: "",
+  });
+
   function HandleLikeButtonAndAddToPlayList() {
     if (IsUserLoggedIn()) {
       return (
@@ -34,9 +46,8 @@ function PlayMusic() {
     }
   }
 
-  function hand() {
+  function handleRenderData() {
     GetSongById(id).then(function (result) {
-      console.log(result[0]);
       setSongData((prev) => ({
         ...prev,
         Artist: result[0].Artist,
@@ -48,12 +59,33 @@ function PlayMusic() {
         UserId: result[0].UserId,
         id: result[0].id,
       }));
+
+      GetCategoryById(result[0].CategoryId).then(function (result) {
+        console.log(result.data[0].Title);
+
+        setCategoryData((prev) => ({
+          id: result.data[0].id,
+          Title: result.data[0].Title,
+          Description: result.data[0].Description,
+          CreatedAt: result.data[0].CreatedAt,
+          UserId: result.data[0].UserId,
+        }));
+      });
     });
+
+    // GetCategoryById(songData.CategoryId).then(function (result) {});
   }
 
+  //console.log(GetCategoryById(CategoryId));
+  function handleWhichCategorySongIsIn() {
+    // GetCategoryById(CategoryId).then(function (result) {
+    //   return result;
+    // });
+  }
   useEffect(() => {
-    hand();
+    handleRenderData();
     HandleLikeButtonAndAddToPlayList();
+    handleWhichCategorySongIsIn();
   }, [id]);
 
   return (
@@ -69,11 +101,29 @@ function PlayMusic() {
                 <img src={urlCalls.Base + songData.PhotoCover} />
               </div>
               <div className="col-md-9 ps-md-0">
-                <p className="fs-1 Title-lg">{songData.Title}</p>
+                <p className="songTitle">
+                  <LinesEllipsis
+                    text={songData.Title}
+                    from={"songData.Title"}
+                  />
+                </p>
                 <p className="text-start Owner-name-and-date">
-                  {songData.Artist} <span> </span>
+                  <LinesEllipsis
+                    text={songData.Artist}
+                    from={"songData.Artist"}
+                  />
+
+                  <span> </span>
                   <i className="fas fa-circle"></i>
-                  <span> {songData.CreatedAt}</span>
+                  <span className="DateCreatedAt">
+                    <Moment fromNow>{songData.CreatedAt}</Moment>
+                  </span>
+                </p>
+                <p className="SongCategory">
+                  <LinesEllipsis
+                    text={CategoryData.Title}
+                    from={"CategoryData.Title"}
+                  />
                 </p>
                 <ReactAudioPlayer
                   src={urlCalls.Base + songData.MusicFile}

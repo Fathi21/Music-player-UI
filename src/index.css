@@ -175,9 +175,9 @@ body {
   padding-top: 5px;
 }
 
-.Title {
+.songTitle {
   color: white;
-  font-size: 15px;
+  font-size: 34px;
   font-weight: bolder;
   margin-bottom: 3px;
 }
@@ -203,7 +203,7 @@ a {
 }
 
 .rounded-0 > .container-fluid > .row > .col-md-3 > img {
-  width: 230px;
+  width: 249px;
   height: 180px;
 }
 
@@ -217,9 +217,9 @@ a {
 }
 
 .Owner-name-and-date {
-  font-size: larger;
   font-weight: bolder;
   width: 633px;
+  margin-bottom: 0px;
 }
 
 .Owner-name-and-date > span {
@@ -234,9 +234,26 @@ a {
 }
 
 .fa-circle {
-  font-size: 8px;
+  font-size: 4px;
   position: relative;
   bottom: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.DateCreatedAt > time {
+  font-weight: 500;
+  font-size: 15px;
+  color: #6a6a6a;
+}
+
+.SongCategory {
+  font-weight: 500;
+  font-size: 12px;
+  color: #6a6a6a;
+  text-transform: uppercase;
+  margin-bottom: 9px;
+  margin-top: 9px;
 }
 
 .LikeAndAddToPlayList {

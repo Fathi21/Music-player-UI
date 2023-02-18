@@ -3,6 +3,7 @@ import { RoutePath } from "../Utilities/UrlPath/RoutePath";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
 import { Link, useLocation, useNavigate, HashRouter } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
+import LinesEllipsis from "./LinesEllipsis";
 
 function Search() {
   const music = GetAllSongs();
@@ -14,18 +15,19 @@ function Search() {
 
   const [searchInput, setSearchInput] = useState("");
 
-  const [oldUrl, setOldUrl] = useState("");
-
   const searchOutput = music
-    .filter((data: any) => data.Title.includes(searchInput))
+    .filter((data: any) =>
+      data.Title.toLowerCase().includes(searchInput.toLowerCase())
+    )
     .slice(0, 7)
     .map((musicData: any, index) => (
       <Link
         key={musicData.id}
         className="list-group-item list-group-item-action"
         to={"/browse/" + musicData.id}
+        onClick={handleClose}
       >
-        {musicData.Title}{" "}
+        <LinesEllipsis text={musicData.Title} from={"songData.Title"} />{" "}
       </Link>
     ));
 

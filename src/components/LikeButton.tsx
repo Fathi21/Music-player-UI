@@ -6,8 +6,10 @@ import UserDetails from "../components/UserDetails";
 function LikeButton(props: any) {
   const [redColor, setredColor] = useState("");
 
+  const songId = props.songId;
+
   function LikesForThisSong() {
-    GetLikesBySongId(props.songId).then(function (result) {
+    GetLikesBySongId(songId).then(function (result) {
       const isUserLikedIt = result.find(
         (data: any) => data.UserId.toString() === UserDetails().userId
       );
@@ -21,7 +23,8 @@ function LikeButton(props: any) {
   }
 
   function handleClick() {
-    LikeASongById(props.songId);
+    LikeASongById(songId);
+    LikesForThisSong();
 
     if (redColor) {
       setredColor("");
@@ -32,7 +35,7 @@ function LikeButton(props: any) {
 
   useEffect(() => {
     LikesForThisSong();
-  }, [redColor, props.songId]);
+  }, [redColor, songId]);
 
   return <i onClick={handleClick} className="fas fa-heart" id={redColor}></i>;
 }

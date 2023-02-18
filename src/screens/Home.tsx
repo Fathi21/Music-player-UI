@@ -6,6 +6,7 @@ import SideBar from "../components/sideBar";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import { RoutePath } from "../Utilities/UrlPath/RoutePath";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
+import LinesEllipsis from "../components/LinesEllipsis";
 
 function Home() {
   const music = GetAllSongs();
@@ -17,11 +18,22 @@ function Home() {
           <Card.Img variant="top" src={urlCalls.Base + musicData.PhotoCover} />
           <Card.Body>
             <div className="Title">
-              <Card.Text>{musicData.Title}</Card.Text>
+              <Card.Text>
+                {" "}
+                <LinesEllipsis
+                  text={musicData.Title}
+                  from={"musicData.Title"}
+                />
+              </Card.Text>
             </div>
 
             <div className="SongName">
-              <Card.Text>{musicData.Artist}</Card.Text>
+              <Card.Text>
+                <LinesEllipsis
+                  text={musicData.Artist}
+                  from={"musicData.Artist"}
+                />
+              </Card.Text>
             </div>
           </Card.Body>
         </Card>
