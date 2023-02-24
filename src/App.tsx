@@ -20,7 +20,7 @@ function App() {
             <Route path="/" element={<Home />} />
 
             <Route path={RoutePath.homePage} element={<Home />} />
-            <Route path="/browse/:id" element={<PlayMusic />} />
+            <Route path={RoutePath.browseId} element={<PlayMusic />} />
             <Route path={RoutePath.registerPage} element={<SignUp />} />
             <Route path={RoutePath.loginPage} element={<SignIn />} />
             <Route

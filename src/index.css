@@ -439,6 +439,12 @@ form > a > .Logo > h1 {
   color: #3abd5f;
 }
 
+.DocSearch-Title,
+.DocSearch-NoResults-Prefill-List {
+  display: flex;
+  justify-content: center;
+}
+
 .searchedData,
 .playListData {
   margin-top: 14px;
@@ -476,6 +482,8 @@ form > a > .Logo > h1 {
 .DocSearch-Screen-Icon {
   display: flex;
   justify-content: center;
+  color: red;
+  margin-bottom: 15px;
 }
 .mainPlayList {
   color: white;
@@ -507,13 +515,13 @@ form > a > .Logo > h1 {
   text-transform: capitalize;
 }
 
-.songsToAddPlayList {
+.SongsInList {
   margin: 20px;
   border-top: 1px solid #202020;
   padding-top: 20px;
 }
 
-.songsToAddPlayList > .row > .col-4 > p {
+.SongsInList > .row > .col-4 > p {
   font-weight: bolder;
   font-size: larger;
 }
@@ -541,24 +549,24 @@ form > a > .Logo > h1 {
   color: red;
 }
 
-.songsToAddPlayList > .row > .col-4 > .input-group > .input-group-text {
+.SongsInList > .row > .col-4 > .input-group > .input-group-text {
   background-color: #202020;
   color: white;
   border: 1px;
   border-radius: 3px;
 }
 
-.songsToAddPlayList > .row > .col-4 > .input-group > input {
+.SongsInList > .row > .col-4 > .input-group > input {
   background-color: #202020;
   color: white;
   border-radius: 3px;
 }
 
-.songsToAddPlayList > .list-group {
+.SongsInList > .list-group {
   margin-top: 12px;
 }
 
-.songsToAddPlayList > .list-group > .list-group-item {
+.SongsInList > .list-group > a > .list-group-item {
   display: flex;
   justify-content: space-between;
   background-color: #0f0f0f;
@@ -569,11 +577,11 @@ form > a > .Logo > h1 {
   cursor: pointer;
 }
 
-.songsToAddPlayList > .list-group > .list-group-item:hover {
+.SongsInList > .list-group > a > .list-group-item:hover {
   background-color: #202020;
 }
 
-.songsToAddPlayList > .list-group > .list-group-item > .songInfo > img {
+.SongsInList > .list-group > a > .list-group-item > .songInfo > img {
   height: 35px;
   width: 45px;
   margin-right: 12px;
@@ -634,6 +642,19 @@ form > a > .Logo > h1 {
 
 .AddButton:hover {
   background-color: #1a3b14;
+}
+
+.HeartIcon {
+  display: flex;
+  align-self: center;
+  margin-right: 5px;
+  padding: 9px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.HeartIcon > .fa-heart {
+  color: red;
 }
 
 .EditPlayList > .modal-content {

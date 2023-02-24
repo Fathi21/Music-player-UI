@@ -51,27 +51,17 @@ function Search() {
               </svg>
             </div>
             <p className="DocSearch-Title text-wrap">
-              No results for "<strong>{searchInput}</strong>"
+              No results for "
+              <strong>
+                {" "}
+                <LinesEllipsis text={searchInput} from={"songData.Title"} />
+              </strong>
+              "
             </p>
             <div className="DocSearch-NoResults-Prefill-List">
-              <p className="DocSearch-Help">Try searching for:</p>
-              <ul>
-                <li>
-                  <button className="DocSearch-Prefill" type="button">
-                    Validation
-                  </button>
-                </li>
-                <li>
-                  <button className="DocSearch-Prefill" type="button">
-                    Offcanvas
-                  </button>
-                </li>
-                <li>
-                  <button className="DocSearch-Prefill" type="button">
-                    RFS
-                  </button>
-                </li>
-              </ul>
+              <p className="DocSearch-Help">
+                Try searching for somthing esle, please:
+              </p>
             </div>
           </div>
         </div>

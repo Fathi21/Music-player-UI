@@ -6,11 +6,13 @@ import LikeButton from "../components/LikeButton";
 import EditAndDeleteButton from "../components/EditAndDeleteButton";
 import Spinner from "../components/Spinner";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
+import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
 import GetSongById from "../Utilities/ApiCalls/GetSongById";
 import IsUserLoggedIn from "../components/IsUserLoggedIn";
 import GetCategoryById from "../Utilities/ApiCalls/GetCategoryById";
 import LinesEllipsis from "../components/LinesEllipsis";
-import { Link, useLocation, useNavigate, HashRouter } from "react-router-dom";
+import GetAllLikedSongsByUser from "../Utilities/ApiCalls/GetAllLikedSongsByUser";
+import AllLikedSongsByActiveUser from "../components/AllLikedSongsByActiveUser";
 import Moment from "react-moment";
 
 function PlayMusic() {
@@ -61,8 +63,6 @@ function PlayMusic() {
       }));
 
       GetCategoryById(result[0].CategoryId).then(function (result) {
-        console.log(result.data[0].Title);
-
         setCategoryData((prev) => ({
           id: result.data[0].id,
           Title: result.data[0].Title,
@@ -72,20 +72,13 @@ function PlayMusic() {
         }));
       });
     });
-
-    // GetCategoryById(songData.CategoryId).then(function (result) {});
   }
 
-  //console.log(GetCategoryById(CategoryId));
-  function handleWhichCategorySongIsIn() {
-    // GetCategoryById(CategoryId).then(function (result) {
-    //   return result;
-    // });
-  }
+  console.log(GetAllLikedSongsByUser());
+
   useEffect(() => {
     handleRenderData();
     HandleLikeButtonAndAddToPlayList();
-    handleWhichCategorySongIsIn();
   }, [id]);
 
   return (
@@ -135,6 +128,7 @@ function PlayMusic() {
           </div>
         </div>
         {HandleLikeButtonAndAddToPlayList()}
+        <AllLikedSongsByActiveUser />
         <Spinner data={1} />
       </div>
     </div>

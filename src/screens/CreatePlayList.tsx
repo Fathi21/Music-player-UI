@@ -141,7 +141,7 @@ function CreatePlayList() {
             </div>
           </div>
 
-          <div className="songsToAddPlayList">
+          <div className="SongsInList">
             <div className="row">
               <div className="col-4">
                 <p>Let's find something for your playlist</p>
