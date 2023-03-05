@@ -19,7 +19,6 @@ function Home() {
           <Card.Body>
             <div className="Title">
               <Card.Text>
-                {" "}
                 <LinesEllipsis
                   text={musicData.Title}
                   from={"musicData.Title"}

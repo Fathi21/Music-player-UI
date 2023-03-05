@@ -2,10 +2,10 @@ import axios from "axios";
 import { urlCalls } from "../UrlPath/ApiUrlPath";
 import UserDetails from "../../components/UserDetails";
 
-function LikeASongById(songId: string) {
+async function LikeASongById(songId: string) {
   const userId = UserDetails().userId;
 
-  return axios
+  return await axios
     .post(urlCalls.LikeASongById, {
       UserId: userId,
       SongID: songId,

@@ -5,4 +5,5 @@ export const RoutePath = {
   registerPage: "/register",
   loginPage: "/login",
   CreatePlayList: "/playlists/create",
+  browsePlayListId: "/play/list/:id",
 };

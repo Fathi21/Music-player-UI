@@ -7,7 +7,7 @@ import PlayMusic from "./screens/SongDetail";
 import SignUp from "./screens/SignUp";
 import SignIn from "./screens/SignIn";
 import CreatePlayList from "./screens/CreatePlayList";
-import Search from "./components/Search";
+import PlayListDetail from "./screens/PlayListDetail";
 
 function App() {
   return (
@@ -18,7 +18,6 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
-
             <Route path={RoutePath.homePage} element={<Home />} />
             <Route path={RoutePath.browseId} element={<PlayMusic />} />
             <Route path={RoutePath.registerPage} element={<SignUp />} />
@@ -26,6 +25,10 @@ function App() {
             <Route
               path={RoutePath.CreatePlayList}
               element={<CreatePlayList />}
+            />
+            <Route
+              path={RoutePath.browsePlayListId}
+              element={<PlayListDetail />}
             />
           </Routes>
         </BrowserRouter>

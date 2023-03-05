@@ -54,10 +54,10 @@ function SignIn() {
     email: string,
     username: string
   ) {
-    localStorage.setItem("Token", JSON.stringify(Token));
-    localStorage.setItem("UserId", JSON.stringify(userId));
-    localStorage.setItem("Email", JSON.stringify(email));
-    localStorage.setItem("Username", JSON.stringify(username));
+    localStorage.setItem("Token", Token);
+    localStorage.setItem("UserId", userId);
+    localStorage.setItem("Email", email);
+    localStorage.setItem("Username", username);
   }
 
   function handleSubmit(event: any) {

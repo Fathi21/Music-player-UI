@@ -4,7 +4,7 @@ import GetLikesBySongId from "../Utilities/ApiCalls/GetLikesBySongId";
 import UserDetails from "../components/UserDetails";
 
 function LikeButton(props: any) {
-  const [redColor, setredColor] = useState("");
+  const [redColor, setredColor] = useState(false);
 
   const songId = props.songId;
 
@@ -15,9 +15,9 @@ function LikeButton(props: any) {
       );
 
       if (isUserLikedIt) {
-        setredColor("redColor");
+        setredColor(true);
       } else {
-        setredColor("");
+        setredColor(false);
       }
     });
   }
@@ -27,9 +27,9 @@ function LikeButton(props: any) {
     LikesForThisSong();
 
     if (redColor) {
-      setredColor("");
+      setredColor(false);
     } else {
-      setredColor("redColor");
+      setredColor(true);
     }
   }
 
@@ -37,7 +37,13 @@ function LikeButton(props: any) {
     LikesForThisSong();
   }, [redColor, songId]);
 
-  return <i onClick={handleClick} className="fas fa-heart" id={redColor}></i>;
+  return (
+    <i
+      onClick={handleClick}
+      className="fas fa-heart"
+      id={redColor ? "redColor" : ""}
+    ></i>
+  );
 }
 
 export default LikeButton;

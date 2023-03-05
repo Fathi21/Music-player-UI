@@ -7,11 +7,13 @@ import UserDetails from "./UserDetails";
 import Logout from "./Logout";
 import Search from "./Search";
 import MyLibrary from "./MyLibrary";
+import { Collapse, Button, Card } from "react-bootstrap";
 
 function SideBar() {
   let navigate = useNavigate();
 
   const [username, setUsername] = useState(UserDetails().username);
+  const [open, setOpen] = useState(false);
 
   function handleLogout() {
     Logout();

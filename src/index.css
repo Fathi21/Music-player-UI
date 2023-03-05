@@ -111,6 +111,24 @@ body {
   position: relative;
   left: 8px;
 }
+
+.collapse-playList {
+  display: grid;
+  margin-top: 14px;
+}
+
+.collapse-playList > a {
+  color: white;
+  padding: 5px;
+  font-size: smaller;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-left: -5px;
+  margin-right: 14px;
+  margin-bottom: 1px;
+  background-color: #1f1f1f;
+}
+
 .libraryLink > .list-group-item {
   margin-top: 22px;
 }

@@ -40,9 +40,14 @@ function PlayMusic() {
   function HandleLikeButtonAndAddToPlayList() {
     if (IsUserLoggedIn()) {
       return (
-        <div className="LikeAndAddToPlayList">
-          <LikeButton songId={id} />
-          <EditAndDeleteButton />
+        <div>
+          <div className="LikeAndAddToPlayList">
+            <LikeButton songId={id} />
+            <EditAndDeleteButton />
+          </div>
+          <div>
+            <AllLikedSongsByActiveUser />
+          </div>
         </div>
       );
     }
@@ -128,7 +133,6 @@ function PlayMusic() {
           </div>
         </div>
         {HandleLikeButtonAndAddToPlayList()}
-        <AllLikedSongsByActiveUser />
         <Spinner data={1} />
       </div>
     </div>

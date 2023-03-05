@@ -2,11 +2,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate, HashRouter } from "react-router-dom";
 import GetAllLikedSongsByUser from "../Utilities/ApiCalls/GetAllLikedSongsByUser";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
+import GetLikesBySongId from "../Utilities/ApiCalls/GetLikesBySongId";
 import LinesEllipsis from "./LinesEllipsis";
 import { RoutePath } from "../Utilities/UrlPath/RoutePath";
+import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 
 function AllLikedSongsByActiveUser() {
-  GetAllLikedSongsByUser();
   const music = GetAllSongs();
 
   const [searchInput, setSearchInput] = useState("");
@@ -17,50 +18,60 @@ function AllLikedSongsByActiveUser() {
       setLikedSongs(result.data);
     });
   }
-
   const likedMusic = likedSongs.map((like: any) => {
     return music.find((musicData: any) => musicData.id === like.SongID);
   });
 
   const searchOutput = likedMusic
-    .filter((data: any) =>
-      data.Title.toLowerCase().includes(searchInput.toLowerCase())
+    .filter(
+      (data: any) =>
+        data && data.Title.toLowerCase().includes(searchInput.toLowerCase())
     )
     .slice(0, 7)
-    .map((musicData: any, index) => (
-      <Link
-        key={musicData.id}
-        className="list-group"
-        to={"/browse/" + musicData.id}
-      >
-        <li className="list-group-item">
-          <span className="songInfo">
-            <img
-              src="https://images.pexels.com/photos/114820/pexels-photo-114820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-              className="rounded-0 float-start"
-              alt="..."
-            />
-            <span className="songDetails">
-              <span className="songName">
-                <LinesEllipsis text={musicData.Title} from={"songData.Title"} />
-              </span>
-              <span className="ArtistName">
-                <LinesEllipsis
-                  text={musicData.Artist}
-                  from={"musicData.Artist"}
+    .map((musicData: any, index) => {
+      if (musicData) {
+        return (
+          <Link
+            key={musicData.id}
+            className="list-group"
+            to={"/browse/" + musicData.id}
+          >
+            <li className="list-group-item">
+              <span className="songInfo">
+                <img
+                  src={urlCalls.Base + musicData.PhotoCover}
+                  className="rounded-0 float-start"
+                  alt="..."
                 />
+                <span className="songDetails">
+                  <span className="songName">
+                    <LinesEllipsis
+                      text={musicData.Title}
+                      from={"songData.Title"}
+                    />
+                  </span>
+                  <span className="ArtistName">
+                    <LinesEllipsis
+                      text={musicData.Artist}
+                      from={"musicData.Artist"}
+                    />
+                  </span>
+                </span>
               </span>
-            </span>
-          </span>
-          <span className="HeartIcon">
-            <i className="fas fa-heart"></i>
-          </span>
-        </li>
-      </Link>
-    ));
+              <span className="HeartIcon">
+                <i className="fas fa-heart"></i>
+              </span>
+            </li>
+          </Link>
+        );
+      }
+    });
 
   useEffect(() => {
     handleLikedSongs();
+    GetLikesBySongId("4").then(function (result) {
+      const isUserLikedIt = result.find((data: any) => console.log(data));
+    });
   }, [0]);
 
   return (
@@ -92,7 +103,7 @@ function AllLikedSongsByActiveUser() {
           </div>
         </div>
       </div>
-      <ul className="list-group">{searchOutput}</ul>
+      <ul className="list-group">{searchOutput} dfds</ul>
     </div>
   );
 }
