@@ -13,5 +13,6 @@ export const urlCalls = {
   GetAllLikedSongs: "http://127.0.0.1:8000/Api/GetAllLikedSongs",
   GetAllLikedSongsByUser: "http://127.0.0.1:8000/Api/GetAllLikedSongsByUser/",
   GetPlayList: "http://127.0.0.1:8000/Api/GetPlayList",
+  GetPlayListById: "http://127.0.0.1:8000/Api/GetPlayListById/",
   GetCategoryById: "http://127.0.0.1:8000/Api/GetCategoryById/",
 };

@@ -75,7 +75,7 @@ function AllLikedSongsByActiveUser() {
   }, [0]);
 
   return (
-    <div className="SongsInList">
+    <div className="SongsInList paddinTop">
       <div className="row">
         <div className="col-4">
           <div className="input-group mb-3">
@@ -103,7 +103,7 @@ function AllLikedSongsByActiveUser() {
           </div>
         </div>
       </div>
-      <ul className="list-group">{searchOutput} dfds</ul>
+      <ul className="list-group">{searchOutput}</ul>
     </div>
   );
 }

@@ -1,13 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import SideBar from "../components/sideBar";
 import Spinner from "../components/Spinner";
 import RedirectIfUserLoggedOut from "../components/RedirectIfUserLoggedOut";
 import UserDetails from "../components/UserDetails";
+import GetPlayListById from "../Utilities/ApiCalls/GetPlayListById";
+import LinesEllipsis from "../components/LinesEllipsis";
+import Moment from "react-moment";
 
 function PlayListDetail() {
+  const { id }: any = useParams();
+
   const userName = UserDetails().username;
 
   RedirectIfUserLoggedOut();
+
+  const [PlayListData, setPlayListData] = useState({
+    id: "",
+    PlayListName: "",
+    Description: "",
+    PhotoCover: "",
+    CreatedAt: "",
+    UserId: "",
+  });
+
+  function handleRenderPlayListDetails() {
+    GetPlayListById(id).then(function (result) {
+      console.log(result.data[0]);
+      setPlayListData((prev) => ({
+        id: result.data[0].id,
+        PlayListName: result.data[0].PlayListName,
+        Description: result.data[0].Description,
+        PhotoCover: result.data[0].PhotoCover,
+        CreatedAt: result.data[0].CreatedAt,
+        UserId: result.data[0].UserId,
+      }));
+    });
+  }
+
+  useEffect(() => {
+    handleRenderPlayListDetails();
+  }, [id]);
 
   return (
     <div className="mainPlayList">
@@ -36,14 +69,48 @@ function PlayListDetail() {
                       data-bs-target="#exampleModal"
                       data-bs-whatever="@mdo"
                     >
-                      my play list
+                      {PlayListData.PlayListName}
                     </h1>
-                    <p className="username">{userName}</p>
+                    <p>{PlayListData.Description}</p>
+                    <p className="text-start Owner-name-and-date">
+                      {/* <LinesEllipsis
+                        text={PlayListData.PlayListName}
+                        from={"songData.Artist"}
+                      /> */}
+                      UserName
+                      <span> </span>
+                      <i className="fas fa-circle"></i>
+                      <span className="DateCreatedAt">
+                        <Moment fromNow>{PlayListData.CreatedAt}</Moment>
+                      </span>
+                    </p>{" "}
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <span className="playButtonToPlayList">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              fill="currentColor"
+              className="bi bi-play-circle-fill"
+              viewBox="0 0 16 16"
+            >
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z" />
+            </svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="30"
+              height="30"
+              fill="currentColor"
+              className="bi bi-stop-circle-fill"
+              viewBox="0 0 16 16"
+            >
+              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.5 5A1.5 1.5 0 0 0 5 6.5v3A1.5 1.5 0 0 0 6.5 11h3A1.5 1.5 0 0 0 11 9.5v-3A1.5 1.5 0 0 0 9.5 5h-3z" />
+            </svg>
+          </span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="26"
@@ -142,7 +209,7 @@ function PlayListDetail() {
           </div>
 
           <div className="SongsInList">
-            <div className="row">
+            {/* <div className="row">
               <div className="col-4">
                 <p>Let's find something for your playlist</p>
                 <div className="input-group mb-3">
@@ -167,33 +234,27 @@ function PlayListDetail() {
                   />
                 </div>
               </div>
-            </div>
+            </div> */}
             <ul className="list-group">
-              <li className="list-group-item">
-                <span className="songInfo">
-                  <img
-                    src="https://images.pexels.com/photos/114820/pexels-photo-114820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                    className="rounded-0 float-start"
-                    alt="..."
-                  />
-                  <span className="songDetails">
-                    <span className="songName">Over my dead</span>
-                    <span className="ArtistName">Drake</span>
+              <div className="header">
+                <span className="Title"># Title</span>
+                <span className="">Date added</span>
+              </div>
+              <a>
+                <li className="list-group-item">
+                  <span className="songInfo">
+                    <img
+                      src="https://images.pexels.com/photos/114820/pexels-photo-114820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                      className="rounded-0 float-start"
+                      alt="..."
+                    />
+                    <span className="songDetails">
+                      <span className="songName">Over my dead</span>
+                      <span className="ArtistName">Drake</span>
+                    </span>
                   </span>
-                </span>
-                <span className="AddButton">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-plus"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                  </svg>
-                </span>
-              </li>
+                </li>
+              </a>
             </ul>
           </div>
         </div>
