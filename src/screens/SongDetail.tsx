@@ -1,5 +1,5 @@
 import ReactAudioPlayer from "react-audio-player";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import SideBar from "../components/sideBar";
 import LikeButton from "../components/LikeButton";
@@ -86,7 +86,11 @@ function PlayMusic() {
     handleRenderData();
     HandleLikeButtonAndAddToPlayList();
   }, [id]);
+  const audioPlayer: any = useRef(null);
 
+  const handleNext = () => {
+    audioPlayer.current.skipForward();
+  };
   return (
     <div className="row">
       <div className="col-2">
@@ -125,6 +129,7 @@ function PlayMusic() {
                   />
                 </p>
                 <ReactAudioPlayer
+                  ref={audioPlayer}
                   src={urlCalls.Base + songData.MusicFile}
                   autoPlay
                   controls

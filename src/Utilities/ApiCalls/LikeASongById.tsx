@@ -2,7 +2,7 @@ import axios from "axios";
 import { urlCalls } from "../UrlPath/ApiUrlPath";
 import UserDetails from "../../components/UserDetails";
 
-async function LikeASongById(songId: string) {
+async function LikeASongById(songId: Number) {
   const userId = UserDetails().userId;
 
   return await axios

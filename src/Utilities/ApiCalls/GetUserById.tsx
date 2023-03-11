@@ -1,10 +1,10 @@
 import axios from "axios";
 import { urlCalls } from "../UrlPath/ApiUrlPath";
 
-async function GetLikesBySongId(songId: Number) {
+async function GetUserById(userId: string) {
   return await axios
-    .get(urlCalls.GetLikesBySongId + songId)
+    .get(urlCalls.GetUserById)
     .then((response) => response.data);
 }
 
-export default GetLikesBySongId;
+export default GetUserById;

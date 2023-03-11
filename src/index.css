@@ -241,7 +241,7 @@ a {
 .Owner-name-and-date {
   font-weight: bolder;
   width: 633px;
-  margin-bottom: 0px;
+  text-transform: capitalize;
 }
 
 .Owner-name-and-date > span {
@@ -266,7 +266,7 @@ a {
 .DateCreatedAt > time {
   font-weight: 500;
   font-size: 15px;
-  color: #6a6a6a;
+  color: #8b8b8b;
 }
 
 .SongCategory {
@@ -527,10 +527,15 @@ form > a > .Logo > h1 {
 }
 
 .backgroundColorCreatePlayList > .row > .col-9 > .playlistInput {
-  font-size: 70px;
+  font-size: 80px;
   text-transform: capitalize;
   font-weight: 800;
   cursor: pointer;
+  margin-bottom: 0px;
+}
+
+.NumberOfSongs {
+  margin-bottom: 0px;
 }
 
 .backgroundColorCreatePlayList > .row > .col-9 > .username {
@@ -638,12 +643,16 @@ form > a > .Logo > h1 {
   color: white;
   border-radius: 3px;
 }
-
+.playButtonToPlayList {
+  display: flex;
+  align-self: center;
+  margin-right: 5px;
+  border-radius: 8px;
+  cursor: pointer;
+}
 .playButtonToPlayList > .bi-play-circle-fill,
 .bi-stop-circle-fill {
   color: #10de47;
-  margin-left: 20px;
-  margin-top: 16px;
   cursor: pointer;
 }
 
@@ -657,6 +666,7 @@ form > a > .Logo > h1 {
   font-size: 12px;
   font-weight: 400;
   text-transform: uppercase;
+  margin: 0px;
 }
 
 .songDetails {
@@ -728,6 +738,47 @@ form > a > .Logo > h1 {
 
 .EditAndDeleteButton {
   color: white;
+}
+
+.spotify-bar {
+  background-color: #282828;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 5px;
+  width: 300px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+
+.song-info {
+  font-weight: bold;
+}
+
+.play-button {
+  background-color: #1db954;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.play-icon {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 15px solid #1db954;
+  margin-left: 15px;
+}
+
+.PlayListBorderAround {
+  border: 1px solid white;
 }
 @media only screen and (max-width: 1200px) {
   /*Tablets [601px -> 1200px]*/

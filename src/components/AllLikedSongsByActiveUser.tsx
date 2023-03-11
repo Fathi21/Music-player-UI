@@ -69,9 +69,6 @@ function AllLikedSongsByActiveUser() {
 
   useEffect(() => {
     handleLikedSongs();
-    GetLikesBySongId("4").then(function (result) {
-      const isUserLikedIt = result.find((data: any) => console.log(data));
-    });
   }, [0]);
 
   return (

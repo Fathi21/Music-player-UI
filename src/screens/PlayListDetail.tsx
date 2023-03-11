@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from "react";
+import ReactAudioPlayer from "react-audio-player";
 import { useParams } from "react-router-dom";
 import SideBar from "../components/sideBar";
 import Spinner from "../components/Spinner";
 import RedirectIfUserLoggedOut from "../components/RedirectIfUserLoggedOut";
 import UserDetails from "../components/UserDetails";
 import GetPlayListById from "../Utilities/ApiCalls/GetPlayListById";
+import GetSongsAddedToPlayListById from "../Utilities/ApiCalls/GetSongsAddedToPlayListById";
+import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
+import GetUserById from "../Utilities/ApiCalls/GetUserById";
 import LinesEllipsis from "../components/LinesEllipsis";
 import Moment from "react-moment";
 
 function PlayListDetail() {
   const { id }: any = useParams();
+  const music = GetAllSongs();
 
-  const userName = UserDetails().username;
+  const [SongsInCurrentPlayList, setSongsInCurrentPlayList] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
 
   RedirectIfUserLoggedOut();
 
-  const [PlayListData, setPlayListData] = useState({
+  const [playListData, setPlayListData] = useState({
     id: "",
     PlayListName: "",
     Description: "",
@@ -24,9 +30,14 @@ function PlayListDetail() {
     UserId: "",
   });
 
+  const [userData, setUserData] = useState({
+    id: "",
+    email: "",
+    username: "",
+  });
+
   function handleRenderPlayListDetails() {
     GetPlayListById(id).then(function (result) {
-      console.log(result.data[0]);
       setPlayListData((prev) => ({
         id: result.data[0].id,
         PlayListName: result.data[0].PlayListName,
@@ -36,8 +47,73 @@ function PlayListDetail() {
         UserId: result.data[0].UserId,
       }));
     });
+
+    GetSongsAddedToPlayListById(id).then(function (result) {
+      setSongsInCurrentPlayList(result);
+    });
+
+    GetUserById(playListData.UserId).then(function (result) {
+      setUserData((prev) => ({
+        id: result.data[0].id,
+        email: result.data[0].email,
+        username: result.data[0].username,
+      }));
+    });
   }
 
+  const songsInPlayList = SongsInCurrentPlayList.map((like: any) => {
+    return music.find((musicData: any) => musicData.id === like.SongID);
+  });
+
+  const searchOutput = songsInPlayList
+    .filter(
+      (data: any) =>
+        data && data.Title.toLowerCase().includes(searchInput.toLowerCase())
+    )
+    // .slice(0, 7)
+    .map((musicData: any, index) => {
+      if (musicData) {
+        return (
+          <a>
+            <li className="list-group-item">
+              <span className="songInfo">
+                <img
+                  src="https://images.pexels.com/photos/114820/pexels-photo-114820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                  className="rounded-0 float-start"
+                  alt="..."
+                />
+                <span className="songDetails">
+                  <span className="songName">{musicData.Title}</span>
+                  <span className="ArtistName">Drake</span>
+                </span>
+              </span>
+              <span className="playButtonToPlayList">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  className="bi bi-play-circle-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z" />
+                </svg>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  fill="currentColor"
+                  className="bi bi-stop-circle-fill"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.5 5A1.5 1.5 0 0 0 5 6.5v3A1.5 1.5 0 0 0 6.5 11h3A1.5 1.5 0 0 0 11 9.5v-3A1.5 1.5 0 0 0 9.5 5h-3z" />
+                </svg>
+              </span>
+            </li>
+          </a>
+        );
+      }
+    });
   useEffect(() => {
     handleRenderPlayListDetails();
   }, [id]);
@@ -48,12 +124,13 @@ function PlayListDetail() {
         <div className="col-2">
           <SideBar />
         </div>
+
         <div className="col-10">
           <Spinner data={2} />
           <div className="row align-items-md-stretch">
             <div className="col-md-12">
               <div className="h-100 p-4 backgroundColorCreatePlayList rounded-0">
-                <div className="row">
+                <div className="row PlayListBorderAround">
                   <div className="col-3">
                     <img
                       src="https://images.pexels.com/photos/114820/pexels-photo-114820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
@@ -62,55 +139,37 @@ function PlayListDetail() {
                     />
                   </div>
                   <div className="col-9">
-                    <p className="playList">playlist</p>
                     <h1
                       className="playlistInput"
                       data-bs-toggle="modal"
                       data-bs-target="#exampleModal"
                       data-bs-whatever="@mdo"
                     >
-                      {PlayListData.PlayListName}
+                      {playListData.PlayListName}
                     </h1>
-                    <p>{PlayListData.Description}</p>
                     <p className="text-start Owner-name-and-date">
                       {/* <LinesEllipsis
-                        text={PlayListData.PlayListName}
+                        text={playListData.PlayListName}
                         from={"songData.Artist"}
                       /> */}
-                      UserName
+                      {userData.username}
                       <span> </span>
                       <i className="fas fa-circle"></i>
                       <span className="DateCreatedAt">
-                        <Moment fromNow>{PlayListData.CreatedAt}</Moment>
+                        <Moment fromNow>{playListData.CreatedAt}</Moment>
                       </span>
-                    </p>{" "}
+                    </p>
+
+                    <ReactAudioPlayer
+                      // src={urlCalls.Base + songData.MusicFile}
+                      autoPlay
+                      controls
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <span className="playButtonToPlayList">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
-              fill="currentColor"
-              className="bi bi-play-circle-fill"
-              viewBox="0 0 16 16"
-            >
-              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z" />
-            </svg>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="30"
-              height="30"
-              fill="currentColor"
-              className="bi bi-stop-circle-fill"
-              viewBox="0 0 16 16"
-            >
-              <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.5 5A1.5 1.5 0 0 0 5 6.5v3A1.5 1.5 0 0 0 6.5 11h3A1.5 1.5 0 0 0 11 9.5v-3A1.5 1.5 0 0 0 9.5 5h-3z" />
-            </svg>
-          </span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="26"
@@ -156,7 +215,6 @@ function PlayListDetail() {
               Delete
             </li>
           </ul>
-
           <div
             className="modal fade"
             id="exampleModal"
@@ -207,9 +265,8 @@ function PlayListDetail() {
               </div>
             </div>
           </div>
-
           <div className="SongsInList">
-            {/* <div className="row">
+            <div className="row">
               <div className="col-4">
                 <p>Let's find something for your playlist</p>
                 <div className="input-group mb-3">
@@ -231,30 +288,17 @@ function PlayListDetail() {
                     placeholder="Search for songs..."
                     aria-label="search"
                     aria-describedby="basic-addon1"
+                    onChange={(e) => setSearchInput(e.target.value)}
+                    value={searchInput}
                   />
                 </div>
               </div>
-            </div> */}
+            </div>
             <ul className="list-group">
               <div className="header">
-                <span className="Title"># Title</span>
-                <span className="">Date added</span>
+                <p className="NumberOfSongs">#2 songs</p>
               </div>
-              <a>
-                <li className="list-group-item">
-                  <span className="songInfo">
-                    <img
-                      src="https://images.pexels.com/photos/114820/pexels-photo-114820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                      className="rounded-0 float-start"
-                      alt="..."
-                    />
-                    <span className="songDetails">
-                      <span className="songName">Over my dead</span>
-                      <span className="ArtistName">Drake</span>
-                    </span>
-                  </span>
-                </li>
-              </a>
+              {searchOutput}
             </ul>
           </div>
         </div>
