@@ -1,9 +1,9 @@
 import axios from "axios";
 import { urlCalls } from "../UrlPath/ApiUrlPath";
 
-async function GetUserById(userId: string) {
+async function GetUserById(userId: Number) {
   return await axios
-    .get(urlCalls.GetUserById)
+    .get(urlCalls.GetUserById + userId)
     .then((response) => response.data);
 }
 

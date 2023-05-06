@@ -310,13 +310,17 @@ a {
 .spinner-border {
   height: 100px;
   width: 100px;
-  position: relative;
-  top: 168px;
-  left: 430px;
 }
 
 .hide {
   display: none;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+  margin-top: 15px;
 }
 
 .form-Box {

@@ -4,37 +4,41 @@ import { useParams } from "react-router-dom";
 import SideBar from "../components/sideBar";
 import Spinner from "../components/Spinner";
 import RedirectIfUserLoggedOut from "../components/RedirectIfUserLoggedOut";
-import UserDetails from "../components/UserDetails";
 import GetPlayListById from "../Utilities/ApiCalls/GetPlayListById";
 import GetSongsAddedToPlayListById from "../Utilities/ApiCalls/GetSongsAddedToPlayListById";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
 import GetUserById from "../Utilities/ApiCalls/GetUserById";
-import LinesEllipsis from "../components/LinesEllipsis";
+import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import Moment from "react-moment";
+import PlaySongFromPlayList from "../components/MusicPlayer";
 
 function PlayListDetail() {
+  RedirectIfUserLoggedOut();
   const { id }: any = useParams();
   const music = GetAllSongs();
 
   const [SongsInCurrentPlayList, setSongsInCurrentPlayList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-
-  RedirectIfUserLoggedOut();
-
   const [playListData, setPlayListData] = useState({
     id: "",
     PlayListName: "",
     Description: "",
     PhotoCover: "",
     CreatedAt: "",
-    UserId: "",
+    UserId: 1,
   });
 
-  const [userData, setUserData] = useState({
+  const [songData, setSongData] = useState({
+    Artist: "",
+    CategoryId: "",
+    CreatedAt: "",
+    MusicFile: "",
+    PhotoCover: "",
+    Title: "",
+    UserId: "",
     id: "",
-    email: "",
-    username: "",
   });
+  const [username, setUsername] = useState("");
 
   function handleRenderPlayListDetails() {
     GetPlayListById(id).then(function (result) {
@@ -46,45 +50,50 @@ function PlayListDetail() {
         CreatedAt: result.data[0].CreatedAt,
         UserId: result.data[0].UserId,
       }));
+
+      GetUserById(result.data[0].UserId).then(function (result) {
+        setUsername(result[0].username);
+      });
     });
 
     GetSongsAddedToPlayListById(id).then(function (result) {
       setSongsInCurrentPlayList(result);
-    });
-
-    GetUserById(playListData.UserId).then(function (result) {
-      setUserData((prev) => ({
-        id: result.data[0].id,
-        email: result.data[0].email,
-        username: result.data[0].username,
-      }));
     });
   }
 
   const songsInPlayList = SongsInCurrentPlayList.map((like: any) => {
     return music.find((musicData: any) => musicData.id === like.SongID);
   });
+  const [selectedMusic, setSelectedMusic] = useState(null);
+
+  // const selectMusicById = (id: any) => {
+  //   const index = songsInPlayList.findIndex((item: any) => item.id === id);
+  //   if (index !== -1) {
+  //     console.log(item);
+  //     // setSelectedMusic({
+  //     //   current: item[index],
+  //     //   prev: item[index - 1] || null,
+  //     //   next: musicData[index + 1] || null,
+  //     // });
+  //   }
+  // };
 
   const searchOutput = songsInPlayList
-    .filter(
-      (data: any) =>
-        data && data.Title.toLowerCase().includes(searchInput.toLowerCase())
-    )
     // .slice(0, 7)
     .map((musicData: any, index) => {
       if (musicData) {
         return (
-          <a>
+          <a key={musicData.id}>
             <li className="list-group-item">
               <span className="songInfo">
                 <img
-                  src="https://images.pexels.com/photos/114820/pexels-photo-114820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                  src={urlCalls.Base + musicData.PhotoCover}
                   className="rounded-0 float-start"
                   alt="..."
                 />
                 <span className="songDetails">
                   <span className="songName">{musicData.Title}</span>
-                  <span className="ArtistName">Drake</span>
+                  <span className="ArtistName">{musicData.Artist}</span>
                 </span>
               </span>
               <span className="playButtonToPlayList">
@@ -114,10 +123,18 @@ function PlayListDetail() {
         );
       }
     });
+
+  function handleToPlaySongFromPlayList() {
+    const randomIndex = Math.floor(Math.random() * 3);
+    //Return the song at the random index
+    return songsInPlayList[2];
+  }
+
   useEffect(() => {
     handleRenderPlayListDetails();
   }, [id]);
 
+  // console.log("playList: ", playListData.UserId == userData);
   return (
     <div className="mainPlayList">
       <div className="row">
@@ -152,16 +169,15 @@ function PlayListDetail() {
                         text={playListData.PlayListName}
                         from={"songData.Artist"}
                       /> */}
-                      {userData.username}
-                      <span> </span>
+                      {username}
                       <i className="fas fa-circle"></i>
                       <span className="DateCreatedAt">
                         <Moment fromNow>{playListData.CreatedAt}</Moment>
                       </span>
                     </p>
-
+                    <PlaySongFromPlayList playListId={id} />
                     <ReactAudioPlayer
-                      // src={urlCalls.Base + songData.MusicFile}
+                      //src={urlCalls.Base + songsInPlayList[0].MusicFile}
                       autoPlay
                       controls
                     />
@@ -296,7 +312,7 @@ function PlayListDetail() {
             </div>
             <ul className="list-group">
               <div className="header">
-                <p className="NumberOfSongs">#2 songs</p>
+                <p className="NumberOfSongs">#{songsInPlayList.length} songs</p>
               </div>
               {searchOutput}
             </ul>
