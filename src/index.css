@@ -553,6 +553,13 @@ form > a > .Logo > h1 {
   border-top: 1px solid #202020;
 }
 
+.bi-x-lg {
+  float: right;
+  position: relative;
+  top: -37px;
+  right: -20px;
+}
+
 .paddinTop {
   padding-top: 20px;
 }

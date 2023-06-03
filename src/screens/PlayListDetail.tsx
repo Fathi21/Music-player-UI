@@ -10,7 +10,7 @@ import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
 import GetUserById from "../Utilities/ApiCalls/GetUserById";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import Moment from "react-moment";
-import PlaySongFromPlayList from "../components/MusicPlayer";
+import MusicPlayer from "../components/MusicPlayer";
 
 function PlayListDetail() {
   RedirectIfUserLoggedOut();
@@ -40,6 +40,8 @@ function PlayListDetail() {
   });
   const [username, setUsername] = useState("");
 
+  const [ClickedSongId, setClickedSongId] = useState();
+
   function handleRenderPlayListDetails() {
     GetPlayListById(id).then(function (result) {
       setPlayListData((prev) => ({
@@ -61,29 +63,16 @@ function PlayListDetail() {
     });
   }
 
+  console.log(SongsInCurrentPlayList);
   const songsInPlayList = SongsInCurrentPlayList.map((like: any) => {
     return music.find((musicData: any) => musicData.id === like.SongID);
   });
-  const [selectedMusic, setSelectedMusic] = useState(null);
 
-  // const selectMusicById = (id: any) => {
-  //   const index = songsInPlayList.findIndex((item: any) => item.id === id);
-  //   if (index !== -1) {
-  //     console.log(item);
-  //     // setSelectedMusic({
-  //     //   current: item[index],
-  //     //   prev: item[index - 1] || null,
-  //     //   next: musicData[index + 1] || null,
-  //     // });
-  //   }
-  // };
-
-  const searchOutput = songsInPlayList
-    // .slice(0, 7)
-    .map((musicData: any, index) => {
+  const songsInPlaylist = SongsInCurrentPlayList.map(
+    (musicData: any, index: any) => {
       if (musicData) {
         return (
-          <a key={musicData.id}>
+          <a key={musicData.id} onClick={(e) => setClickedSongId(musicData.id)}>
             <li className="list-group-item">
               <span className="songInfo">
                 <img
@@ -96,45 +85,17 @@ function PlayListDetail() {
                   <span className="ArtistName">{musicData.Artist}</span>
                 </span>
               </span>
-              <span className="playButtonToPlayList">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  fill="currentColor"
-                  className="bi bi-play-circle-fill"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814l-3.5-2.5z" />
-                </svg>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  fill="currentColor"
-                  className="bi bi-stop-circle-fill"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.5 5A1.5 1.5 0 0 0 5 6.5v3A1.5 1.5 0 0 0 6.5 11h3A1.5 1.5 0 0 0 11 9.5v-3A1.5 1.5 0 0 0 9.5 5h-3z" />
-                </svg>
-              </span>
             </li>
           </a>
         );
       }
-    });
-
-  function handleToPlaySongFromPlayList() {
-    const randomIndex = Math.floor(Math.random() * 3);
-    //Return the song at the random index
-    return songsInPlayList[2];
-  }
+    }
+  );
 
   useEffect(() => {
     handleRenderPlayListDetails();
   }, [id]);
 
-  // console.log("playList: ", playListData.UserId == userData);
   return (
     <div className="mainPlayList">
       <div className="row">
@@ -144,48 +105,10 @@ function PlayListDetail() {
 
         <div className="col-10">
           <Spinner data={2} />
-          <div className="row align-items-md-stretch">
-            <div className="col-md-12">
-              <div className="h-100 p-4 backgroundColorCreatePlayList rounded-0">
-                <div className="row PlayListBorderAround">
-                  <div className="col-3">
-                    <img
-                      src="https://images.pexels.com/photos/114820/pexels-photo-114820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                      className="rounded-0 float-start"
-                      alt="..."
-                    />
-                  </div>
-                  <div className="col-9">
-                    <h1
-                      className="playlistInput"
-                      data-bs-toggle="modal"
-                      data-bs-target="#exampleModal"
-                      data-bs-whatever="@mdo"
-                    >
-                      {playListData.PlayListName}
-                    </h1>
-                    <p className="text-start Owner-name-and-date">
-                      {/* <LinesEllipsis
-                        text={playListData.PlayListName}
-                        from={"songData.Artist"}
-                      /> */}
-                      {username}
-                      <i className="fas fa-circle"></i>
-                      <span className="DateCreatedAt">
-                        <Moment fromNow>{playListData.CreatedAt}</Moment>
-                      </span>
-                    </p>
-                    <PlaySongFromPlayList playListId={id} />
-                    <ReactAudioPlayer
-                      //src={urlCalls.Base + songsInPlayList[0].MusicFile}
-                      autoPlay
-                      controls
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <MusicPlayer
+            data={ClickedSongId ? ClickedSongId : SongsInCurrentPlayList}
+          />
+
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="26"
@@ -282,9 +205,25 @@ function PlayListDetail() {
             </div>
           </div>
           <div className="SongsInList">
+            <ul className="list-group">
+              <div className="header">
+                <p className="NumberOfSongs">#{songsInPlayList.length} songs</p>
+              </div>
+              {songsInPlaylist}
+            </ul>
             <div className="row">
               <div className="col-4">
                 <p>Let's find something for your playlist</p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-x-lg"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                </svg>
                 <div className="input-group mb-3">
                   <span className="input-group-text" id="basic-addon1">
                     <svg
@@ -310,12 +249,6 @@ function PlayListDetail() {
                 </div>
               </div>
             </div>
-            <ul className="list-group">
-              <div className="header">
-                <p className="NumberOfSongs">#{songsInPlayList.length} songs</p>
-              </div>
-              {searchOutput}
-            </ul>
           </div>
         </div>
       </div>

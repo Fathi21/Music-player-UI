@@ -1,37 +1,20 @@
 import React, { useState, useEffect } from "react";
-import GetSongsAddedToPlayListById from "../Utilities/ApiCalls/GetSongsAddedToPlayListById";
-import GetRandomSongfromPlaylist from "../Utilities/ApiCalls/GetRandomSongfromPlaylist";
-import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
+import SongBox from "../components/SongBox";
 
-function PlaySongFromPlayList(props: any) {
-  const playlistId: number = props.playlistId;
+function MusicPlayer(props: any) {
+  const randomIndex = Math.floor(Math.random() * props.data.length);
 
-  const [songId, setSongId] = useState([]);
+  const randomSongfromPlayList = props.data[randomIndex];
 
-  const [SongsInCurrentPlayList, setSongsInCurrentPlayList] = useState([]);
-  const [songPlayingNow, setSongPlayingNow] = useState("");
-  const [PlayingNow, sePlayingNow] = useState("");
+  const songId: number = !isNaN(props.data)
+    ? props.data
+    : randomSongfromPlayList.id;
 
-  function HandlePlaylistData() {
-    GetSongsAddedToPlayListById(1).then(function (result) {
-      setSongsInCurrentPlayList(result);
-    });
-  }
-
-  function handleASongToPlay(songDetails: any) {
-    // console.log(songDetails[0]);
-    songDetails.filter((musicData: any) => {
-      // console.log(musicData);
-    });
-  }
-
-  console.log(SongsInCurrentPlayList);
-
-  useEffect(() => {
-    HandlePlaylistData();
-  }, [playlistId]);
-
-  return <div>sas</div>;
+  return (
+    <div>
+      <SongBox songId={songId} />
+    </div>
+  );
 }
 
-export default PlaySongFromPlayList;
+export default MusicPlayer;

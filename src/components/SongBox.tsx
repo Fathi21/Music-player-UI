@@ -56,6 +56,7 @@ function SongBox(props: any) {
 
   function handleRenderData() {
     GetSongById(songId).then(function (result) {
+      //
       setSongData((prev) => ({
         ...prev,
         Artist: result[0].Artist,
@@ -91,9 +92,21 @@ function SongBox(props: any) {
   const handleNext = () => {
     audioPlayer.current.skipForward();
   };
+
+  const handlePlay = () => {
+    console.log("Audio started playing");
+  };
+
+  const handleEnded = () => {
+    console.log("Audio stopped playing");
+  };
+
+  const handlePause = () => {
+    console.log("Audio paused");
+  };
+
   return (
     <div>
-      {" "}
       <div className="p-4 rounded-0 songBox">
         <Spinner data={songId} />
         <div className="container-fluid shadow-lg">
@@ -128,6 +141,9 @@ function SongBox(props: any) {
                 src={urlCalls.Base + songData.MusicFile}
                 autoPlay
                 controls
+                onPlay={handlePlay}
+                onEnded={handleEnded}
+                onPause={handlePause}
               />
             </div>
           </div>

@@ -6,6 +6,7 @@ import EditAndDeleteButton from "../components/EditAndDeleteButton";
 import IsUserLoggedIn from "../components/IsUserLoggedIn";
 import AllLikedSongsByActiveUser from "../components/AllLikedSongsByActiveUser";
 import SongBox from "../components/SongBox";
+import MusicPlayer from "../components/MusicPlayer";
 
 function PlayMusic() {
   const { id }: any = useParams();
@@ -14,6 +15,8 @@ function PlayMusic() {
     if (IsUserLoggedIn()) {
       return (
         <div>
+          <MusicPlayer data={id} />
+
           <div className="LikeAndAddToPlayList">
             <LikeButton songId={id} />
             <EditAndDeleteButton />
@@ -36,10 +39,7 @@ function PlayMusic() {
       <div className="col-2">
         <SideBar />
       </div>
-      <div className="col-10">
-        <SongBox songId={id} />
-        {HandleLikeButtonAndAddToPlayList()}
-      </div>
+      <div className="col-10">{HandleLikeButtonAndAddToPlayList()}</div>
     </div>
   );
 }
