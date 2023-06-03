@@ -26,13 +26,18 @@ function PlayMusic() {
           </div>
         </div>
       );
+    } else {
+      return (
+        <div>
+          <MusicPlayer data={id} />
+        </div>
+      );
     }
   }
 
   useEffect(() => {
     HandleLikeButtonAndAddToPlayList();
   }, [id]);
-  const audioPlayer: any = useRef(null);
 
   return (
     <div className="row">
