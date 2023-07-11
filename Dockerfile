@@ -2,7 +2,7 @@
 FROM node:14-alpine
 
 # Create a directory for the app
-WORKDIR /app
+WORKDIR /Music-Player-IU
 
 # Copy the package.json and package-lock.json files
 COPY package*.json ./

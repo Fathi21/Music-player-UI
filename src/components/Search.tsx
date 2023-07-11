@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate, HashRouter } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import LinesEllipsis from "./LinesEllipsis";
 
-function Search() {
+function Search(props: any) {
   const music = GetAllSongs();
 
   const [show, setShow] = useState(false);

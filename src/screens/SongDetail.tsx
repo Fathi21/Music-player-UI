@@ -12,27 +12,19 @@ function PlayMusic() {
   const { id }: any = useParams();
 
   function HandleLikeButtonAndAddToPlayList() {
-    if (IsUserLoggedIn()) {
-      return (
-        <div>
-          <MusicPlayer data={id} />
+    return (
+      <div>
+        <MusicPlayer data={id} />
 
-          <div className="LikeAndAddToPlayList">
-            <LikeButton songId={id} />
-            <EditAndDeleteButton />
-          </div>
-          <div>
-            <AllLikedSongsByActiveUser />
-          </div>
+        <div className="LikeAndAddToPlayList">
+          <LikeButton songId={id} />
+          <EditAndDeleteButton />
         </div>
-      );
-    } else {
-      return (
         <div>
-          <MusicPlayer data={id} />
+          <AllLikedSongsByActiveUser />
         </div>
-      );
-    }
+      </div>
+    );
   }
 
   useEffect(() => {

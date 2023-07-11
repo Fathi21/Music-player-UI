@@ -4,13 +4,15 @@ import { useParams } from "react-router-dom";
 import SideBar from "../components/sideBar";
 import Spinner from "../components/Spinner";
 import RedirectIfUserLoggedOut from "../components/RedirectIfUserLoggedOut";
-import GetPlayListById from "../Utilities/ApiCalls/GetPlayListById";
 import GetSongsAddedToPlayListById from "../Utilities/ApiCalls/GetSongsAddedToPlayListById";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
 import GetUserById from "../Utilities/ApiCalls/GetUserById";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import Moment from "react-moment";
 import MusicPlayer from "../components/MusicPlayer";
+import { List } from "cypress/types/lodash";
+import { ArrayBindingElement } from "typescript";
+import PlayListCard from "../components/PlayListCard";
 
 function PlayListDetail() {
   RedirectIfUserLoggedOut();
@@ -19,14 +21,6 @@ function PlayListDetail() {
 
   const [SongsInCurrentPlayList, setSongsInCurrentPlayList] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const [playListData, setPlayListData] = useState({
-    id: "",
-    PlayListName: "",
-    Description: "",
-    PhotoCover: "",
-    CreatedAt: "",
-    UserId: 1,
-  });
 
   const [songData, setSongData] = useState({
     Artist: "",
@@ -40,39 +34,73 @@ function PlayListDetail() {
   });
   const [username, setUsername] = useState("");
 
-  const [ClickedSongId, setClickedSongId] = useState();
+  const [PlayingSong, setPlayingSong] = useState(Number);
+
+  const [songId, setSongId] = useState();
 
   function handleRenderPlayListDetails() {
-    GetPlayListById(id).then(function (result) {
-      setPlayListData((prev) => ({
-        id: result.data[0].id,
-        PlayListName: result.data[0].PlayListName,
-        Description: result.data[0].Description,
-        PhotoCover: result.data[0].PhotoCover,
-        CreatedAt: result.data[0].CreatedAt,
-        UserId: result.data[0].UserId,
-      }));
-
-      GetUserById(result.data[0].UserId).then(function (result) {
-        setUsername(result[0].username);
-      });
-    });
-
-    GetSongsAddedToPlayListById(id).then(function (result) {
-      setSongsInCurrentPlayList(result);
-    });
+    // GetSongsAddedToPlayListById(id).then(function (result) {
+    //   const randomIndex = Math.floor(Math.random() * result.length);
+    //   const randomSongfromPlayList = result[randomIndex];
+    //   const filter = result.filter(
+    //     (item: any) => item.id //!== randomSongfromPlayList.id && item.id !== PlayingSong
+    //   );
+    //   sethandleWhichSongToPlay(randomSongfromPlayList.id);
+    //   setSongsInCurrentPlayList(filter);
+    // });
   }
 
   console.log(SongsInCurrentPlayList);
-  const songsInPlayList = SongsInCurrentPlayList.map((like: any) => {
-    return music.find((musicData: any) => musicData.id === like.SongID);
-  });
+
+  function handleRandomSong(songs: any) {
+    const randomIndex = Math.floor(Math.random() * songs.length);
+    return songs[randomIndex].id;
+  }
+
+  const handleClickSong = (id: number) => {
+    setPlayingSong(id);
+  };
+
+  async function handleData() {
+    try {
+      const songgFromPlayList = await GetSongsAddedToPlayListById(id);
+
+      if (songgFromPlayList.length > 0) {
+        setPlayingSong(handleRandomSong(songgFromPlayList));
+        setPlayingSong(handleRandomSong(songgFromPlayList));
+        setSongsInCurrentPlayList(songgFromPlayList); // Access the data retrieved from the API
+        // Continue with further processing or UI updates
+      }
+    } catch (error) {
+      console.error(error);
+      // Handle any errors that occurred during the API request
+    }
+  }
+
+  function handleSongIsPlaying(isPlaying: boolean) {
+    if (isPlaying) {
+      return (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          fill="currentColor"
+          className="bi bi-stop-circle-fill"
+          viewBox="0 0 16 16"
+        >
+          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.5 5A1.5 1.5 0 0 0 5 6.5v3A1.5 1.5 0 0 0 6.5 11h3A1.5 1.5 0 0 0 11 9.5v-3A1.5 1.5 0 0 0 9.5 5h-3z" />
+        </svg>
+      );
+    }
+  }
 
   const songsInPlaylist = SongsInCurrentPlayList.map(
     (musicData: any, index: any) => {
-      if (musicData) {
+      let isSelected: boolean = PlayingSong === musicData.id;
+
+      if (musicData.id) {
         return (
-          <a key={musicData.id} onClick={(e) => setClickedSongId(musicData.id)}>
+          <a key={musicData.id} onClick={() => handleClickSong(musicData.id)}>
             <li className="list-group-item">
               <span className="songInfo">
                 <img
@@ -85,6 +113,9 @@ function PlayListDetail() {
                   <span className="ArtistName">{musicData.Artist}</span>
                 </span>
               </span>
+              <span className="playButtonToPlayList">
+                {handleSongIsPlaying(isSelected)}
+              </span>
             </li>
           </a>
         );
@@ -92,10 +123,22 @@ function PlayListDetail() {
     }
   );
 
+  function handleLoadingPlaylist() {
+    if (!PlayingSong) {
+      return <PlayListCard id={id} />;
+    } else {
+      return <MusicPlayer data={PlayingSong} />;
+    }
+  }
+
   useEffect(() => {
     handleRenderPlayListDetails();
+    handleData();
+    handleLoadingPlaylist();
+    setPlayingSong(Number.NaN);
   }, [id]);
 
+  console.log();
   return (
     <div className="mainPlayList">
       <div className="row">
@@ -104,11 +147,7 @@ function PlayListDetail() {
         </div>
 
         <div className="col-10">
-          <Spinner data={2} />
-          <MusicPlayer
-            data={ClickedSongId ? ClickedSongId : SongsInCurrentPlayList}
-          />
-
+          {handleLoadingPlaylist()}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="26"
@@ -207,48 +246,10 @@ function PlayListDetail() {
           <div className="SongsInList">
             <ul className="list-group">
               <div className="header">
-                <p className="NumberOfSongs">#{songsInPlayList.length} songs</p>
+                <p className="NumberOfSongs">#{songsInPlaylist.length} songs</p>
               </div>
               {songsInPlaylist}
             </ul>
-            <div className="row">
-              <div className="col-4">
-                <p>Let's find something for your playlist</p>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  className="bi bi-x-lg"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
-                </svg>
-                <div className="input-group mb-3">
-                  <span className="input-group-text" id="basic-addon1">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      className="bi bi-search"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
-                    </svg>
-                  </span>
-                  <input
-                    type="text"
-                    className="form-control"
-                    placeholder="Search for songs..."
-                    aria-label="search"
-                    aria-describedby="basic-addon1"
-                    onChange={(e) => setSearchInput(e.target.value)}
-                    value={searchInput}
-                  />
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
