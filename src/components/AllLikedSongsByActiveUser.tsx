@@ -7,19 +7,25 @@ import LinesEllipsis from "./LinesEllipsis";
 import { RoutePath } from "../Utilities/UrlPath/RoutePath";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 
-function AllLikedSongsByActiveUser() {
-  const music = GetAllSongs();
-
-  const [searchInput, setSearchInput] = useState("");
+function AllLikedSongsByActiveUser(props: any) {
+  const [searchInput, setSearchInput] = useState(String);
   const [likedSongs, setLikedSongs] = useState([]);
+  const [songs, setsongs] = useState([]);
+  const [PlayingSong, setPlayingSong] = useState(Number);
 
-  function handleLikedSongs() {
+  async function handleLikedSongs() {
+    const music = await GetAllSongs();
+
+    setsongs(music);
+
     GetAllLikedSongsByUser().then(function (result) {
       setLikedSongs(result.data);
     });
   }
   const likedMusic = likedSongs.map((like: any) => {
-    return music.find((musicData: any) => musicData.id === like.SongID);
+    if (songs) {
+      return songs.find((musicData: any) => musicData.id === like.SongID);
+    }
   });
 
   const searchOutput = likedMusic
@@ -29,7 +35,10 @@ function AllLikedSongsByActiveUser() {
     )
     .slice(0, 7)
     .map((musicData: any, index) => {
-      if (musicData) {
+      if (musicData.id === props.data) {
+        return null; // Skip this iteration of the loop
+      }
+      {
         return (
           <Link
             key={musicData.id}

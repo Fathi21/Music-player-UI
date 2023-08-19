@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import { Link } from "react-router-dom";
 import Spinner from "../components/Spinner";
@@ -9,9 +9,15 @@ import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
 import LinesEllipsis from "../components/LinesEllipsis";
 
 function Home() {
-  const music = GetAllSongs();
+  const [songs, setsongs] = useState([]);
 
-  const listMusic = music.map((musicData: any, index) => (
+  const handleLoadingData = async () => {
+    const music = await GetAllSongs();
+    // Rest of your code here
+    setsongs(music);
+  };
+
+  const listMusic = songs.map((musicData: any, index) => (
     <div key={musicData.id} className="col">
       <Link to={RoutePath.browse + musicData.id}>
         <Card key={index}>
@@ -40,6 +46,10 @@ function Home() {
     </div>
   ));
 
+  useEffect(() => {
+    handleLoadingData();
+  }, [0]);
+
   return (
     <div className="row">
       <div className="col-2">
@@ -47,7 +57,7 @@ function Home() {
       </div>
       <div className="col-10 Main-righSide">
         <div className="row">
-          <Spinner data={music.length} />
+          <Spinner data={songs.length} />
           {listMusic}
         </div>
       </div>

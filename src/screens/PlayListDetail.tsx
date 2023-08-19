@@ -13,6 +13,7 @@ import MusicPlayer from "../components/MusicPlayer";
 import { List } from "cypress/types/lodash";
 import { ArrayBindingElement } from "typescript";
 import PlayListCard from "../components/PlayListCard";
+import SearchForPlayList from "../components/SearchForPlayList";
 
 function PlayListDetail() {
   RedirectIfUserLoggedOut();
@@ -38,17 +39,7 @@ function PlayListDetail() {
 
   const [songId, setSongId] = useState();
 
-  function handleRenderPlayListDetails() {
-    // GetSongsAddedToPlayListById(id).then(function (result) {
-    //   const randomIndex = Math.floor(Math.random() * result.length);
-    //   const randomSongfromPlayList = result[randomIndex];
-    //   const filter = result.filter(
-    //     (item: any) => item.id //!== randomSongfromPlayList.id && item.id !== PlayingSong
-    //   );
-    //   sethandleWhichSongToPlay(randomSongfromPlayList.id);
-    //   setSongsInCurrentPlayList(filter);
-    // });
-  }
+  const [songs, setsongs] = useState([]);
 
   console.log(SongsInCurrentPlayList);
 
@@ -65,6 +56,10 @@ function PlayListDetail() {
     try {
       const songgFromPlayList = await GetSongsAddedToPlayListById(id);
 
+      const music = await GetAllSongs();
+
+      setsongs(music);
+
       if (songgFromPlayList.length > 0) {
         setPlayingSong(handleRandomSong(songgFromPlayList));
         setPlayingSong(handleRandomSong(songgFromPlayList));
@@ -77,51 +72,35 @@ function PlayListDetail() {
     }
   }
 
-  function handleSongIsPlaying(isPlaying: boolean) {
-    if (isPlaying) {
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="20"
-          height="20"
-          fill="currentColor"
-          className="bi bi-stop-circle-fill"
-          viewBox="0 0 16 16"
-        >
-          <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM6.5 5A1.5 1.5 0 0 0 5 6.5v3A1.5 1.5 0 0 0 6.5 11h3A1.5 1.5 0 0 0 11 9.5v-3A1.5 1.5 0 0 0 9.5 5h-3z" />
-        </svg>
-      );
-    }
-  }
-
-  const songsInPlaylist = SongsInCurrentPlayList.map(
-    (musicData: any, index: any) => {
-      let isSelected: boolean = PlayingSong === musicData.id;
-
-      if (musicData.id) {
-        return (
-          <a key={musicData.id} onClick={() => handleClickSong(musicData.id)}>
-            <li className="list-group-item">
-              <span className="songInfo">
-                <img
-                  src={urlCalls.Base + musicData.PhotoCover}
-                  className="rounded-0 float-start"
-                  alt="..."
-                />
-                <span className="songDetails">
-                  <span className="songName">{musicData.Title}</span>
-                  <span className="ArtistName">{musicData.Artist}</span>
-                </span>
-              </span>
-              <span className="playButtonToPlayList">
-                {handleSongIsPlaying(isSelected)}
-              </span>
-            </li>
-          </a>
-        );
-      }
-    }
-  );
+  const songsInPlaylist =
+    SongsInCurrentPlayList.length != 0
+      ? SongsInCurrentPlayList.map((musicData: any, index: any) => {
+          if (musicData.id === PlayingSong) {
+            return null; // Skip this iteration of the loop
+          } else {
+            return (
+              <a
+                key={musicData.id}
+                onClick={() => handleClickSong(musicData.id)}
+              >
+                <li className="list-group-item">
+                  <span className="songInfo">
+                    <img
+                      src={urlCalls.Base + musicData.PhotoCover}
+                      className="rounded-0 float-start"
+                      alt="..."
+                    />
+                    <span className="songDetails">
+                      <span className="songName">{musicData.Title}</span>
+                      <span className="ArtistName">{musicData.Artist}</span>
+                    </span>
+                  </span>
+                </li>
+              </a>
+            );
+          }
+        })
+      : "";
 
   function handleLoadingPlaylist() {
     if (!PlayingSong) {
@@ -132,10 +111,10 @@ function PlayListDetail() {
   }
 
   useEffect(() => {
-    handleRenderPlayListDetails();
     handleData();
     handleLoadingPlaylist();
     setPlayingSong(Number.NaN);
+    setSongsInCurrentPlayList([]);
   }, [id]);
 
   console.log();
@@ -246,11 +225,21 @@ function PlayListDetail() {
           <div className="SongsInList">
             <ul className="list-group">
               <div className="header">
-                <p className="NumberOfSongs">#{songsInPlaylist.length} songs</p>
+                <p className="NumberOfSongs">
+                  {SongsInCurrentPlayList.length >= 0
+                    ? SongsInCurrentPlayList.length + " songs"
+                    : "ss"}
+                </p>
               </div>
+
               {songsInPlaylist}
             </ul>
           </div>
+          {SongsInCurrentPlayList.length == 0 ? (
+            <SearchForPlayList data={songs} />
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>

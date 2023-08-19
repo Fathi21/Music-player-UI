@@ -21,7 +21,7 @@ function PlayMusic() {
           <EditAndDeleteButton />
         </div>
         <div>
-          <AllLikedSongsByActiveUser />
+          <AllLikedSongsByActiveUser data={id} />
         </div>
       </div>
     );

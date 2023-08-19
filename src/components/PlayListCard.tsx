@@ -20,7 +20,7 @@ function PlayListCard(props: any) {
 
       setPlayListData((prev) => ({
         id: "",
-        PlayListName: playList.data[0].PlayListName,
+        PlayListName: playList.data.PlayListName,
         Description: "",
         PhotoCover: "",
         CreatedAt: "",

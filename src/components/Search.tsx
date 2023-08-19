@@ -5,17 +5,22 @@ import { Link, useLocation, useNavigate, HashRouter } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import LinesEllipsis from "./LinesEllipsis";
 
-function Search(props: any) {
-  const music = GetAllSongs();
-
+function Search() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const [searchInput, setSearchInput] = useState("");
+  const [songs, setsongs] = useState([]);
 
-  const searchOutput = music
+  const handleLoadingData = async () => {
+    const music = await GetAllSongs();
+    // Rest of your code here
+    setsongs(music);
+  };
+
+  const searchOutput = songs
     .filter((data: any) =>
       data.Title.toLowerCase().includes(searchInput.toLowerCase())
     )
@@ -68,6 +73,9 @@ function Search(props: any) {
       );
     }
   }
+  useEffect(() => {
+    handleLoadingData();
+  }, [0]);
 
   return (
     <div>
