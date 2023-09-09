@@ -41,6 +41,10 @@ function PlayListDetail() {
 
   const [songs, setsongs] = useState([]);
 
+  const [toggle, setToggle] = useState(false);
+
+  const [hideOpenCloseButton, setHideOpenCloseButton] = useState(true);
+
   console.log(SongsInCurrentPlayList);
 
   function handleRandomSong(songs: any) {
@@ -108,6 +112,16 @@ function PlayListDetail() {
     } else {
       return <MusicPlayer data={PlayingSong} />;
     }
+  }
+
+  function handleToggleSongsSearch() {
+    // Toggle the 'toggle' state by negating its current value
+    setToggle((prevToggle) => !prevToggle);
+
+    // Toggle the 'hideOpenCloseButton' state by negating its current value
+    setHideOpenCloseButton(
+      (prevHideOpenCloseButton) => !prevHideOpenCloseButton
+    );
   }
 
   useEffect(() => {
@@ -230,15 +244,31 @@ function PlayListDetail() {
                     ? SongsInCurrentPlayList.length + " songs"
                     : "ss"}
                 </p>
-                <span className="Open">Open</span>
-                <span className="Open">Close</span>
+                <span
+                  onClick={handleToggleSongsSearch}
+                  id={hideOpenCloseButton ? "" : "Toggle"}
+                  className="Open"
+                >
+                  Open
+                </span>
+                <span
+                  onClick={handleToggleSongsSearch}
+                  id={hideOpenCloseButton ? "Toggle" : ""}
+                  className="Close"
+                >
+                  Close
+                </span>
               </div>
 
-              {songsInPlaylist}
+              {hideOpenCloseButton ? songsInPlaylist : ""}
             </ul>
           </div>
           {SongsInCurrentPlayList.length >= 0 ? (
-            <SearchForPlayList data={id} />
+            toggle ? (
+              <SearchForPlayList data={id} />
+            ) : (
+              ""
+            )
           ) : (
             ""
           )}

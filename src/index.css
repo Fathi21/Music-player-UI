@@ -791,6 +791,22 @@ form > a > .Logo > h1 {
 .PlayListBorderAround {
   border: 1px solid white;
 }
+
+.Open,
+.Close {
+  color: white;
+  border: 2px solid green;
+  padding-left: 2px;
+  padding-right: 2px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bolder;
+}
+
+#Toggle {
+  display: none !important;
+}
+
 @media only screen and (max-width: 1200px) {
   /*Tablets [601px -> 1200px]*/
 }
