@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import ListGroup from "react-bootstrap/ListGroup";
-
+/**
+ * The Logout function clears the local storage.
+ */
 function Logout() {
   localStorage.clear();
 }

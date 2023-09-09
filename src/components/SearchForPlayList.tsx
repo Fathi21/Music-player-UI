@@ -1,10 +1,35 @@
 import React, { useState, useEffect } from "react";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
-
+import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
+import AddSongSongToThePlayList from "../Utilities/ApiCalls/AddSongSongToThePlayList";
 function SearchForPlayList(props: any) {
+  const [songsInList, setsongs] = useState([]);
+
   const songs = props.data;
 
-  const songsInPlaylist = songs.map((musicData: any, index: any) => {
+  async function handleData() {
+    try {
+      const music = await GetAllSongs();
+
+      setsongs(music);
+    } catch (error) {
+      console.error(error);
+      // Handle any errors that occurred during the API request
+    }
+  }
+
+  function handleClickAdd(id: any) {
+    const data = id;
+
+    AddSongSongToThePlayList(id, props.data);
+    // return songs;
+  }
+
+  useEffect(() => {
+    handleData();
+  }, [0]);
+
+  const songsInPlaylist = songsInList.map((musicData: any, index: any) => {
     if (musicData.id) {
       return (
         <ul className="list-group">
@@ -21,7 +46,10 @@ function SearchForPlayList(props: any) {
                   <span className="ArtistName">{musicData.Title}</span>
                 </span>
               </span>
-              <span className="AddButton">
+              <span
+                className="AddButton"
+                onClick={() => handleClickAdd(musicData.id)}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"

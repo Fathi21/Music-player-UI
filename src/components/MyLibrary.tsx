@@ -16,11 +16,16 @@ function MyLibrary() {
 
   const [searchInput, setSearchInput] = useState("");
 
-  const handleRenderPlayList = playList.map((playListData: any, index) => (
-    <Link key={playListData.id} to={"/play/list/" + playListData.id}>
-      {playListData.PlayListName}
-    </Link>
-  ));
+  const handleRenderPlayList = playList.map(
+    (playListData: any, index) => (
+      console.log(playListData),
+      (
+        <Link key={playListData.id} to={"/playlist/" + playListData.id}>
+          {playListData.PlayListName}
+        </Link>
+      )
+    )
+  );
 
   return (
     <div>

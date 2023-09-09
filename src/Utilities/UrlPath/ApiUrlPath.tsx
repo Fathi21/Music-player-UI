@@ -6,8 +6,7 @@ export const urlCalls = {
   GetSongById: "http://127.0.0.1:8080/Api/GetSongById/",
   Register: "http://127.0.0.1:8080/Api/Register",
   ExistUsers: "http://127.0.0.1:8080/Api/ExistUsers",
-  UserByUserName
-  : "http://127.0.0.1:8080/Api/UserByUserName/",
+  UserByUserName: "http://127.0.0.1:8080/Api/UserByUserName/",
   GetUserById: "http://127.0.0.1:8080/Api/GetUserById/",
   login: "http://127.0.0.1:8080/Api/login/",
   GetLikesBySongId: "http://127.0.0.1:8080/Api/GetLikesBySongId/",
@@ -20,6 +19,7 @@ export const urlCalls = {
     "http://127.0.0.1:8080/Api/GetRandomSongfromPlaylist/",
   GetSongsAddedToPlayListById:
     "http://127.0.0.1:8080/Api/GetSongsAddedToPlayListById/",
-
   GetCategoryById: "http://127.0.0.1:8080/Api/GetCategoryById/",
+  AddSongSongToThePlayList:
+    "http://127.0.0.1:8080/Api/AddSongSongToThePlayList",
 };

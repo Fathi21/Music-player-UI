@@ -9,6 +9,8 @@ function CreatePlayList() {
 
   RedirectIfUserLoggedOut();
 
+  function handleAddSonToNewPlayList() {}
+
   return (
     <div className="mainPlayList">
       <div className="row">

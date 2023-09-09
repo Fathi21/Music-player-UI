@@ -4,7 +4,9 @@ import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
 import { Link, useLocation, useNavigate, HashRouter } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import LinesEllipsis from "./LinesEllipsis";
+/* The code is defining a functional component called `Search`. */
 
+/* The code is defining a functional component called `Search`. */
 function Search() {
   const [show, setShow] = useState(false);
 

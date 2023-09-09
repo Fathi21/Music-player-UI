@@ -35,10 +35,9 @@ function AllLikedSongsByActiveUser(props: any) {
     )
     .slice(0, 7)
     .map((musicData: any, index) => {
-      if (musicData.id === props.data) {
+      if (musicData.id === parseInt(props.data)) {
         return null; // Skip this iteration of the loop
-      }
-      {
+      } else {
         return (
           <Link
             key={musicData.id}

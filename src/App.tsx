@@ -26,10 +26,7 @@ function App() {
               path={RoutePath.CreatePlayList}
               element={<CreatePlayList />}
             />
-            <Route
-              path={RoutePath.browsePlayListId}
-              element={<PlayListDetail />}
-            />
+            <Route path={RoutePath.PlayListId} element={<PlayListDetail />} />
           </Routes>
         </BrowserRouter>
       </div>

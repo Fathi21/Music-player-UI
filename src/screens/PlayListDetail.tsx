@@ -230,13 +230,15 @@ function PlayListDetail() {
                     ? SongsInCurrentPlayList.length + " songs"
                     : "ss"}
                 </p>
+                <span className="Open">Open</span>
+                <span className="Open">Close</span>
               </div>
 
               {songsInPlaylist}
             </ul>
           </div>
-          {SongsInCurrentPlayList.length == 0 ? (
-            <SearchForPlayList data={songs} />
+          {SongsInCurrentPlayList.length >= 0 ? (
+            <SearchForPlayList data={id} />
           ) : (
             ""
           )}
