@@ -1,17 +1,11 @@
 import React, { useState, useEffect } from "react";
-import ReactAudioPlayer from "react-audio-player";
 import { useParams } from "react-router-dom";
 import SideBar from "../components/sideBar";
-import Spinner from "../components/Spinner";
 import RedirectIfUserLoggedOut from "../components/RedirectIfUserLoggedOut";
 import GetSongsAddedToPlayListById from "../Utilities/ApiCalls/GetSongsAddedToPlayListById";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
-import GetUserById from "../Utilities/ApiCalls/GetUserById";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
-import Moment from "react-moment";
 import MusicPlayer from "../components/MusicPlayer";
-import { List } from "cypress/types/lodash";
-import { ArrayBindingElement } from "typescript";
 import PlayListCard from "../components/PlayListCard";
 import SearchForPlayList from "../components/SearchForPlayList";
 
@@ -37,8 +31,6 @@ function PlayListDetail() {
 
   const [PlayingSong, setPlayingSong] = useState(Number);
 
-  const [songId, setSongId] = useState();
-
   const [songs, setsongs] = useState([]);
 
   const [toggle, setToggle] = useState(false);
@@ -47,27 +39,16 @@ function PlayListDetail() {
 
   console.log(SongsInCurrentPlayList);
 
-  function handleRandomSong(songs: any) {
-    const randomIndex = Math.floor(Math.random() * songs.length);
-    return songs[randomIndex].id;
-  }
-
   const handleClickSong = (id: number) => {
     setPlayingSong(id);
   };
 
   async function handleData() {
     try {
-      const songgFromPlayList = await GetSongsAddedToPlayListById(id);
+      const songFromPlayList = await GetSongsAddedToPlayListById(id);
 
-      const music = await GetAllSongs();
-
-      setsongs(music);
-
-      if (songgFromPlayList.length > 0) {
-        setPlayingSong(handleRandomSong(songgFromPlayList));
-        setPlayingSong(handleRandomSong(songgFromPlayList));
-        setSongsInCurrentPlayList(songgFromPlayList); // Access the data retrieved from the API
+      if (songFromPlayList.length > 0) {
+        setSongsInCurrentPlayList(songFromPlayList); // Access the data retrieved from the API
         // Continue with further processing or UI updates
       }
     } catch (error) {
@@ -129,7 +110,7 @@ function PlayListDetail() {
     handleLoadingPlaylist();
     setPlayingSong(Number.NaN);
     setSongsInCurrentPlayList([]);
-  }, [id]);
+  }, [id, hideOpenCloseButton]);
 
   console.log();
   return (

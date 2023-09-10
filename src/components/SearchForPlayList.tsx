@@ -2,16 +2,19 @@ import React, { useState, useEffect } from "react";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
 import AddSongSongToThePlayList from "../Utilities/ApiCalls/AddSongSongToThePlayList";
-function SearchForPlayList(props: any) {
-  const [songsInList, setsongs] = useState([]);
+import toast from "react-hot-toast";
+import { textOutputForCreate } from "../Utilities/OutputText/TextOutput";
 
-  const songs = props.data;
+function SearchForPlayList(props: any) {
+  const [songsInList, setSongs] = useState([]);
+
+  const songs = props.id;
 
   async function handleData() {
     try {
       const music = await GetAllSongs();
 
-      setsongs(music);
+      setSongs(music);
     } catch (error) {
       console.error(error);
       // Handle any errors that occurred during the API request
@@ -23,6 +26,7 @@ function SearchForPlayList(props: any) {
 
     AddSongSongToThePlayList(id, props.data);
     // return songs;
+    toast.success(textOutputForCreate.songAddToPlaylist);
   }
 
   useEffect(() => {

@@ -9,6 +9,7 @@ import {
 import GetAtoken from "../Utilities/ApiCalls/GetAtoken";
 import ExistUsers from "../Utilities/ApiCalls/ExistUsers";
 import RedirectIfUserLoggedIn from "../components/RedirectIfUserLoggedIn";
+import toast, { Toaster } from "react-hot-toast";
 
 function SignIn() {
   const [username, setUsername] = useState("");
@@ -81,16 +82,21 @@ function SignIn() {
   }
 
   function handleDisabled() {
+    const notify = () =>
+      toast(
+        "Congratulations! You have successfully logged in to your account. Welcome back!"
+      );
+
     if (!username || !password || messages.email || messages.username) {
       return (
         <button type="submit" className="btn btn-success mb-3" disabled>
-          Register
+          Login
         </button>
       );
     } else {
       return (
-        <button type="submit" className="btn btn-success mb-3">
-          Register
+        <button onClick={notify} type="submit" className="btn btn-success mb-3">
+          Login
         </button>
       );
     }

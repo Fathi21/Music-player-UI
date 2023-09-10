@@ -8,6 +8,7 @@ import SignUp from "./screens/SignUp";
 import SignIn from "./screens/SignIn";
 import CreatePlayList from "./screens/CreatePlayList";
 import PlayListDetail from "./screens/PlayListDetail";
+import toast, { Toaster } from "react-hot-toast";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path={RoutePath.PlayListId} element={<PlayListDetail />} />
           </Routes>
         </BrowserRouter>
+        <Toaster position="bottom-right" reverseOrder={false} />
       </div>
     </div>
   );

@@ -4,3 +4,7 @@ export const SignUpMessage = {
   emptyStrig: "",
   weakPassword: "Password is too weak",
 };
+
+export const textOutputForCreate = {
+  songAddToPlaylist: "Add to your playlist",
+};
