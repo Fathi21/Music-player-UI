@@ -246,7 +246,10 @@ function PlayListDetail() {
           </div>
           {SongsInCurrentPlayList.length >= 0 ? (
             toggle ? (
-              <SearchForPlayList data={id} />
+              <SearchForPlayList
+                playListId={id}
+                SongsInCurrentPlayList={SongsInCurrentPlayList}
+              />
             ) : (
               ""
             )

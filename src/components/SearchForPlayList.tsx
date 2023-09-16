@@ -8,30 +8,36 @@ import { textOutputForCreate } from "../Utilities/OutputText/TextOutput";
 function SearchForPlayList(props: any) {
   const [songsInList, setSongs] = useState([]);
 
-  const songs = props.id;
+  const playListId: number = props.playListId;
 
   async function handleData() {
     try {
       const music = await GetAllSongs();
 
-      setSongs(music);
+      const songsNotInPlaylist = music.filter((song: any) => {
+        // Check if the song is not in the playlist by comparing the 'id' or any other unique identifier
+        return !props.SongsInCurrentPlayList.some(
+          (playlistSong: any) => playlistSong.id === song.id
+        );
+      });
+
+      setSongs(songsNotInPlaylist);
     } catch (error) {
       console.error(error);
       // Handle any errors that occurred during the API request
     }
   }
 
-  function handleClickAdd(id: any) {
-    const data = id;
-
-    AddSongSongToThePlayList(id, props.data);
-    // return songs;
-    toast.success(textOutputForCreate.songAddToPlaylist);
+  function handleClickAdd(songId: any) {
+    if (songId || playListId) {
+      AddSongSongToThePlayList(songId, playListId);
+      toast.success(textOutputForCreate.songAddToPlaylist);
+    }
   }
 
   useEffect(() => {
     handleData();
-  }, [0]);
+  }, [playListId, props.SongsInCurrentPlayList]);
 
   const songsInPlaylist = songsInList.map((musicData: any, index: any) => {
     if (musicData.id) {
@@ -46,8 +52,8 @@ function SearchForPlayList(props: any) {
                   alt="..."
                 />
                 <span className="songDetails">
-                  <span className="songName">{musicData.Artist}</span>
-                  <span className="ArtistName">{musicData.Title}</span>
+                  <span className="songName">{musicData.Title}</span>
+                  <span className="ArtistName">{musicData.Artist}</span>
                 </span>
               </span>
               <span
