@@ -1,15 +1,88 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import SideBar from "../components/sideBar";
 import Spinner from "../components/Spinner";
 import RedirectIfUserLoggedOut from "../components/RedirectIfUserLoggedOut";
 import UserDetails from "../components/UserDetails";
+import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
+import CreateNewPlayList from "../Utilities/ApiCalls/CreateNewPlayList";
+
+import SearchForPlayList from "../components/SearchForPlayList";
 
 function CreatePlayList() {
-  const userName = UserDetails().username;
-
   RedirectIfUserLoggedOut();
 
-  function handleAddSonToNewPlayList() {}
+  const userName = UserDetails().username;
+
+  const [songsInList, setSongs] = useState([]);
+
+  async function handleData() {
+    try {
+      const music = await GetAllSongs();
+
+      // const songsNotInPlaylist = music.filter((song: any) => {
+      //   // Check if the song is not in the playlist by comparing the 'id' or any other unique identifier
+      //   return !props.SongsInCurrentPlayList.some(
+      //     (playlistSong: any) => playlistSong.id === song.id
+      //   );
+      // });
+
+      setSongs(music);
+    } catch (error) {
+      console.error(error);
+      // Handle any errors that occurred during the API request
+    }
+  }
+
+  function handleAddSonToNewPlayList(songId: any) {
+    const id = songId;
+
+    CreateNewPlayList();
+    return id;
+  }
+
+  useEffect(() => {
+    handleData();
+  }, [0]);
+
+  const songsInPlaylist = songsInList.map((musicData: any, index: any) => {
+    if (musicData.id) {
+      return (
+        <ul className="list-group">
+          <a>
+            <li className="list-group-item">
+              <span className="songInfo">
+                <img
+                  src={urlCalls.Base + musicData.PhotoCover}
+                  className="rounded-0 float-start"
+                  alt="..."
+                />
+                <span className="songDetails">
+                  <span className="songName">{musicData.Title}</span>
+                  <span className="ArtistName">{musicData.Artist}</span>
+                </span>
+              </span>
+              <span
+                className="AddButton"
+                onClick={() => handleAddSonToNewPlayList(musicData.id)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-plus"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                </svg>
+              </span>
+            </li>
+          </a>
+        </ul>
+      );
+    }
+  });
 
   return (
     <div className="mainPlayList">
@@ -142,7 +215,6 @@ function CreatePlayList() {
               </div>
             </div>
           </div>
-
           <div className="SongsInList paddinTop">
             <div className="row">
               <div className="col-4">
@@ -170,35 +242,8 @@ function CreatePlayList() {
                 </div>
               </div>
             </div>
-            <ul className="list-group">
-              <a>
-                <li className="list-group-item">
-                  <span className="songInfo">
-                    <img
-                      src="https://images.pexels.com/photos/114820/pexels-photo-114820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                      className="rounded-0 float-start"
-                      alt="..."
-                    />
-                    <span className="songDetails">
-                      <span className="songName">Over my dead</span>
-                      <span className="ArtistName">Drake</span>
-                    </span>
-                  </span>
-                  <span className="AddButton">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="16"
-                      height="16"
-                      fill="currentColor"
-                      className="bi bi-plus"
-                      viewBox="0 0 16 16"
-                    >
-                      <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                    </svg>
-                  </span>
-                </li>
-              </a>
-            </ul>
+
+            {songsInPlaylist}
           </div>
         </div>
       </div>
