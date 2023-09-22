@@ -7,10 +7,13 @@ async function CreateNewPlayList(songId: number, PlayListId: number) {
 
   return await axios
     .post(urlCalls.CreateNewPlayList, {
-      CreatedAt: "2023-02-03T00:00:00Z",
-      PlayListId: PlayListId,
+      id: 1,
+      PlayListName: "play List 1",
+      Description:
+        "Now that your identity is set up, you can configure the default text editor that will be used when Git needs you to type in a message. If not configured, Git uses your system’s default edito",
+      PhotoCover: "/media/uploads/PhotoCover/pexels-rahul-shah-2268487.jpg",
       UserId: userId,
-      SongID: songId,
+      CreatedAt: "2023-01-29T18:20:31Z",
     })
     .then(function (response) {
       return response.data[0];
