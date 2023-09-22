@@ -2,7 +2,7 @@ import axios from "axios";
 import { urlCalls } from "../UrlPath/ApiUrlPath";
 import UserDetails from "../../components/UserDetails";
 
-async function CreateNewPlayList(songId: number, PlayListId: number) {
+async function CreateNewPlayList() {
   const userId = UserDetails().userId;
 
   return await axios

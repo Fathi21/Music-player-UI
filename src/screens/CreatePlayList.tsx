@@ -5,6 +5,7 @@ import Spinner from "../components/Spinner";
 import RedirectIfUserLoggedOut from "../components/RedirectIfUserLoggedOut";
 import UserDetails from "../components/UserDetails";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
+import CreateNewPlayList from "../Utilities/ApiCalls/CreateNewPlayList";
 
 import SearchForPlayList from "../components/SearchForPlayList";
 
@@ -36,6 +37,7 @@ function CreatePlayList() {
   function handleAddSonToNewPlayList(songId: any) {
     const id = songId;
 
+    CreateNewPlayList();
     return id;
   }
 

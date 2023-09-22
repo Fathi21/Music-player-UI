@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
-import AddSongSongToThePlayList from "../Utilities/ApiCalls/AddSongSongToThePlayList";
+import AddSongSongToThePlayList from "../Utilities/ApiCalls/AddSongToThePlayList";
 import toast from "react-hot-toast";
 import { textOutputForCreate } from "../Utilities/OutputText/TextOutput";
 

@@ -2,7 +2,7 @@ import axios from "axios";
 import { urlCalls } from "../UrlPath/ApiUrlPath";
 import UserDetails from "../../components/UserDetails";
 
-async function AddSongSongToThePlayList(songId: number, PlayListId: number) {
+async function AddSongToThePlayList(songId: number, PlayListId: number) {
   const userId = UserDetails().userId;
 
   return await axios
@@ -20,4 +20,4 @@ async function AddSongSongToThePlayList(songId: number, PlayListId: number) {
     });
 }
 
-export default AddSongSongToThePlayList;
+export default AddSongToThePlayList;
