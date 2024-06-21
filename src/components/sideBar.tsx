@@ -7,7 +7,7 @@ import UserDetails from "./UserDetails";
 import Logout from "./Logout";
 import Search from "./Search";
 import MyLibrary from "./MyLibrary";
-import { Collapse, Button, Card } from "react-bootstrap";
+import CreateNewPlayList from "../Utilities/ApiCalls/CreateNewPlayList";
 
 function SideBar() {
   let navigate = useNavigate();
@@ -23,6 +23,10 @@ function SideBar() {
     //return history.push("/login");
   }
 
+  function handleAddSonToNewPlayList() {
+    CreateNewPlayList();
+  }
+
   function HandleSignUpAndSignIn() {
     if (IsUserLoggedIn()) {
       return (
@@ -35,7 +39,10 @@ function SideBar() {
 
           <span className="createPlayList">
             <ListGroup.Item className="sideBarButton">
-              <Link to={RoutePath.CreatePlayList}>
+              <Link
+                onClick={() => handleAddSonToNewPlayList()}
+                to={RoutePath.CreatePlayList}
+              >
                 <i className="fa fa-plus-square" aria-hidden="true"></i>
                 Create Playlist
               </Link>

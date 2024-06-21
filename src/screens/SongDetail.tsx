@@ -17,11 +17,11 @@ function PlayMusic() {
         <MusicPlayer data={id} />
 
         <div className="LikeAndAddToPlayList">
-          <LikeButton songId={id} />
-          <EditAndDeleteButton />
+          {IsUserLoggedIn() ? <LikeButton songId={id} /> : ""}
+          {IsUserLoggedIn() ? <EditAndDeleteButton /> : ""}
         </div>
         <div>
-          <AllLikedSongsByActiveUser data={id} />
+          {IsUserLoggedIn() ? <AllLikedSongsByActiveUser data={id} /> : ""}
         </div>
       </div>
     );

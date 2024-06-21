@@ -15,6 +15,7 @@ export const urlCalls = {
   GetAllLikedSongsByUser: "http://127.0.0.1:8000/Api/GetAllLikedSongsByUser/",
   GetPlayList: "http://127.0.0.1:8000/Api/GetPlayList",
   GetPlayListById: "http://127.0.0.1:8000/Api/GetPlayListById/",
+  GetPlayListByUserId: "http://127.0.0.1:8000/Api/GetPlayListByUserId/",
   GetRandomSongfromPlaylist:
     "http://127.0.0.1:8000/Api/GetRandomSongfromPlaylist/",
   GetSongsAddedToPlayListById:

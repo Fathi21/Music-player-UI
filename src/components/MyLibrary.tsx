@@ -4,9 +4,10 @@ import GetPlayList from "../Utilities/ApiCalls/GetPlayList";
 import { Link, useLocation } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import { Collapse, Button, Card } from "react-bootstrap";
+import UserDetails from "./UserDetails";
 
 function MyLibrary() {
-  const playList = GetPlayList();
+  const [playList, setPlayList] = useState([]);
 
   const [show, setShow] = useState(false);
   const [open, setOpen] = useState(false);
@@ -16,23 +17,40 @@ function MyLibrary() {
 
   const [searchInput, setSearchInput] = useState("");
 
-  const handleRenderPlayList = playList.map(
-    (playListData: any, index) => (
-      console.log(playListData),
-      (
-        <Link key={playListData.id} to={"/playlist/" + playListData.id}>
-          {playListData.PlayListName}
-        </Link>
-      )
-    )
-  );
+  const userId: number = Number(UserDetails().userId);
+
+  async function handleData() {
+    try {
+      const playList = await GetPlayList();
+
+      const playListForLoggedInUser = playList.filter((playListData: any) => {
+        if (playListData.UserId == userId) {
+          return playListData;
+        }
+      });
+
+      setPlayList(playListForLoggedInUser);
+    } catch (error) {
+      console.error(error);
+      // Handle any errors that occurred during the API request
+    }
+  }
+
+  const handleRenderPlayList = playList.map((playListData: any, index) => (
+    <Link key={playListData.id} to={"/playlist/" + playListData.id}>
+      {playListData.PlayListName}
+    </Link>
+  ));
+
+  useEffect(() => {
+    handleData();
+  }, [open, show]);
 
   return (
     <div>
       <span
         onClick={() => {
           setOpen(!open);
-          handleShow();
         }}
       >
         <svg

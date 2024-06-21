@@ -5,9 +5,7 @@ import Spinner from "../components/Spinner";
 import RedirectIfUserLoggedOut from "../components/RedirectIfUserLoggedOut";
 import UserDetails from "../components/UserDetails";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
-import CreateNewPlayList from "../Utilities/ApiCalls/CreateNewPlayList";
-
-import SearchForPlayList from "../components/SearchForPlayList";
+import AddSongSongToThePlayList from "../Utilities/ApiCalls/AddSongToThePlayList";
 
 function CreatePlayList() {
   RedirectIfUserLoggedOut();
@@ -20,13 +18,6 @@ function CreatePlayList() {
     try {
       const music = await GetAllSongs();
 
-      // const songsNotInPlaylist = music.filter((song: any) => {
-      //   // Check if the song is not in the playlist by comparing the 'id' or any other unique identifier
-      //   return !props.SongsInCurrentPlayList.some(
-      //     (playlistSong: any) => playlistSong.id === song.id
-      //   );
-      // });
-
       setSongs(music);
     } catch (error) {
       console.error(error);
@@ -34,11 +25,8 @@ function CreatePlayList() {
     }
   }
 
-  function handleAddSonToNewPlayList(songId: any) {
+  function handleAddSonToTheNewPlayList(songId: any) {
     const id = songId;
-
-    CreateNewPlayList();
-    return id;
   }
 
   useEffect(() => {
@@ -48,7 +36,7 @@ function CreatePlayList() {
   const songsInPlaylist = songsInList.map((musicData: any, index: any) => {
     if (musicData.id) {
       return (
-        <ul className="list-group">
+        <ul key={musicData.id} className="list-group">
           <a>
             <li className="list-group-item">
               <span className="songInfo">
@@ -64,7 +52,7 @@ function CreatePlayList() {
               </span>
               <span
                 className="AddButton"
-                onClick={() => handleAddSonToNewPlayList(musicData.id)}
+                onClick={() => handleAddSonToTheNewPlayList(musicData.id)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
