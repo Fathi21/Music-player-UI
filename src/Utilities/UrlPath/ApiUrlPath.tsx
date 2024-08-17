@@ -24,4 +24,5 @@ export const urlCalls = {
   AddSongSongToThePlayList:
     "http://127.0.0.1:8000/Api/AddSongSongToThePlayList",
   CreateNewPlayList: "http://127.0.0.1:8000/Api/CreateNewPlayList",
+  DeletePlayList: "http://127.0.0.1:8000/Api/DeletePlayList/",
 };

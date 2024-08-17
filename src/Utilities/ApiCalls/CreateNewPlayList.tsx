@@ -15,7 +15,7 @@ async function CreateNewPlayList() {
       UserId: userId,
     })
     .then(function (response) {
-      return response.data[0];
+      return response.data;
     })
     .catch(function (error) {
       return error;

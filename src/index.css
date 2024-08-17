@@ -472,7 +472,7 @@ form > a > .Logo > h1 {
   justify-content: center;
 }
 
-.searchedData,
+/* .searchedData, */
 .playListData {
   margin-top: 14px;
 }
@@ -549,8 +549,7 @@ form > a > .Logo > h1 {
 }
 
 .SongsInList {
-  margin: 20px;
-  border-top: 1px solid #202020;
+  margin: 15px;
 }
 
 .bi-x-lg {
@@ -558,10 +557,6 @@ form > a > .Logo > h1 {
   position: relative;
   top: -37px;
   right: -20px;
-}
-
-.paddinTop {
-  padding-top: 20px;
 }
 
 .SongsInList > .row > .col-4 > p {
