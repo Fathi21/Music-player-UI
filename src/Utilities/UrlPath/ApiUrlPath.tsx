@@ -23,6 +23,7 @@ export const urlCalls = {
   GetCategoryById: "http://127.0.0.1:8000/Api/GetCategoryById/",
   AddSongSongToThePlayList:
     "http://127.0.0.1:8000/Api/AddSongSongToThePlayList",
-  CreateNewPlayList: "http://127.0.0.1:8000/Api/CreateNewPlayList",
+  CreateNewPlayListAddSongAddSong: "http://127.0.0.1:8000/Api/CreateNewPlayListAddSong",
+  
   DeletePlayList: "http://127.0.0.1:8000/Api/DeletePlayList/",
 };

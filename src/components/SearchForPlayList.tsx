@@ -3,7 +3,7 @@ import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
 import AddSongSongToThePlayList from "../Utilities/ApiCalls/AddSongToThePlayList";
 import toast from "react-hot-toast";
-import { textOutputForCreate } from "../Utilities/OutputText/TextOutput";
+import { TextOutput } from "../Utilities/OutputText/TextOutput";
 
 function SearchForPlayList(props: any) {
   const [songsInList, setSongs] = useState([]);
@@ -31,7 +31,7 @@ function SearchForPlayList(props: any) {
   function handleClickAdd(songId: any) {
     if (songId || playListId) {
       AddSongSongToThePlayList(songId, playListId);
-      toast.success(textOutputForCreate.songAddToPlaylist);
+      toast.success(TextOutput.songAddedToPlaylist);
     }
   }
 

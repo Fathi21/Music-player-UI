@@ -5,6 +5,7 @@ export const SignUpMessage = {
   weakPassword: "Password is too weak",
 };
 
-export const textOutputForCreate = {
-  songAddToPlaylist: "Add to your playlist",
+export const TextOutput = {
+  songAddedToPlaylist: "Song added to your playlist.",
+  createdPlaylist: "Playlist created successfully."
 };

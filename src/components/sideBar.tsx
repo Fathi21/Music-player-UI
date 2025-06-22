@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState } from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import { Link, useNavigate } from "react-router-dom";
 import { RoutePath } from "../Utilities/UrlPath/RoutePath";
@@ -6,39 +6,31 @@ import IsUserLoggedIn from "./IsUserLoggedIn";
 import UserDetails from "./UserDetails";
 import Logout from "./Logout";
 import MyLibrary from "./MyLibrary";
-import CreateNewPlayList from "../Utilities/ApiCalls/CreateNewPlayList";
-import { any } from "cypress/types/bluebird";
+import CreateNewPlayListAddSong from "../Utilities/ApiCalls/CreateNewPlayListAddSong";
 import Search from "./Search";
 
-export const Context = React.createContext([44]);
+// export const Context = React.createContext([5555]);
 
 function SideBar() {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
-  const [username, setUsername] = useState(UserDetails().username);
-  const [open, setOpen] = useState(false);
+  const [username, setUsername] = useState(UserDetails().username || "Guest");
   const [playListData, setPlayListData] = useState([]);
 
   function handleLogout() {
     Logout();
     navigate("/login");
-    //let history = useHistory();
-
-    //return history.push("/login");
   }
 
-  const handleCreateNewPlayList = async () => {
-    const newPlayList = await CreateNewPlayList();
-    setPlayListData(newPlayList);
-
-    // if (newPlayList && Array.isArray(newPlayList)) {
-    //   setPlayListData(111111);
-    // } else {
-    //   console.warn("Unexpected data format:", newPlayList);
+  const handleCreateNewPlayListAddSong = async () => {
+    // try {
+    //   const newPlayList = await CreateNewPlayListAddSong();
+    //   setPlayListData(newPlayList);
+    //   console.log("New Playlist:", newPlayList); // Debugging line
+    // } catch (error) {
+    //   console.error("Error creating playlist:", error);
     // }
   };
-
-  console.log("New Playlist:", playListData); // Debugging line
 
   function HandleSignUpAndSignIn() {
     if (IsUserLoggedIn()) {
@@ -53,7 +45,7 @@ function SideBar() {
           <span className="createPlayList">
             <ListGroup.Item className="sideBarButton">
               <Link
-                onClick={() => handleCreateNewPlayList()}
+                onClick={handleCreateNewPlayListAddSong}
                 to={RoutePath.CreatePlayList}
               >
                 <i className="fa fa-plus-square" aria-hidden="true"></i>
@@ -90,7 +82,6 @@ function SideBar() {
   }
 
   return (
-    <Context.Provider value={[5555]}>
       <div className="SideBar d-none d-md-block bg-light sidebar">
         <Link to={RoutePath.homePage}>
           <div className="Logo">
@@ -113,7 +104,6 @@ function SideBar() {
           </ListGroup>
         </div>
       </div>
-    </Context.Provider>
   );
 }
 

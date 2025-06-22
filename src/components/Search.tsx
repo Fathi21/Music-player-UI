@@ -1,12 +1,14 @@
 import React, { useState, useEffect, useContext } from "react";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
-import AddSongToThePlayList from "../Utilities/ApiCalls/AddSongToThePlayList";
 import { RoutePath } from "../Utilities/UrlPath/RoutePath";
 import { Link, useLocation, useNavigate, HashRouter } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import LinesEllipsis from "./LinesEllipsis";
-import { Context } from "./sideBar";
+import CreateNewPlayListAddSong from "../Utilities/ApiCalls/CreateNewPlayListAddSong";
+import UserDetails from "../components/UserDetails";
+import toast from "react-hot-toast";
+import { TextOutput } from "../Utilities/OutputText/TextOutput";
 
 function Search(props: any) {
   const [show, setShow] = useState(false);
@@ -17,23 +19,47 @@ function Search(props: any) {
   const [songsInList, setSongs] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Use the context value
-  const playListData = useContext(Context);
+  const [playlistInfo, setPlaylistInfo] = useState<{
+    message: string;
+    playlist: { id: number; name: string; description: string };
+  } | null>(null);
 
-  console.log("Received Playlist Data in Search Component:", playListData);
+  const location = useLocation();
+
+  
+  // Use the context value
+
+  const userId: number = Number(UserDetails().userId);
 
   const handleLoadingData = async () => {
     const music = await GetAllSongs();
     setSongs(music);
   };
 
-  function handleAddSongToPlayList(songId: any) {
-    // Assuming playListData contains an object with playListId
-    // if (songId && playListData.playListId) {
-    //   AddSongToThePlayList(songId, playListData.playListId);
-    //   // Assuming you're using toast for notifications
-    //   toast.success("Song added to playlist!");
-    // }
+  async function handleAddSongToPlayList(songId: any) {
+    if (!userId) {
+      alert("Please log in to add songs to a playlist.");
+      return;
+    }
+  
+    try {
+
+      if (!playlistInfo) {
+        // If no playlist info, create a new playlist
+        const newPlayList = await CreateNewPlayListAddSong(songId, true);
+        setPlaylistInfo(newPlayList); // Save to state
+        toast.success(TextOutput.createdPlaylist);
+
+      } else if (playlistInfo.playlist && playlistInfo.playlist.id) {
+        // If playlist info exists, add the song to the existing playlist
+      
+        await CreateNewPlayListAddSong(songId, false, playlistInfo.playlist.id);
+        toast.success(TextOutput.songAddedToPlaylist);
+      }
+
+    } catch (error) {
+      console.error("Error adding song to playlist:", error);
+    }
   }
 
   const searchOutputForFlatSearch = songsInList
@@ -139,7 +165,7 @@ function Search(props: any) {
       <div className="SongsInList paddinTop">
         <div className="row">
           <div className="col-4">
-            <p>Let's find something for your playlist</p>
+            <p>Let's find something for your playlist {playlistInfo?.message}</p>
             <div className="input-group mb-3">
               <span className="input-group-text" id="basic-addon1">
                 <svg
@@ -207,7 +233,10 @@ function Search(props: any) {
 
   useEffect(() => {
     handleLoadingData();
-  }, [0]);
+    if (location.pathname !== "/createPlaylists") {
+      setPlaylistInfo(null); // Clear the playlist info
+    }
+  }, [0, [location.pathname]]);
 
   return <div>{props.value === "popUp" ? PopUpSearch() : flatSearch()}</div>;
 }
