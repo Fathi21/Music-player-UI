@@ -18,12 +18,8 @@ export const urlCalls = {
   GetPlayListByUserId: "http://127.0.0.1:8000/Api/GetPlayListByUserId/",
   GetRandomSongfromPlaylist:
     "http://127.0.0.1:8000/Api/GetRandomSongfromPlaylist/",
-  GetSongsAddedToPlayListById:
-    "http://127.0.0.1:8000/Api/GetSongsAddedToPlayListById/",
   GetCategoryById: "http://127.0.0.1:8000/Api/GetCategoryById/",
-  AddSongSongToThePlayList:
-    "http://127.0.0.1:8000/Api/AddSongSongToThePlayList",
   CreateNewPlayListAddSongAddSong: "http://127.0.0.1:8000/Api/CreateNewPlayListAddSong",
-  
+  GetSongsInPlaylistById: "http://127.0.0.1:8000/Api/GetSongsInPlaylistById",
   DeletePlayList: "http://127.0.0.1:8000/Api/DeletePlayList/",
 };

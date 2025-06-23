@@ -154,7 +154,7 @@ function Search(props: any) {
     <div className="SongsInList paddinTop">
       <div className="row">
         <div className="col-4">
-          <p>Let's find something for your playlist {playlistInfo?.message}</p>
+          <p>Let's find something for your playlist==</p>
           <div className="input-group mb-3">
             <span className="input-group-text" id="basic-addon1">
               <svg

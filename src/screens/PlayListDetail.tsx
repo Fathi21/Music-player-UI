@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import SideBar from "../components/sideBar";
 import RedirectIfUserLoggedOut from "../components/RedirectIfUserLoggedOut";
-import GetSongsAddedToPlayListById from "../Utilities/ApiCalls/GetSongsAddedToPlayListById";
+import GetSongsInPlaylistById from "../Utilities/ApiCalls/GetSongsInPlaylistById";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import MusicPlayer from "../components/MusicPlayer";
@@ -12,9 +12,8 @@ import SearchForPlayList from "../components/SearchForPlayList";
 function PlayListDetail() {
   RedirectIfUserLoggedOut();
   const { id }: any = useParams();
-  const music = GetAllSongs();
 
-  const [SongsInCurrentPlayList, setSongsInCurrentPlayList] = useState([]);
+  const [SongsInCurrentPlayList, setSongsInCurrentPlayList] = useState<any[]>([]);
   const [searchInput, setSearchInput] = useState("");
 
   const [songData, setSongData] = useState({
@@ -31,7 +30,7 @@ function PlayListDetail() {
 
   const [PlayingSong, setPlayingSong] = useState(Number);
 
-  const [songs, setsongs] = useState([]);
+  const [songs, setsongs] = useState<any[]>([]);
 
   const [toggle, setToggle] = useState(false);
 
@@ -45,10 +44,12 @@ function PlayListDetail() {
 
   async function handleData() {
     try {
-      const songFromPlayList = await GetSongsAddedToPlayListById(id);
+      const music =  await GetAllSongs();
+      setsongs(music); // Store the data retrieved from the API in the state
+      const songFromPlayList = await GetSongsInPlaylistById(id);
 
-      if (songFromPlayList.length > 0) {
-        setSongsInCurrentPlayList(songFromPlayList); // Access the data retrieved from the API
+      if (songs.length > 0) {
+        setSongsInCurrentPlayList(songs); // Access the data retrieved from the API
         // Continue with further processing or UI updates
       }
     } catch (error) {
@@ -57,9 +58,7 @@ function PlayListDetail() {
     }
   }
 
-  const songsInPlaylist =
-    SongsInCurrentPlayList.length != 0
-      ? SongsInCurrentPlayList.map((musicData: any, index: any) => {
+  const songsInPlaylist = SongsInCurrentPlayList.map((musicData: any, index: any) => {
           if (musicData.id === PlayingSong) {
             return null; // Skip this iteration of the loop
           } else {
@@ -85,7 +84,6 @@ function PlayListDetail() {
             );
           }
         })
-      : "";
 
   function handleLoadingPlaylist() {
     if (!PlayingSong) {
@@ -251,10 +249,10 @@ function PlayListDetail() {
                 SongsInCurrentPlayList={SongsInCurrentPlayList}
               />
             ) : (
-              ""
+              "fffff"
             )
           ) : (
-            ""
+            "dddd"
           )}
         </div>
       </div>

@@ -1,82 +1,61 @@
 import React, { useState, useEffect } from "react";
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
-import AddSongSongToThePlayList from "../Utilities/ApiCalls/AddSongToThePlayList";
+import CreateNewPlayListAddSong from "../Utilities/ApiCalls/CreateNewPlayListAddSong";
 import toast from "react-hot-toast";
 import { TextOutput } from "../Utilities/OutputText/TextOutput";
+import GetSongsInPlaylistById from "../Utilities/ApiCalls/GetSongsInPlaylistById";
 
-function SearchForPlayList(props: any) {
-  const [songsInList, setSongs] = useState([]);
-
-  const playListId: number = props.playListId;
-
-  async function handleData() {
-    try {
-      const music = await GetAllSongs();
-
-      const songsNotInPlaylist = music.filter((song: any) => {
-        // Check if the song is not in the playlist by comparing the 'id' or any other unique identifier
-        return !props.SongsInCurrentPlayList.some(
-          (playlistSong: any) => playlistSong.id === song.id
-        );
-      });
-
-      setSongs(songsNotInPlaylist);
-    } catch (error) {
-      console.error(error);
-      // Handle any errors that occurred during the API request
-    }
-  }
-
-  function handleClickAdd(songId: any) {
-    if (songId || playListId) {
-      AddSongSongToThePlayList(songId, playListId);
-      toast.success(TextOutput.songAddedToPlaylist);
-    }
-  }
+function SearchForPlayList({ playListId, SongsInCurrentPlayList }: any) {
+  const [allSongs, setAllSongs] = useState<any[]>([]);
+  const [filteredSongs, setFilteredSongs] = useState<any[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    handleData();
-  }, [playListId, props.SongsInCurrentPlayList]);
+    async function fetchData() {
+      setLoading(true);
+      try {
+        const allSongs = await GetAllSongs();
+        const playlistSongs = await GetSongsInPlaylistById(playListId);
+        const playlistSongIds = playlistSongs.map((song: any) => song.SongID);
 
-  const songsInPlaylist = songsInList.map((musicData: any, index: any) => {
-    if (musicData.id) {
-      return (
-        <ul className="list-group">
-          <a>
-            <li className="list-group-item">
-              <span className="songInfo">
-                <img
-                  src={urlCalls.Base + musicData.PhotoCover}
-                  className="rounded-0 float-start"
-                  alt="..."
-                />
-                <span className="songDetails">
-                  <span className="songName">{musicData.Title}</span>
-                  <span className="ArtistName">{musicData.Artist}</span>
-                </span>
-              </span>
-              <span
-                className="AddButton"
-                onClick={() => handleClickAdd(musicData.id)}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  className="bi bi-plus"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                </svg>
-              </span>
-            </li>
-          </a>
-        </ul>
-      );
+        const songsToAdd = allSongs.filter(
+          (song: any) => !playlistSongIds.includes(song.id)
+        );
+
+        setAllSongs(songsToAdd);
+        setFilteredSongs(songsToAdd);
+      } catch (error) {
+        console.error("Failed to fetch songs:", error);
+        toast.error("Failed to load songs.");
+      } finally {
+        setLoading(false);
+      }
     }
-  });
+
+    fetchData();
+  }, [playListId, SongsInCurrentPlayList]);
+
+  useEffect(() => {
+    const query = searchQuery.toLowerCase();
+    const filtered = allSongs.filter((song) =>
+      song.Title.toLowerCase().includes(query) ||
+      song.Artist.toLowerCase().includes(query)
+    );
+    setFilteredSongs(filtered);
+  }, [searchQuery, allSongs]);
+
+  const handleAddSong = async (songId: number) => {
+    try {
+      await CreateNewPlayListAddSong(songId, false, playListId);
+      toast.success(TextOutput.songAddedToPlaylist);
+    } catch (error) {
+      console.error("Error adding song to playlist:", error);
+      toast.error("Failed to add song.");
+    }
+  };
+
   return (
     <div className="SongsInList paddinTop">
       <div className="row">
@@ -101,11 +80,54 @@ function SearchForPlayList(props: any) {
               placeholder="Search for songs..."
               aria-label="search"
               aria-describedby="basic-addon1"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
           </div>
         </div>
       </div>
-      {songsInPlaylist}
+
+      {loading ? (
+        <p>Loading songs...</p>
+      ) : filteredSongs.length === 0 ? (
+        <p>No songs found.</p>
+      ) : (
+        <ul className="list-group">
+          {filteredSongs.map((song, index) => (
+          <a key={song.id || index} href="#">
+            <li className="list-group-item">
+              <span className="songInfo">
+                <img
+                  src={urlCalls.Base + song.PhotoCover}
+                  className="rounded-0 float-start"
+                  alt="cover"
+                />
+                <span className="songDetails">
+                  <span className="songName">{song.Title}</span>
+                  <span className="ArtistName">{song.Artist}</span>
+                </span>
+              </span>
+              <span
+                className="AddButton"
+                onClick={() => handleAddSong(song.id)}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-plus"
+                  viewBox="0 0 16 16"
+                >
+                  <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                </svg>
+              </span>
+            </li>
+          </a>
+        ))}
+      </ul>
+
+      )}
     </div>
   );
 }
