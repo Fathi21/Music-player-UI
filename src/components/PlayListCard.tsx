@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import UserDetails from "../components/UserDetails";
 import GetPlayListById from "../Utilities/ApiCalls/GetPlayListById";
 
+
 function PlayListCard(props: any) {
-  const userName = UserDetails().username;
+  const { id } = props;
+  const { username: userName } = UserDetails();
 
   const [playListData, setPlayListData] = useState({
     id: "",
@@ -14,7 +16,7 @@ function PlayListCard(props: any) {
     UserId: 1,
   });
 
-  async function handleData() {
+  async function fetchPlayListData() {
     try {
       const playList = await GetPlayListById(props.id);
 
@@ -27,14 +29,15 @@ function PlayListCard(props: any) {
         UserId: 1,
       }));
     } catch (error) {
-      console.error(error);
-      // Handle any errors that occurred during the API request
+      console.error("Error fetching playlist data:", error);
     }
-  }
+  };
 
   useEffect(() => {
-    handleData();
-  }, [props.id]);
+    
+    fetchPlayListData();
+  }, [id]);
+
   return (
     <div className="row align-items-md-stretch">
       <div className="col-md-12">
@@ -42,13 +45,16 @@ function PlayListCard(props: any) {
           <div className="row">
             <div className="col-3">
               <img
-                src="https://images.pexels.com/photos/114820/pexels-photo-114820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                src={
+                  playListData.PhotoCover ||
+                  "https://images.pexels.com/photos/114820/pexels-photo-114820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+                }
                 className="rounded-0 float-start"
-                alt="..."
+                alt={playListData.PlayListName || "Playlist Cover"}
               />
             </div>
             <div className="col-9">
-              <p className="playList">playlist</p>
+              <p className="playList">Playlist</p>
               <h1
                 className="playlistInput"
                 data-bs-toggle="modal"
@@ -64,6 +70,6 @@ function PlayListCard(props: any) {
       </div>
     </div>
   );
-}
+};
 
 export default PlayListCard;

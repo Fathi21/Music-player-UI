@@ -5,6 +5,7 @@ import CreateNewPlayListAddSong from "../Utilities/ApiCalls/CreateNewPlayListAdd
 import toast from "react-hot-toast";
 import { TextOutput } from "../Utilities/OutputText/TextOutput";
 import GetSongsInPlaylistById from "../Utilities/ApiCalls/GetSongsInPlaylistById";
+import { text } from "stream/consumers";
 
 function SearchForPlayList({ playListId, SongsInCurrentPlayList }: any) {
   const [allSongs, setAllSongs] = useState<any[]>([]);
@@ -12,29 +13,31 @@ function SearchForPlayList({ playListId, SongsInCurrentPlayList }: any) {
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      try {
-        const allSongs = await GetAllSongs();
-        const playlistSongs = await GetSongsInPlaylistById(playListId);
-        const playlistSongIds = playlistSongs.map((song: any) => song.SongID);
+  async function fetchData() {
+    setLoading(true);
+    try {
+      const allSongs = await GetAllSongs();
+      const playlistSongs = await GetSongsInPlaylistById(playListId);
+      const playlistSongIds = playlistSongs.map((song: any) => song.SongID);
 
-        const songsToAdd = allSongs.filter(
-          (song: any) => !playlistSongIds.includes(song.id)
-        );
+      const songsToAdd = allSongs.filter(
+        (song: any) => !playlistSongIds.includes(song.id)
+      );
 
-        setAllSongs(songsToAdd);
-        setFilteredSongs(songsToAdd);
-      } catch (error) {
-        console.error("Failed to fetch songs:", error);
-        toast.error("Failed to load songs.");
-      } finally {
-        setLoading(false);
-      }
+      setAllSongs(songsToAdd);
+      setFilteredSongs(songsToAdd);
+    } catch (error) {
+      console.error("Failed to fetch songs:", error);
+      toast.error("Failed to load songs.");
+    } finally {
+      setLoading(false);
     }
+  }
+
+  useEffect(() => {
 
     fetchData();
+
   }, [playListId, SongsInCurrentPlayList]);
 
   useEffect(() => {
@@ -50,9 +53,11 @@ function SearchForPlayList({ playListId, SongsInCurrentPlayList }: any) {
     try {
       await CreateNewPlayListAddSong(songId, false, playListId);
       toast.success(TextOutput.songAddedToPlaylist);
+      fetchData();
+
     } catch (error) {
       console.error("Error adding song to playlist:", error);
-      toast.error("Failed to add song.");
+      toast.error(TextOutput.failedToLoadSongs);
     }
   };
 

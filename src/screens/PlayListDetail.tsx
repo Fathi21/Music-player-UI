@@ -8,116 +8,114 @@ import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import MusicPlayer from "../components/MusicPlayer";
 import PlayListCard from "../components/PlayListCard";
 import SearchForPlayList from "../components/SearchForPlayList";
+import RemoveSongFromPlaylist from "../Utilities/ApiCalls/RemoveSongFromPlaylist";
+import toast from "react-hot-toast";
+import { TextOutput } from "../Utilities/OutputText/TextOutput";
+import Edit from "../components/Edit";
 
 function PlayListDetail() {
   RedirectIfUserLoggedOut();
   const { id }: any = useParams();
 
   const [SongsInCurrentPlayList, setSongsInCurrentPlayList] = useState<any[]>([]);
-  const [searchInput, setSearchInput] = useState("");
-
-  const [songData, setSongData] = useState({
-    Artist: "",
-    CategoryId: "",
-    CreatedAt: "",
-    MusicFile: "",
-    PhotoCover: "",
-    Title: "",
-    UserId: "",
-    id: "",
-  });
-  const [username, setUsername] = useState("");
-
-  const [PlayingSong, setPlayingSong] = useState(Number);
-
+  const [PlayingSong, setPlayingSong] = useState<number | null>(null);
   const [songs, setsongs] = useState<any[]>([]);
-
   const [toggle, setToggle] = useState(false);
-
   const [hideOpenCloseButton, setHideOpenCloseButton] = useState(true);
-
-  console.log(SongsInCurrentPlayList);
 
   const handleClickSong = (id: number) => {
     setPlayingSong(id);
   };
 
-  async function handleData() {
+  const handleRemoveSongFromPlaylist = async (songId: number) => {
+
+    await RemoveSongFromPlaylist(songId, id); // Call the API to remove the song
+    handleData(); // Refresh the playlist data after removal
+    toast.success(TextOutput.songRemovedFromPlaylist); // Show success message
+    setPlayingSong(null); // Reset the currently playing song
+    
+  };
+
+  const handleData = async () => {
     try {
-      const music =  await GetAllSongs();
-      setsongs(music); // Store the data retrieved from the API in the state
-      const songFromPlayList = await GetSongsInPlaylistById(id);
+      const allSongs = await GetAllSongs();
+      const playlistSongs = await GetSongsInPlaylistById(id);
 
-      if (songs.length > 0) {
-        setSongsInCurrentPlayList(songs); // Access the data retrieved from the API
-        // Continue with further processing or UI updates
-      }
+      const songsInPlaylist = allSongs.filter((song: any) =>
+        playlistSongs.some((p: { SongID: number }) => p.SongID === song.id)
+      );
+
+      console.log("Songs in Playlist:", songsInPlaylist);
+      setSongsInCurrentPlayList(songsInPlaylist);
+      setsongs(allSongs);
+      
     } catch (error) {
-      console.error(error);
-      // Handle any errors that occurred during the API request
+      console.error("Error fetching data:", error);
     }
-  }
+  };
 
-  const songsInPlaylist = SongsInCurrentPlayList.map((musicData: any, index: any) => {
-          if (musicData.id === PlayingSong) {
-            return null; // Skip this iteration of the loop
-          } else {
-            return (
-              <a
-                key={musicData.id}
-                onClick={() => handleClickSong(musicData.id)}
+  const songsInPlaylist = SongsInCurrentPlayList.map((musicData: any) => {
+    if (musicData.id === PlayingSong) return null;
+
+    return (
+      <a key={musicData.id} onClick={() => handleClickSong(musicData.id)}>
+        <li className="list-group-item">
+          <span className="songInfo">
+            <img
+              src={urlCalls.Base + musicData.PhotoCover}
+              className="rounded-0 float-start"
+              alt="..."
+            />
+            <span className="songDetails">
+              <span className="songName">{musicData.Title}</span>
+              <span className="ArtistName">{musicData.Artist}</span>
+            </span>
+          </span>
+          
+          <span
+                className="DeleteButton"
+                onClick={() => handleRemoveSongFromPlaylist(musicData.id)}
               >
-                <li className="list-group-item">
-                  <span className="songInfo">
-                    <img
-                      src={urlCalls.Base + musicData.PhotoCover}
-                      className="rounded-0 float-start"
-                      alt="..."
-                    />
-                    <span className="songDetails">
-                      <span className="songName">{musicData.Title}</span>
-                      <span className="ArtistName">{musicData.Artist}</span>
-                    </span>
-                  </span>
-                </li>
-              </a>
-            );
-          }
-        })
-
-  function handleLoadingPlaylist() {
-    if (!PlayingSong) {
-      return <PlayListCard id={id} />;
-    } else {
-      return <MusicPlayer data={PlayingSong} />;
-    }
-  }
-
-  function handleToggleSongsSearch() {
-    // Toggle the 'toggle' state by negating its current value
-    setToggle((prevToggle) => !prevToggle);
-
-    // Toggle the 'hideOpenCloseButton' state by negating its current value
-    setHideOpenCloseButton(
-      (prevHideOpenCloseButton) => !prevHideOpenCloseButton
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                className="bi bi-dash"
+                viewBox="0 0 16 16"
+              >
+                <path d="M3.5 8a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5z" />
+              </svg>
+            </span>
+        </li>
+      </a>
     );
-  }
+  });
+
+  const handleLoadingPlaylist = () => {
+    return PlayingSong ? (
+      <MusicPlayer data={PlayingSong} />
+    ) : (
+      <PlayListCard id={id} />
+    );
+  };
+
+  const handleToggleSongsSearch = () => {
+    setToggle((prev) => !prev);
+    setHideOpenCloseButton((prev) => !prev);
+  };
 
   useEffect(() => {
     handleData();
-    handleLoadingPlaylist();
-    setPlayingSong(Number.NaN);
-    setSongsInCurrentPlayList([]);
+    setPlayingSong(null);
   }, [id, hideOpenCloseButton]);
 
-  console.log();
   return (
     <div className="mainPlayList">
       <div className="row">
         <div className="col-2">
           <SideBar />
         </div>
-
         <div className="col-10">
           {handleLoadingPlaylist()}
           <svg
@@ -165,63 +163,12 @@ function PlayListDetail() {
               Delete
             </li>
           </ul>
-          <div
-            className="modal fade"
-            id="exampleModal"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div className="modal-dialog EditPlayList">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h1 className="modal-title fs-5" id="exampleModalLabel">
-                    Edit details
-                  </h1>
-                  <button
-                    type="button"
-                    className="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <div className="modal-body">
-                  <div className="row">
-                    <div className="col-4">
-                      <img
-                        src="https://images.pexels.com/photos/114820/pexels-photo-114820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                        className="rounded-0 float-start"
-                        alt="..."
-                      />
-                    </div>
-                    <div className="col-8">
-                      <div className="mb-3 playlistName">
-                        <input
-                          type="email"
-                          className="form-control"
-                          id="exampleFormControlInput1"
-                          placeholder="Add name"
-                        />
-                      </div>
-                      <div className="mb-3 playlistDescription">
-                        <textarea
-                          className="form-control"
-                          id="exampleFormControlTextarea1"
-                          placeholder="Add an optional description"
-                        ></textarea>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          <Edit id={id}/>
           <div className="SongsInList">
             <ul className="list-group">
               <div className="header">
                 <p className="NumberOfSongs">
-                  {SongsInCurrentPlayList.length >= 0
-                    ? SongsInCurrentPlayList.length + " songs"
-                    : "ss"}
+                  {SongsInCurrentPlayList.length} songs
                 </p>
                 <span
                   onClick={handleToggleSongsSearch}
@@ -238,22 +185,15 @@ function PlayListDetail() {
                   Close
                 </span>
               </div>
-
               {hideOpenCloseButton ? songsInPlaylist : ""}
             </ul>
           </div>
-          {SongsInCurrentPlayList.length >= 0 ? (
-            toggle ? (
-              <SearchForPlayList
-                playListId={id}
-                SongsInCurrentPlayList={SongsInCurrentPlayList}
-              />
-            ) : (
-              "fffff"
-            )
-          ) : (
-            "dddd"
-          )}
+          {/*SongsInCurrentPlayList.length > 0 &&*/ songs.length !== SongsInCurrentPlayList.length && toggle ? (
+            <SearchForPlayList
+              playListId={id}
+              SongsInCurrentPlayList={SongsInCurrentPlayList}
+            />
+          ) : null}
         </div>
       </div>
     </div>

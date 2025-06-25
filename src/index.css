@@ -707,6 +707,20 @@ form > a > .Logo > h1 {
   background-color: #1a3b14;
 }
 
+.DeleteButton {
+  display: flex;
+  align-self: center;
+  margin-right: 5px;
+  border: 1px solid #ffffff;
+  padding: 9px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.DeleteButton:hover {
+  background-color: #481818;
+}
+
 .HeartIcon {
   display: flex;
   align-self: center;
