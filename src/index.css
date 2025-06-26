@@ -707,7 +707,7 @@ form > a > .Logo > h1 {
   background-color: #1a3b14;
 }
 
-.DeleteButton {
+.RemoveSongFromPlayListButton {
   display: flex;
   align-self: center;
   margin-right: 5px;
@@ -717,7 +717,7 @@ form > a > .Logo > h1 {
   cursor: pointer;
 }
 
-.DeleteButton:hover {
+.RemoveSongFromPlayListButton:hover {
   background-color: #481818;
 }
 
