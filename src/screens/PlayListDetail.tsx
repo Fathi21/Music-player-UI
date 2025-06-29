@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 import { TextOutput } from "../Utilities/OutputText/TextOutput";
 import EditPlayList from "../components/EditPlayList";
 import EditAndDeleteButton from "../components/EditAndDeleteButton";  
+import DeletePlayList from "../components/DeletePlayList";
 
 function PlayListDetail() {
   RedirectIfUserLoggedOut();
@@ -121,6 +122,7 @@ function PlayListDetail() {
           {handleLoadingPlaylist()}
           <EditAndDeleteButton/> 
           <EditPlayList id={id}/>
+          <DeletePlayList id={id} />
           <div className="SongsInList">
             <ul className="list-group">
               <div className="header">
