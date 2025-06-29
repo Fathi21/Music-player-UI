@@ -78,6 +78,9 @@ function PlayListCard(props: any) {
                   "https://images.pexels.com/photos/114820/pexels-photo-114820.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                 }
                 className="rounded-0 float-start"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+                data-bs-whatever="@mdo"
                 alt={playListData.PlayListName || "Playlist Cover"}
               />
             </div>
