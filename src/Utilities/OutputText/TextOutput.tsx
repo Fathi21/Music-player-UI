@@ -21,4 +21,7 @@ export const TextOutput = {
   songRemovedFromPlaylist: "Removed from playlist.",
   songLiked: "Liked.",
   songUnliked: "Unliked.",
+  playlistUpdatedSuccessfully: "Playlist updated successfully.",
+  playlistDeletedSuccessfully: "Playlist deleted successfully.",
+  NoneChangesMade: "No changes made to update." 
 };
