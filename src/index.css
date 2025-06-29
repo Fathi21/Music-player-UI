@@ -824,9 +824,17 @@ form > a > .Logo > h1 {
   display: none !important;
 }
 
-@media only screen and (max-width: 1200px) {
-  /*Tablets [601px -> 1200px]*/
+.modelText {
+  color: white;
+
+  font-size: 20px;
 }
+
+.cancleButton { 
+  background-color: #444; 
+  border-color: #444; 
+}
+
 
 @media only screen and (max-width: 767px) {
   /*Tablets [601px -> 1200px]*/
