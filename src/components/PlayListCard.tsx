@@ -33,6 +33,34 @@ function PlayListCard(props: any) {
     }
   };
 
+  // Check if modal is open from EditPlayList.tsx
+
+  useEffect(() => {
+    const modalElement = document.getElementById("exampleModal");
+  
+    const handleShow = () => {
+      fetchPlayListData();
+    };
+  
+    const handleHide = () => {
+      fetchPlayListData();
+    };
+  
+    if (modalElement) {
+      modalElement.addEventListener("shown.bs.modal", handleShow);
+      modalElement.addEventListener("hidden.bs.modal", handleHide);
+    }
+  
+    return () => {
+      if (modalElement) {
+        modalElement.removeEventListener("shown.bs.modal", handleShow);
+        modalElement.removeEventListener("hidden.bs.modal", handleHide);
+      }
+    };
+  }, []);
+  
+
+
   useEffect(() => {
     
     fetchPlayListData();
@@ -54,7 +82,7 @@ function PlayListCard(props: any) {
               />
             </div>
             <div className="col-9">
-              <p className="playList">Playlist</p>
+              <p className="playList">Playlistss</p>
               <h1
                 className="playlistInput"
                 data-bs-toggle="modal"
