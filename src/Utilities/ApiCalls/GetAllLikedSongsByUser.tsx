@@ -1,4 +1,4 @@
-import UserDetails from "../../components/UserDetails";
+import {UserDetails} from "../../components/UserDetails";
 import axios from "axios";
 import { urlCalls } from "../UrlPath/ApiUrlPath";
 /**
@@ -8,8 +8,10 @@ import { urlCalls } from "../UrlPath/ApiUrlPath";
  */
 
 async function GetAllLikedSongsByUser() {
+  const userDetails = await UserDetails();
+  const userId = userDetails?.userId;
   return await axios
-    .get(urlCalls.GetAllLikedSongsByUser + UserDetails().userId)
+    .get(urlCalls.GetAllLikedSongsByUser + userId)
     .then((response) => response);
 }
 

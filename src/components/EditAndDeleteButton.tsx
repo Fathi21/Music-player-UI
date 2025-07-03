@@ -3,28 +3,6 @@ import React, { useEffect, useState } from "react";
 import EditPlayList from "./EditPlayList";
 function EditAndDeleteButton() {  
 
-  const [playlist, setPlaylist] = useState(null);
-
-  const handleEditClick = async () => {
-    try {
-      // const playlistData = await GetPlayListById(); // Assuming this fetches playlist data
-      // setPlaylist(playlistData);
-      // console.log("Edit button clicked. Playlist data:", playlistData);
-      // Additional logic for editing can be added here
-    } catch (error) {
-      console.error("Error fetching playlist data for edit:", error);
-    }
-  };
-
-  const handleDeleteClick = () => {
-    console.log("Delete button clicked.");
-    // Logic for deleting the playlist can be added here
-    // Example: Show confirmation modal or call delete API
-  };
-
-
-
-
   return (
     <div className="EditAndDeleteButton">
       <svg

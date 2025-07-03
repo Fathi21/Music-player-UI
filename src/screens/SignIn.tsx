@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useInsertionEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Footer from "../components/Footer";
 import { RoutePath } from "../Utilities/UrlPath/RoutePath";
@@ -18,9 +18,11 @@ function SignIn() {
     email: "",
     username: "",
   });
-
   const [showPassword, setShowPassword] = useState(true);
   const [incorrectMessage, setIncorrectMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Check if username exists to show validation message
   function handleValidations() {
     ExistUsers().then(function (result) {
       const usernameExist = result.find(
@@ -32,8 +34,7 @@ function SignIn() {
           ...prev,
           username: SignUpMessage.emptyStrig,
         }));
-      }
-      if (!usernameExist) {
+      } else {
         setMessages((prev) => ({
           ...prev,
           username: SignInMessage.usernameExists,
@@ -49,105 +50,99 @@ function SignIn() {
     });
   }
 
-  function handleSaveUserInlocalStorage(
-    Token: string,
-    userId: string,
-    email: string,
-    username: string
-  ) {
-    localStorage.setItem("Token", Token);
-    localStorage.setItem("UserId", userId);
-    localStorage.setItem("Email", email);
-    localStorage.setItem("Username", username);
-  }
-
-  function handleSubmit(event: any) {
+  // Handle form submission
+  function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    GetAtoken(username, password).then(function (result) {
-      if (result.data.isUserHasToken) {
-        handleSaveUserInlocalStorage(
-          result.data.Token,
-          result.data.UserId,
-          result.data.Email,
-          result.data.Username
-        );
+    setIsSubmitting(true);
 
-        setIncorrectMessage("");
-      } else {
-        setIncorrectMessage(result.data.message);
-      }
-    });
+    GetAtoken(username, password)
+      .then((result) => {
+        if (result.data.access) {
+          localStorage.setItem("accessToken", result.data.access);
+          localStorage.setItem("refreshToken", result.data.refresh);
+          setIncorrectMessage("");
+          toast.success("Logged in successfully!");
+          // Optionally redirect or update UI here
+        } else {
+          setIncorrectMessage("Invalid username or password.");
+        }
+      })
+      .catch(() => {
+        setIncorrectMessage("Invalid username or password.");
+      })
+      .finally(() => {
+        setIsSubmitting(false);
+      });
+
     setUsername("");
     setPassword("");
   }
 
+  // Disable button logic
   function handleDisabled() {
-    const notify = () =>
-      toast(
-        "Congratulations! You have successfully logged in to your account. Welcome back!"
-      );
-
-    if (!username || !password || messages.email || messages.username) {
+    if (!username || !password || messages.email || messages.username || isSubmitting) {
       return (
         <button type="submit" className="btn btn-success mb-3" disabled>
-          Login
+          {isSubmitting ? "Logging in..." : "Login"}
         </button>
       );
     } else {
       return (
-        <button onClick={notify} type="submit" className="btn btn-success mb-3">
+        <button type="submit" className="btn btn-success mb-3">
           Login
         </button>
       );
     }
   }
 
+  // Toggle password visibility
   function handleShowpassword() {
-    if (showPassword) {
-      setShowPassword(false);
-    } else {
-      setShowPassword(true);
-    }
+    setShowPassword(!showPassword);
   }
 
   useEffect(() => {
     handleValidations();
-    handleDisabled();
-  }, [username, password]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [username]);
 
   RedirectIfUserLoggedIn();
 
   return (
     <div className="Login-form">
+      <Toaster />
       <form onSubmit={handleSubmit}>
         <Link to={RoutePath.homePage}>
           <div className="Logo">
             <h1>Melody</h1>
           </div>
         </Link>
+
         <div className="mb-3">
-          <label htmlFor="" className="form-label">
+          <label htmlFor="usernameInput" className="form-label">
             User name
           </label>
           <input
+            id="usernameInput"
             type="text"
             className="form-control"
-            aria-describedby="emailHelp"
             placeholder="Username"
             name="username"
             onChange={(e) => setUsername(e.target.value)}
             value={username}
             required
+            autoComplete="username"
           />
           <div id="error-message" className="form-text">
             {messages.username}
           </div>
         </div>
+
         <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
+          <label htmlFor="passwordInput" className="form-label">
             Password
           </label>
           <input
+            id="passwordInput"
             type={showPassword ? "password" : "text"}
             className="form-control"
             placeholder="Password"
@@ -155,34 +150,37 @@ function SignIn() {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             required
+            autoComplete="current-password"
           />
           <div id="error-message" className="form-text">
             {incorrectMessage}
           </div>
         </div>
+
         <div className="mb-3 form-check">
           <input
-            onClick={(event) => handleShowpassword()}
+            onClick={handleShowpassword}
             type="checkbox"
             className="form-check-input"
-            id="exampleCheck1"
+            id="showPasswordCheck"
           />
-          <label className="form-check-label" htmlFor="exampleCheck1">
+          <label className="form-check-label" htmlFor="showPasswordCheck">
             Show password
           </label>
         </div>
-        <div className="col-auto">
-          <div className="col-auto">{handleDisabled()}</div>
-        </div>
+
+        <div className="col-auto">{handleDisabled()}</div>
+
         <div className="signUpAndSignInPage">
           <p>
-            You don't have account
+            You don't have an account?{" "}
             <Link to={RoutePath.registerPage}>
-              <span className="link">sign up</span>{" "}
+              <span className="link">Sign up</span>
             </Link>
           </p>
         </div>
       </form>
+
       <Footer />
     </div>
   );

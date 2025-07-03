@@ -3,15 +3,25 @@ import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import SideBar from "../components/sideBar";
 import Spinner from "../components/Spinner";
 import RedirectIfUserLoggedOut from "../components/RedirectIfUserLoggedOut";
-import UserDetails from "../components/UserDetails";
+import {UserDetails} from "../components/UserDetails";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
 import Search from "../components/Search";
 
 function CreatePlayList() {
   RedirectIfUserLoggedOut();
 
-  const userName = UserDetails().username;
+  const [userName, setUserName] = useState<string | null>(null);
+  const [userId, setUserId] = useState<number | null>(null);
 
+  const fetchUserDetails = async () => {
+    const userDetails = await UserDetails();
+    setUserId(userDetails?.userId || null);
+    setUserName(userDetails?.username || null);
+  };
+
+  useEffect(() => {
+    fetchUserDetails();
+  }, []);
   // useEffect(() => {}, [0]);
 
   return (

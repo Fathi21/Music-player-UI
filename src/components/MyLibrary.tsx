@@ -4,7 +4,7 @@ import GetPlayList from "../Utilities/ApiCalls/GetPlayList";
 import { Link, useLocation } from "react-router-dom";
 import Modal from "react-bootstrap/Modal";
 import { Collapse, Button, Card } from "react-bootstrap";
-import UserDetails from "./UserDetails";
+import {UserDetails} from "./UserDetails";
 
 function MyLibrary() {
   const [playList, setPlayList] = useState([]);
@@ -17,12 +17,11 @@ function MyLibrary() {
 
   const [searchInput, setSearchInput] = useState("");
 
-  const userId: number = Number(UserDetails().userId);
-
   async function handleData() {
     try {
       const playList = await GetPlayList();
-
+      const userDetails = await UserDetails();
+      const userId = userDetails?.userId;
       const playListForLoggedInUser = playList.filter((playListData: any) => {
         if (playListData.UserId == userId) {
           return playListData;

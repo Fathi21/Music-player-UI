@@ -3,7 +3,7 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { Link, useNavigate } from "react-router-dom";
 import { RoutePath } from "../Utilities/UrlPath/RoutePath";
 import IsUserLoggedIn from "./IsUserLoggedIn";
-import UserDetails from "./UserDetails";
+import {UserDetails} from "./UserDetails";
 import Logout from "./Logout";
 import MyLibrary from "./MyLibrary";
 import Search from "./Search";
@@ -13,7 +13,16 @@ import Search from "./Search";
 function SideBar() {
   const navigate = useNavigate();
 
-  const [username, setUsername] = useState(UserDetails().username || "Guest");
+  const [username, setUsername] = useState("Guest");
+
+  const fetchUserId = async () => {
+    const userDetails = await UserDetails();
+    setUsername(userDetails?.username || "Guest");
+  };
+
+  React.useEffect(() => {
+    fetchUserId();
+  }, []);
   const [playListData, setPlayListData] = useState([]);
 
   function handleLogout() {

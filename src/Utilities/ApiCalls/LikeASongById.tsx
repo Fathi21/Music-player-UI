@@ -1,9 +1,17 @@
 import axios from "axios";
 import { urlCalls } from "../UrlPath/ApiUrlPath";
-import UserDetails from "../../components/UserDetails";
+import {UserDetails} from "../../components/UserDetails";
 
 async function LikeASongById(songId: Number) {
-  const userId = UserDetails().userId;
+  const userDetails = await UserDetails();
+  const userId = userDetails?.userId;
+
+  if (!userId) {
+    console.error("User ID is required to like a song.");
+    return;
+  }
+  
+
 
   return await axios
     .post(urlCalls.LikeASongById, {

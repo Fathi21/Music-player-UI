@@ -1,4 +1,3 @@
-import UserDetails from "../../components/UserDetails";
 import axios from "axios";
 import { urlCalls } from "../UrlPath/ApiUrlPath";
 

@@ -6,6 +6,7 @@ import { SignUpMessage } from "../Utilities/OutputText/ValidationMessages";
 import CreateNewUser from "../Utilities/ApiCalls/CreateNewUser";
 import ExistUsers from "../Utilities/ApiCalls/ExistUsers";
 import RedirectIfUserLoggedIn from "../components/RedirectIfUserLoggedIn";
+import toast, { Toaster } from "react-hot-toast";
 
 function SignUp() {
   const [email, setEmail] = useState("");
@@ -15,96 +16,80 @@ function SignUp() {
     email: "",
     username: "",
   });
-
   const [showPassword, setShowPassword] = useState(true);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const [accountCreated, setAccountCreated] = useState("");
+  // Validate email and username existance
+  async function handleValidations() {
+    const users = await ExistUsers();
 
-  function handleValidations() {
-    ExistUsers().then(function (result) {
-      const emailExist = result.find((data: any) => data.email === email);
+    const emailExist = users.find((user: any) => user.email === email);
+    const usernameExist = users.find((user: any) => user.username === username);
 
-      const usernameExist = result.find(
-        (data: any) => data.username === username
-      );
-
-      if (emailExist) {
-        setMessages((prev) => ({
-          ...prev,
-          email: SignUpMessage.emailExists,
-        }));
-      }
-      if (!emailExist) {
-        setMessages((prev) => ({
-          ...prev,
-          email: SignUpMessage.emptyStrig,
-        }));
-      }
-      if (usernameExist) {
-        setMessages((prev) => ({
-          ...prev,
-          username: SignUpMessage.usernameExists,
-        }));
-      }
-      if (!usernameExist) {
-        setMessages((prev) => ({
-          ...prev,
-          username: SignUpMessage.emptyStrig,
-        }));
-      }
+    setMessages({
+      email: emailExist ? SignUpMessage.emailExists : "",
+      username: usernameExist ? SignUpMessage.usernameExists : "",
     });
   }
 
-  function handleSubmit(event: any) {
+  // Handle form submit
+  async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    if (!messages.email && !messages.username) {
-      CreateNewUser(email.toLowerCase(), username.toLowerCase(), password);
-      setUsername("");
+
+    if (messages.email || messages.username) {
+      toast.error("Please fix validation errors before submitting.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      await CreateNewUser(email.toLowerCase(), username.toLowerCase(), password);
+      toast.success("Account created successfully!");
       setEmail("");
+      setUsername("");
       setPassword("");
-      setAccountCreated("Account created");
+      setMessages({ email: "", username: "" });
+    } catch (error: any) {
+      // Customize depending on backend error structure
+      toast.error(
+        error.detail || error.message || "Failed to create account. Try again."
+      );
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
+  // Toggle password visibility
   function handleShowpassword() {
-    if (showPassword) {
-      setShowPassword(false);
-    } else {
-      setShowPassword(true);
-    }
+    setShowPassword(!showPassword);
   }
 
+  // Disable button if invalid or submitting
   function handleDisabled() {
-    if (
-      !email ||
-      !username ||
-      !password ||
-      messages.email ||
-      messages.username
-    ) {
-      return (
-        <button type="submit" className="btn btn-success mb-3" disabled>
-          Register
-        </button>
-      );
-    } else {
-      return (
-        <button type="submit" className="btn btn-success mb-3">
-          Register
-        </button>
-      );
-    }
+    return (
+      <button
+        type="submit"
+        className="btn btn-success mb-3"
+        disabled={
+          !email || !username || !password || messages.email !== "" || messages.username !== "" || isSubmitting
+        }
+      >
+        {isSubmitting ? "Registering..." : "Register"}
+      </button>
+    );
   }
 
   useEffect(() => {
-    handleValidations();
-    handleDisabled();
-  }, [email, username, password]);
+    if (email || username) handleValidations();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [email, username]);
 
   RedirectIfUserLoggedIn();
 
   return (
     <div className="form-Box">
+      <Toaster />
       <form onSubmit={handleSubmit}>
         <Link to={RoutePath.homePage}>
           <div className="Logo">
@@ -112,53 +97,55 @@ function SignUp() {
           </div>
         </Link>
 
-        <div className="accountCreated">
-          <p>{accountCreated}</p>
-        </div>
         <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="form-label">
+          <label htmlFor="emailInput" className="form-label">
             Email address
           </label>
           <input
+            id="emailInput"
             type="email"
             className="form-control"
-            aria-describedby="emailHelp"
             placeholder="Email@hotmail.com"
             name="email"
             onChange={(e) => setEmail(e.target.value)}
             value={email}
             required
+            autoComplete="email"
           />
           <div id="emailHelp" className="form-text">
-            We'll never share your email with anyone .
+            We'll never share your email with anyone.
           </div>
-          <div id="error-message" className="form-text">
+          <div id="error-message" className="form-text text-danger">
             {messages.email}
           </div>
         </div>
+
         <div className="mb-3">
-          <label htmlFor="" className="form-label">
+          <label htmlFor="usernameInput" className="form-label">
             User name
           </label>
           <input
+            id="usernameInput"
             type="text"
             className="form-control"
-            aria-describedby="emailHelp"
             placeholder="Username"
             name="username"
             onChange={(e) => setUsername(e.target.value)}
             value={username}
             required
+            autoComplete="username"
           />
-          <div id="error-message" className="form-text">
+          <div id="error-message" className="form-text text-danger">
             {messages.username}
           </div>
         </div>
+
         <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
+          <label htmlFor="passwordInput" className="form-label">
             Password
           </label>
           <input
+            id="passwordInput"
             type={showPassword ? "password" : "text"}
             className="form-control"
             placeholder="Password"
@@ -166,25 +153,29 @@ function SignUp() {
             onChange={(e) => setPassword(e.target.value)}
             value={password}
             required
+            autoComplete="new-password"
           />
         </div>
+
         <div className="mb-3 form-check">
           <input
-            onClick={(event) => handleShowpassword()}
+            onClick={handleShowpassword}
             type="checkbox"
             className="form-check-input"
-            id="exampleCheck1"
+            id="showPasswordCheck"
           />
-          <label className="form-check-label" htmlFor="exampleCheck1">
+          <label className="form-check-label" htmlFor="showPasswordCheck">
             Show password
           </label>
         </div>
+
         <div className="col-auto">{handleDisabled()}</div>
+
         <div className="signUpAndSignInPage">
           <p>
-            You have account{" "}
+            You have an account?{" "}
             <Link to={RoutePath.loginPage}>
-              <span className="link">sign in</span>{" "}
+              <span className="link">Sign in</span>
             </Link>
           </p>
         </div>

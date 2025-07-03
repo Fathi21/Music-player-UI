@@ -1,6 +1,6 @@
 import axios from "axios";
 import { urlCalls } from "../UrlPath/ApiUrlPath";
-import UserDetails from "../../components/UserDetails";
+import {UserDetails} from "../../components/UserDetails";
 
 // Overload: create new playlist
 async function CreateNewPlayListAddSong(songId: number, createNew: true): Promise<any>;
@@ -14,7 +14,8 @@ async function CreateNewPlayListAddSong(
   createNew: boolean,
   PlayListId?: number
 ): Promise<any> {
-  const userId: number = Number(UserDetails().userId);
+  const userDetails = await UserDetails();
+  const userId = userDetails?.userId;
 
   if (!createNew && PlayListId === undefined) {
     throw new Error("playListID is required when not creating a new playlist.");

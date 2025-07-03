@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import LikeASongById from "../Utilities/ApiCalls/LikeASongById";
 import GetLikesBySongId from "../Utilities/ApiCalls/GetLikesBySongId";
-import UserDetails from "../components/UserDetails";
+import {UserDetails} from "../components/UserDetails";
 
 /**
  * The LikeButton component is a React component that allows users to like a song and displays a heart
@@ -18,29 +18,27 @@ function LikeButton(props: any) {
 
   const songId = props.songId;
 
-  function LikesForThisSong() {
-    GetLikesBySongId(songId).then(function (result) {
-      const isUserLikedIt = result.find(
-        (data: any) => data.UserId.toString() === UserDetails().userId
-      );
+  async function LikesForThisSong() {
 
-      if (isUserLikedIt) {
-        setredColor(true);
-      } else {
-        setredColor(false);
-      }
-    });
+    const userDetails = await UserDetails();
+    const userId = userDetails?.userId;
+
+    const updateLikeStatus = async () => {
+      const likes = await GetLikesBySongId(songId);
+      const isUserLikedIt = likes.some((like: any) => like.UserId === userId);
+      
+      setredColor(isUserLikedIt);
+
+    };
+
+    updateLikeStatus();
   }
 
-  function handleClick() {
-    LikeASongById(songId);
-    LikesForThisSong();
+  async function handleClick() {
+    await LikeASongById(songId);
+    await LikesForThisSong();
 
-    if (redColor) {
-      setredColor(false);
-    } else {
-      setredColor(true);
-    }
+    setredColor(!redColor);
   }
 
   useEffect(() => {

@@ -14,7 +14,6 @@ import LinesEllipsis from "../components/LinesEllipsis";
 import GetAllLikedSongsByUser from "../Utilities/ApiCalls/GetAllLikedSongsByUser";
 import AllLikedSongsByActiveUser from "../components/AllLikedSongsByActiveUser";
 import Moment from "react-moment";
-import UserDetails from "../components/UserDetails";
 
 function SongBox(props: any) {
   const songId = props.songId;

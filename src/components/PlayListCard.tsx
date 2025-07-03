@@ -1,11 +1,24 @@
 import React, { useState, useEffect } from "react";
-import UserDetails from "../components/UserDetails";
+import {UserDetails} from "../components/UserDetails";
 import GetPlayListById from "../Utilities/ApiCalls/GetPlayListById";
 
 
 function PlayListCard(props: any) {
   const { id } = props;
-  const { username: userName } = UserDetails();
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    async function fetchUserDetails() {
+      try {
+        const userDetails = await UserDetails();
+        setUserName(userDetails?.username || "");
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    }
+
+    fetchUserDetails();
+  }, []);
 
   const [playListData, setPlayListData] = useState({
     id: "",

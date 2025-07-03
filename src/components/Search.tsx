@@ -7,7 +7,7 @@ import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 import { RoutePath } from "../Utilities/UrlPath/RoutePath";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
 import CreateNewPlayListAddSong from "../Utilities/ApiCalls/CreateNewPlayListAddSong";
-import UserDetails from "../components/UserDetails";
+import {UserDetails} from "../components/UserDetails";
 import LinesEllipsis from "./LinesEllipsis";
 import { TextOutput } from "../Utilities/OutputText/TextOutput";
 
@@ -21,7 +21,16 @@ function Search(props: any) {
   } | null>(null);
 
   const location = useLocation();
-  const userId: number = Number(UserDetails().userId);
+  const [userId, setUserId] = useState<number | undefined>();
+
+  const fetchUserId = async () => {
+    const userDetails = await UserDetails();
+    setUserId(userDetails?.userId);
+  };
+
+  useEffect(() => {
+    fetchUserId();
+  }, []);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
