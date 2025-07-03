@@ -53,43 +53,53 @@ function SongBox(props: any) {
     }
   }
 
-  function handleRenderData() {
-    GetSongById(songId).then(function (result) {
-      //
-      setSongData((prev) => ({
-        ...prev,
-        Artist: result[0].Artist,
-        CategoryId: result[0].CategoryId,
-        CreatedAt: result[0].CreatedAt,
-        MusicFile: result[0].MusicFile,
-        PhotoCover: result[0].PhotoCover,
-        Title: result[0].Title,
-        UserId: result[0].UserId,
-        id: result[0].id,
-      }));
-
-      GetCategoryById(result[0].CategoryId).then(function (result) {
-        setCategoryData((prev) => ({
-          id: result.data[0].id,
-          Title: result.data[0].Title,
-          Description: result.data[0].Description,
-          CreatedAt: result.data[0].CreatedAt,
-          UserId: result.data[0].UserId,
+  async function handleRenderData() {
+    try {
+      const result = await GetSongById(songId);
+      if (result && result.length > 0) {
+        const song = result[0];
+        setSongData((prev) => ({
+          ...prev,
+          Artist: song.Artist || "",
+          CategoryId: song.CategoryId || "",
+          CreatedAt: song.CreatedAt || "",
+          MusicFile: song.MusicFile || "",
+          PhotoCover: song.PhotoCover || "",
+          Title: song.Title || "",
+          UserId: song.UserId || "",
+          id: song.id || "",
         }));
-      });
-    });
-  }
 
-  // console.log(GetAllLikedSongsByUser());
+        if (song.CategoryId) {
+          const categoryResult = await GetCategoryById(song.CategoryId);
+          if (categoryResult?.data && categoryResult.data.length > 0) {
+            const cat = categoryResult.data[0];
+            setCategoryData({
+              id: cat.id || "",
+              Title: cat.Title || "",
+              Description: cat.Description || "",
+              CreatedAt: cat.CreatedAt || "",
+              UserId: cat.UserId || "",
+            });
+          }
+        }
+      }
+    } catch (error) {
+      // Optional: handle errors gracefully here
+      console.error("Error loading song or category data:", error);
+    }
+  }
 
   useEffect(() => {
     handleRenderData();
-    HandleLikeButtonAndAddToPlayList();
   }, [songId]);
+
   const audioPlayer: any = useRef(null);
 
   const handleNext = () => {
-    audioPlayer.current.skipForward();
+    if (audioPlayer.current && audioPlayer.current.skipForward) {
+      audioPlayer.current.skipForward();
+    }
   };
 
   const handlePlay = () => {
@@ -111,7 +121,7 @@ function SongBox(props: any) {
         <div className="container-fluid shadow-lg">
           <div className="row g-0">
             <div className="col-md-3 mb-md-0">
-              <img src={urlCalls.Base + songData.PhotoCover} />
+              <img src={urlCalls.Base + songData.PhotoCover} alt="Song Cover" />
             </div>
             <div className="col-md-9 ps-md-0">
               <p className="songTitle">
