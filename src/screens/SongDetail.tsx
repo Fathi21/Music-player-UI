@@ -1,44 +1,36 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import SideBar from "../components/sideBar";
 import LikeButton from "../components/LikeButton";
 import EditAndDeleteButton from "../components/EditAndDeleteButton";
 import IsUserLoggedIn from "../components/IsUserLoggedIn";
 import AllLikedSongsByActiveUser from "../components/AllLikedSongsByActiveUser";
-import SongBox from "../components/SongBox";
 import MusicPlayer from "../components/MusicPlayer";
 
-function PlayMusic() {
-  const { id }: any = useParams();
+const SongDetail: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const isUserLoggedIn = IsUserLoggedIn();
 
-  function HandleLikeButtonAndAddToPlayList() {
-    return (
-      <div>
-        <MusicPlayer data={id} />
-
-        <div className="LikeAndAddToPlayList">
-          {IsUserLoggedIn() ? <LikeButton songId={id} /> : ""}
-          {IsUserLoggedIn() ? <EditAndDeleteButton /> : ""}
-        </div>
-        <div>
-          {IsUserLoggedIn() ? <AllLikedSongsByActiveUser data={id} /> : ""}
-        </div>
+  const MainBody = () => (
+    <div>
+      <MusicPlayer data={id} />
+      <div className="LikeAndAddToPlayList">
+        {isUserLoggedIn && <LikeButton songId={id} />}
       </div>
-    );
-  }
-
-  useEffect(() => {
-    HandleLikeButtonAndAddToPlayList();
-  }, [id]);
+      <div>{isUserLoggedIn && <AllLikedSongsByActiveUser data={id} />}</div>
+    </div>
+  );
 
   return (
     <div className="row">
       <div className="col-2">
         <SideBar />
       </div>
-      <div className="col-10">{HandleLikeButtonAndAddToPlayList()}</div>
+      <div className="col-10">
+        <MainBody />
+      </div>
     </div>
   );
-}
+};
 
-export default PlayMusic;
+export default SongDetail;

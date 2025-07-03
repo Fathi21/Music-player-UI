@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link, useLocation, useNavigate, HashRouter } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import GetAllLikedSongsByUser from "../Utilities/ApiCalls/GetAllLikedSongsByUser";
 import GetAllSongs from "../Utilities/ApiCalls/GetAllSongs";
-import GetLikesBySongId from "../Utilities/ApiCalls/GetLikesBySongId";
+// Removed unused import
 import LinesEllipsis from "./LinesEllipsis";
-import { RoutePath } from "../Utilities/UrlPath/RoutePath";
+// Removed unused import
 import { urlCalls } from "../Utilities/UrlPath/ApiUrlPath";
 
 function AllLikedSongsByActiveUser(props: any) {
   const [searchInput, setSearchInput] = useState(String);
   const [likedSongs, setLikedSongs] = useState([]);
   const [songs, setsongs] = useState([]);
-  const [PlayingSong, setPlayingSong] = useState(Number);
+  // Removed unused state
 
   async function handleLikedSongs() {
     const music = await GetAllSongs();
@@ -34,7 +34,7 @@ function AllLikedSongsByActiveUser(props: any) {
         data && data.Title.toLowerCase().includes(searchInput.toLowerCase())
     )
     .slice(0, 7)
-    .map((musicData: any, index) => {
+    .map((musicData: any) => {
       if (musicData.id === parseInt(props.data)) {
         return null; // Skip this iteration of the loop
       } else {
