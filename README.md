@@ -33,8 +33,8 @@ A modern web-based music player inspired by Spotify that allows users to search,
 
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/yourusername/music-player-app.git
-   cd music-player-app/frontend
+   git clone https://github.com/Fathi21/Music-player-UI.git
+   cd Music-player-UI
 
 npm install
 # or
